@@ -7,6 +7,7 @@
   census.allData = [];
 
   $('#state-choice').on('change', function(){
+    $('#county-filter').empty();
     stateChoice = $(this).val();
     census.request();
   });
