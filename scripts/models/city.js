@@ -6,13 +6,9 @@
 //array of all site objects that
   census.allData = [];
 
-  $('#test-button').on('click', function(){
-    census.request(alert('census.request called'));
-  });
-
   $('#state-choice').on('change', function(){
     stateChoice = $(this).val();
-    alert(stateChoice);
+    census.request();
   });
 
 //ajax call here
