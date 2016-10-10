@@ -1,7 +1,3 @@
-
-
-
-
 /* Media Query Stuff */
 /* These need to updated with correct font sizes and padding spacing as
 the page is filled in, but this should give a skeleton to work from. */
@@ -18,18 +14,29 @@ the page is filled in, but this should give a skeleton to work from. */
 
     .main-nav ul {
         display: block;
-        padding: 0;
-        margin: 0;
+        margin:0 auto;
+        padding:2%;
+        background-color:#00171F;
+        opacity:0.85;
         list-style: none;
         position: absolute;
-        width: 100%;
+        width: 96%;
     }
 
     .main-nav ul li {
         display: inline-block;
-        padding: 8px;
+        padding: 1% 5%;
         text-align: center;
         font-size: .95em;
+    }
+
+    .hero {
+      color:#FFF;
+      background-image:url('https://static.pexels.com/photos/88725/pexels-photo-88725.jpeg');
+      background-size:cover;
+      background-attachment:fixed;
+      display:block;
+      padding: 30%;
     }
 
     /* Set me to the correct class to hide the hamburger menu
@@ -54,20 +61,8 @@ the page is filled in, but this should give a skeleton to work from. */
         font-size: 1em;
     }
 
-    .main-nav ul {
-        display: block;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        position: absolute;
-        width: 100%;
-    }
-
-    .main-nav ul li {
-        display: inline-block;
-        padding: 10px 12px 10px 12px;
-        text-align: center;
-        font-size: 1em;
+    .hero {
+      padding: 20%;
     }
 
     /* Set me to the correct class to hide the hamburger menu
@@ -92,23 +87,31 @@ the page is filled in, but this should give a skeleton to work from. */
         font-size: 1em;
     }
 
-    .main-nav ul {
-        display: block;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        position: absolute;
-        width: 100%;
+    .main-nav ul li {
+        padding:0.5% 5%;
     }
 
-    .main-nav ul li {
-        display: inline-block;
-        padding: 10px 25px 10px 25px;
-        text-align: center;
+    .hero {
+      background-position:50% 50%;
+      padding: 15%;
     }
 
     /* Set me to the correct class to hide the hamburger menu
     .hamburger {
         display: none;
     } */
+}
+
+.home_column {
+  width:29.33%;
+  padding:2%;
+  display:inline-block;
+  float:left;
+}
+
+footer {
+  clear:both;
+  padding:1%;
+  color:#FFF;
+  background-color:#003459;
 }

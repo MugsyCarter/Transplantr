@@ -1,5 +1,7 @@
-
-
+nav {
+  color:#FFF;
+  margin:0 auto;
+}
 
 .clearfix::after {
     content: "";
