@@ -3,6 +3,10 @@ nav {
   margin:0 auto;
 }
 
+label {
+  padding-left:2%;
+}
+
 .clearfix::after {
     content: "";
     display: table;
