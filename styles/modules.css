@@ -2,51 +2,65 @@
 /* These need to updated with correct font sizes and padding spacing as
 the page is filled in, but this should give a skeleton to work from. */
 
-@media only screen and (min-width: 450px) {
+.icon-menu3 {
+  font-size: 2em;
+  float: right;
+  padding:0 2% 4% 1%;
+}
+h1 {
+    font-size: 1.7em;
+}
 
-    h1 {
-        font-size: 1.7em;
-    }
+h2 {
+    font-size: 1.3em;
+}
 
-    h2 {
-        font-size: 1.3em;
-    }
+.main-nav {
+    display: block;
+    margin:0 auto;
+    background-color:#00171F;
+    opacity:0.85;
+    list-style: none;
+    position: absolute;
+    width: 100%;
+}
 
-    .main-nav ul {
-        display: block;
-        margin:0 auto;
-        padding:2%;
-        background-color:#00171F;
-        opacity:0.85;
-        list-style: none;
-        position: absolute;
-        width: 96%;
-    }
+.main-nav:hover ul {
+  display:block;
+}
 
-    .main-nav ul li {
-        display: inline-block;
-        padding: 1% 5%;
-        text-align: center;
-        font-size: .95em;
-    }
+.main-nav ul li {
+    display: none;
+    padding: 1% 5%;
+    text-align: center;
+    font-size: .95em;
+}
 
-    .hero {
-      color:#FFF;
-      background-image:url('https://static.pexels.com/photos/88725/pexels-photo-88725.jpeg');
-      background-size:cover;
-      background-attachment:fixed;
-      display:block;
-      padding: 30%;
-    }
+.hero {
+  color:#FFF;
+  background-image:url('https://static.pexels.com/photos/88725/pexels-photo-88725.jpeg');
+  background-size:cover;
+  background-attachment:fixed;
+  display:block;
+  padding: 30%;
+}
 
-    /* Set me to the correct class to hide the hamburger menu
-    .hamburger {
-        display: none;
-    } */
+.home_column {
+  width:94%;
+  padding:3%;
+  display:block;
 }
 
 
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 450px) {
+
+    .icon-menu3 {
+      display:none;
+    }
+
+    .responsive-menu {
+      display:none;
+    }
 
     h1 {
         font-size: 1.9em;
@@ -61,19 +75,21 @@ the page is filled in, but this should give a skeleton to work from. */
         font-size: 1em;
     }
 
+    .main-nav ul li {
+        display: inline-block;
+    }
+
     .hero {
       padding: 20%;
     }
-
-    /* Set me to the correct class to hide the hamburger menu
-    .hamburger {
-        display: none;
-    } */
-
 }
 
 /* Goal is to have this display two+ columns */
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 640px) {
+
+    .icon-menu3 {
+      display:none;
+    }
 
     h1 {
         font-size: 1.9em;
@@ -96,17 +112,12 @@ the page is filled in, but this should give a skeleton to work from. */
       padding: 15%;
     }
 
-    /* Set me to the correct class to hide the hamburger menu
-    .hamburger {
-        display: none;
-    } */
-}
-
-.home_column {
-  width:29.33%;
-  padding:2%;
-  display:inline-block;
-  float:left;
+    .home_column {
+      width:29.33%;
+      padding:2%;
+      display:block;
+      float:left;
+    }
 }
 
 footer {
