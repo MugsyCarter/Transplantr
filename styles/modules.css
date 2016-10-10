@@ -2,38 +2,45 @@
 /* These need to updated with correct font sizes and padding spacing as
 the page is filled in, but this should give a skeleton to work from. */
 
-.icon-menu3 {
+.icon-menu {
   font-size: 2em;
-  float: right;
-  padding:0 2% 4% 1%;
+  text-align:center;
 }
+
 h1 {
-    font-size: 1.7em;
+  font-size: 1.7em;
 }
 
 h2 {
-    font-size: 1.3em;
+  font-size: 1.3em;
+}
+
+nav a {
+  color:#FFF;
 }
 
 .main-nav {
-    display: block;
-    margin:0 auto;
-    background-color:#00171F;
-    opacity:0.85;
-    list-style: none;
-    position: absolute;
-    width: 100%;
-}
-
-.main-nav:hover ul {
-  display:block;
+  display: block;
+  margin:0 auto;
+  background-color:#00171F;
+  opacity:0.85;
+  list-style: none;
+  position: absolute;
+  width: 100%;
 }
 
 .main-nav ul li {
-    display: none;
-    padding: 1% 5%;
-    text-align: center;
-    font-size: .95em;
+  display: none;
+  padding: 1% 5%;
+  text-align: center;
+  font-size: .95em;
+}
+
+.responsive-menu {
+  text-align:center;
+  font-size:0.5em;
+  font-family: "Roboto", sans-serif;
+  line-height:150%;
 }
 
 .hero {
@@ -41,8 +48,12 @@ h2 {
   background-image:url('https://static.pexels.com/photos/88725/pexels-photo-88725.jpeg');
   background-size:cover;
   background-attachment:fixed;
-  display:block;
-  padding: 30%;
+  padding: 25%;
+}
+
+.search-page {
+  text-align:center;
+  padding:3%;
 }
 
 .home_column {
@@ -51,10 +62,25 @@ h2 {
   display:block;
 }
 
+@media only screen and (max-width: 450px) {
 
-@media only screen and (min-width: 450px) {
+  .icon-menu:hover ul li {
+    display: block;
+    line-height:200%;
+    list-style:none;
+    padding-top:5%
+  }
 
-    .icon-menu3 {
+  .icon-menu:active ul li {
+    display: block;
+    line-height:200%;
+  }
+
+}
+
+@media only screen and (min-width: 451px) {
+
+    .icon-menu {
       display:none;
     }
 
@@ -87,7 +113,7 @@ h2 {
 /* Goal is to have this display two+ columns */
 @media only screen and (min-width: 640px) {
 
-    .icon-menu3 {
+    .icon-menu {
       display:none;
     }
 
