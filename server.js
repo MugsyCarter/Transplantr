@@ -7,13 +7,17 @@ var express = require('express'),
 
 app.get('/zillow/*', function(request, response){
   console.log('External Zillow request made: ', request.url);
+  console.log('Zillow params: ', request.params);
   // If a Zillow request happens internally, glue it together here:
   (proxy({
     url: 'http://www.zillow.com/webservice/GetRegionChildren.htm?'
-    + '&state='
-    + state
-    + '&city='
-    + city,
+    + '&state=or'
+    //+ request.params[0]  // state
+    + '&city=portland',
+    //+ request.params[1],  // city
+    headers: {
+      Authorization: 'zws-id=' + 'X1-ZWz19jfw5ars3v_1oefy'
+    }
   }))(request, response);
 });
 

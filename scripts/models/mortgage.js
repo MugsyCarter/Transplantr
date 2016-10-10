@@ -20,13 +20,14 @@ MortgageData.prototype.createHtml = function() {
     // return the finished html
 };
 
-MortgageData.fetchZillow = function(city, state) {
+MortgageData.fetchZillow = function() {
+    console.log('im in the fetchZillow function');
     // This method does the API call to zillow
     $.ajax({
         method: 'GET',
-        url: '/zillow/:city/:state'
+        url: '/zillow',
         success: function(data, status, xhr) {
-            console.log(data);
+            console.log('inside the fetch ajax call, data is:', data);
         },
         error: function(xhr, settings, error) {
             console.log('Server returned a ', xhr.status + ' ' + error + ' error.');
@@ -34,4 +35,3 @@ MortgageData.fetchZillow = function(city, state) {
     })
 };
 
-MortgageData.fetchZillow('portland', 'or');
