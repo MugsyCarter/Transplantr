@@ -6,6 +6,9 @@
     $('.about-page').show();
     $('a').show();
     $('#about-link').hide();
+    $('.hero').fadeOut(function() {
+      $('.hero').text('About Transplantr').fadeIn().animate({fontSize: '3em'}, 800);
+    });
   };
 
   module.aboutController = aboutController;
