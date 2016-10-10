@@ -5,17 +5,22 @@ var express = require('express'),
   app = express();
 
 
-/* app.get('/github/*', function(request, response){
-  console.log('External Github request made: ', request.url);
-  // If a git hub request happens internally, glue it together here:
+app.get('/zillow/*', function(request, response){
+  console.log('External Zillow request made: ', request.url);
+  console.log('Zillow params: ', request.params);
+  // If a Zillow request happens internally, glue it together here:
   (proxy({
-    url: 'https://api.github.com/' + request.params[0],
+    url: 'http://www.zillow.com/webservice/GetRegionChildren.htm?'
+    + '&state=or'
+    //+ request.params[0]  // state
+    + '&city=portland',
+    //+ request.params[1],  // city
     headers: {
-      Authorization: 'token ' + process.env.GITHUB_TOKEN
+      Authorization: 'zws-id=' + 'X1-ZWz19jfw5ars3v_1oefy'
     }
   }))(request, response);
 });
-*/
+
 
 /*
 app.get('/twitter/*', function(request, response){
