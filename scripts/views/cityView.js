@@ -7,5 +7,7 @@ var cityView = {};
 
 
 cityView.handleStateRental = function() {
-
+  RentalData.stateData.forEach(function(state) {
+    $('#state-rentals').append(state.createStateHtml());
+  });
 };

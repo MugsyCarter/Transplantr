@@ -12,6 +12,12 @@ function RentalData (data) {
 // Create the array to hold the objects from the AJAX call
 RentalData.stateData = [];
 
+// Do some basic handlebars templating
+RentalData.prototype.createStateHtml = function() {
+    var template = Handlebars.compile($('#state-rental-template').html());
+    return template(this);
+};
+
 RentalData.fetchStates = function() {
     console.log('im in the fetchjson method');
     $.ajax({
@@ -21,7 +27,7 @@ RentalData.fetchStates = function() {
         success: function(data, status, xhr) {
             // turn the json into RentalData
             RentalData.loadStateData(data);
-            console.log(RentalData.stateData);
+            cityView.handleStateRental()
         },
         error: function(xhr, settings, error) {
             var message = 'Server returned a '
