@@ -2,7 +2,8 @@
   var infoController = {};
 
   infoController.reveal = function() {
-    $('div').not('.head').slideUp();
+    $('.home-column').fadeout('fast');
+    $('.search-page').show();
   };
 
   module.infoController = infoController;
