@@ -1,0 +1,31 @@
+/* Body styling */
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Text and heading formatting */
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    color: black;
+    font-size: 1.2em;
+}
+
+h3 {
+    font-size: 1.1em;
+}
+
+p {
+    font-size: .95em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* Link Styles */
+a, a:link, a:active {
+    text-decoration: none;
+}
