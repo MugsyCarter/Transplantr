@@ -2,7 +2,10 @@
   var cityController = {};
 
   cityController.reveal = function() {
-    alert('page is working!');
+    $('div').not('.hero').hide();
+    $('.city-comparison-page').show();
+    $('a').show();
+    $('#city-link').hide();
   };
 
   module.cityController = cityController;
