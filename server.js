@@ -1,39 +1,27 @@
 // Let's build a server!
 var express = require('express'),
-  proxy = require('express-request-proxy'),
+  requestProxy = require('express-request-proxy'),
   port = process.env.PORT || 3000,
+  zillowKey = 'X1-ZWz19jfw5ars3v_1oefy',
   app = express();
 
 
-app.get('/zillow/*', function(request, response){
-  console.log('External Zillow request made: ', request.url);
-  console.log('Zillow params: ', request.params);
-  // If a Zillow request happens internally, glue it together here:
-  (proxy({
-    url: 'http://www.zillow.com/webservice/GetRegionChildren.htm?'
-    + '&state=or'
-    //+ request.params[0]  // state
-    + '&city=portland',
-    //+ request.params[1],  // city
-    headers: {
-      Authorization: 'zws-id=' + 'X1-ZWz19jfw5ars3v_1oefy'
+function proxyZillow(request, response) {
+  console.log('Routing Zillow request for', request.params[0]);
+  (requestProxy({
+    method: 'GET',
+    dataType: 'xml',
+    url:'http://www.zillow.com/webservice/GetRegionChildren.htm',
+    query: {
+      'zws-id': zillowKey,
+      state: 'wa',
+      city: 'seattle',
+      childtype: 'neighborhood'
     }
   }))(request, response);
-});
+};
 
-
-/*
-app.get('/twitter/*', function(request, response){
-  console.log('External Twitter request made: ', request.url);
-  // If a twitter request happens internally, glue it together here:
-  (proxy({
-    url: '	https://api.twitter.com/oauth/access_token' + request.params[0],
-    headers: {
-      Authorization: 'token ' + process.env.TWITTER_TOKEN
-    }
-  }))(request, response);
-});
-*/
+app.get('/zillow/*', proxyZillow);
 
 // The serve-all has to be below the specific requests or it overrides them
 app.use(express.static('./'));
