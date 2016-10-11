@@ -17,6 +17,11 @@
       <p>For the state of {{State}}, the average rental price of a two-bedroom apartment is {{Avg}}.</p>
     </script>
 
+    <script id="city-rental-template" type="text/x-handlebars-template">
+      <p>For the city of {{City}}, the average rental price of a two-bedroom apartment is {{twoBDAvg}}.</p>
+        <p>The average rental price of a one-bedroom apartment is {{oneBDAvg}}.</p>
+    </script>
+
   </head>
   <body>
     <header>
@@ -106,11 +111,19 @@
               <option value="">Choose County</option>
               <!-- dynamically created -->
             </select>
-            <label for="city-input">Enter City:</label>
+            <label for="city-choice">Enter City:</label>
+            <select id="city-choice">
+              <option value="">Choose City</option>
+                <!-- dynamically created -->
+            </select>
+
             <input type="text" name="city" id="city-input">
-            <input type="submit" value="Go" id="zipCodeSubmit">
+            <!-- <input type="submit" value="Go" id="zipCodeSubmit"> -->
           </form>
             <div id="state-rentals">
+
+            </div>
+            <div id="city-rentals">
 
             </div>
         </div>
@@ -147,6 +160,7 @@
     <script src="scripts/models/city.js"></script>
     <script src="scripts/models/mortgage.js"></script>
     <script src="scripts/models/rental.js"></script>
+    <!-- <script src="scripts/models/cityrental.js"></script> -->
     <!-- View Files -->
     <script src="scripts/views/chartrView.js"></script>
     <script src="scripts/views/cityView.js"></script>

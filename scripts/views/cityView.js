@@ -9,4 +9,8 @@ cityView.handleStateRental = function(stateObj) {
   $('#state-rentals').hide().html(stateObj.createStateHtml()).fadeIn('slow');
 };
 
+cityView.handleCityRental = function(cityObj) {
+  $('#city-rentals').hide().html(cityObj.createCityHtml()).fadeIn('slow');
+};
+
 MortgageData.fetchZillow();

@@ -38,6 +38,10 @@
   color: grey;
 }
 
+a:hover{
+  font-style: italic;
+}
+
 .icon-menu:hover ul li {
   display: block;
   line-height: 200%;
