@@ -2,10 +2,10 @@
   var aboutController = {};
 
   aboutController.reveal = function() {
-    $('div').not('.hero').hide();
+    $('div').not('.hero, .icon-menu').hide();
     $('.about-page').show();
-    $('a').show();
-    $('#about-link').hide();
+    $('li').show();
+    $('ul li:nth-child(3)').hide();
     $('.hero').fadeOut(function() {
       $('.hero').text('About Transplantr').fadeIn().animate({fontSize: '3em'}, 800);
     });

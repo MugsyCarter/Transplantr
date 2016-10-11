@@ -2,14 +2,14 @@
   var homeController = {};
 
   homeController.reveal = function() {
-    $('div').not('.hero').hide();
+    $('div').not('.hero, .icon-menu').hide();
     $('.threeColumnHome').show();
     $('.home_column').show();
     $('.hero').text('Transplantr: The Smarter Way to Move');
-    $('a').show();
-    $('#home-link').hide();
+    $('li').show();
+    $('ul li:nth-child(2)').hide();
     $('.hero').fadeOut(function() {
-      $('.hero').text('Transplantr: The Smarter Way to Move').fadeIn().animate({fontSize: '2em'}, 800);
+      $('.hero').text('Transplantr: The Smarter Way to Move').fadeIn().animate({fontSize: '3em'}, 800);
     });
   };
 

@@ -73,7 +73,11 @@ nav a {
   display: block;
   line-height:200%;
   list-style:none;
-  padding-top:5%
+  padding-top:5%;
+}
+
+a:hover{
+  color: grey;
 }
 
 .icon-menu:active ul li {
