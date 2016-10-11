@@ -2,8 +2,10 @@
 a useable data structure to display on the main page
  */
 
+(function(module) {
+
 function RentalData (data) {
-    // Loop through the data and make it into a MortgageData object
+    // Loop through the data and make it into a RentalData object
     for (key in data) {
         this[key] = data[key]
     }
@@ -14,33 +16,45 @@ RentalData.stateData = [];
 
 // Do some basic handlebars templating
 RentalData.prototype.createStateHtml = function() {
-    var template = Handlebars.compile($('#state-rental-template').html());
-    return template(this);
+  var template = Handlebars.compile($('#state-rental-template').html());
+  return template(this);
 };
 
 RentalData.fetchStates = function() {
-    console.log('im in the fetchjson method');
-    $.ajax({
-        method: 'GET',
-        url: '../data/state_rents.json',
-        timeout: 2000,
-        success: function(data, status, xhr) {
-            // turn the json into RentalData
-            RentalData.loadStateData(data);
-            cityView.handleStateRental()
-        },
-        error: function(xhr, settings, error) {
-            var message = 'Server returned a '
-                + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
-                + ' error message. <br />Please try again later.</div>';
-            console.log(message);
-        }
-    })
+  $.ajax({
+    method: 'GET',
+    url: '../data/state_rents.json',
+    timeout: 2000,
+
+    success: function(data, status, xhr) {
+
+      // loop through the json data, turn it into a RentalData object
+      RentalData.stateData = data.map(function(state) {
+        return new RentalData(state);
+      });
+
+      // grab the state name of the selected state
+      selectedState = $('option[value="'+ Census.stateChoice +'"]').text();
+
+      // grab only the RentalData obj you need:
+      for (var i=0; i < RentalData.stateData.length; i++) {
+        if (RentalData.stateData[i]["State"] == selectedState) {
+          var stateObj = RentalData.stateData[i];
+          break;
+        }  // close if
+      } // close for-loop
+      // pass the selected RentalData state object off to the controller
+      rentalController.reveal(stateObj);
+    },
+
+    error: function(xhr, settings, error) {
+      var message = 'Server returned a '
+        + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
+        + ' error message. <br />Please try again later.</div>';
+      console.log(message);
+    }
+  })
 };
 
-RentalData.loadStateData = function(jsondata) {
-    // This function loops through the json and turns it into a RentalData object
-    RentalData.stateData = jsondata.map(function(state) {
-        return new RentalData(state);
-    })
-};
+  module.RentalData = RentalData;
+})(window);

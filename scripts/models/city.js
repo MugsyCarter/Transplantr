@@ -45,6 +45,8 @@
             $('#county-filter').append($option);
           }
         });
+        // The rental data can't run until census populates, callback goes here:
+        RentalData.fetchStates();
       },
       error: function(xhr, settings, error){
         console.log('Ajax call failed:', error);
