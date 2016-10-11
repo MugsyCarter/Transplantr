@@ -89,7 +89,7 @@
   }
 
   .hero {
-    background-image: url('../img/map-640.png');
+    background-image: url('../img/map-1024.png');
     background-position:50% 50%;
     padding: 15%;
   }
@@ -103,25 +103,6 @@
     padding:2%;
     display:block;
     float:left;
-  }
-}
-
-@media only screen and (min-width: 640px) {
-  /* Minor styling: larger image and fonts to match new screen size */
-  h1 {
-    font-size: 2.1em;
-  }
-
-  h2 {
-    font-size: 1.7em;
-  }
-
-  .hero {
-    background-image: url('../img/map-1024.png');
-  }
-
-  .main-nav ul li {
-    padding: 1% 8%;
   }
 }
 
