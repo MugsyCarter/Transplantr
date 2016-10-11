@@ -5,10 +5,10 @@
     $('div').not('.hero, .icon-menu').hide();
     $('.city-comparison-page').show();
     $('li').show();
-    $('ul li:nth-child(5)').hide();
-    $('.hero').fadeOut(function() {
-      $('.hero').text('City Comparisons').fadeIn().animate({fontSize: '3em'}, 800);
-    });
+    //be more specific thatn "li"
+    //then update all the other controllers
+    $('#city-link').parent().hide();
+    $('.hero').text('City Comparisons').animate({fontSize: '3em'}, 800);
   };
 
   module.cityController = cityController;
