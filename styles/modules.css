@@ -9,11 +9,6 @@ the page is filled in, but this should give a skeleton to work from. */
     text-shadow: 3px 4px 4px black;
 }
 
-.icon-menu {
-  font-size: 2em;
-  text-align:center;
-}
-
 h1 {
   font-size: 1.7em;
 }
@@ -41,6 +36,23 @@ nav a {
   padding: 1% 5%;
   text-align: center;
   font-size: .95em;
+}
+
+.icon-menu {
+  font-size: 2em;
+  text-align:center;
+}
+
+.icon-menu:hover{
+  color: grey;
+}
+
+.icon-menu:hover ul li{
+  display: block;
+}
+
+.icon-menu:active ul li{
+  display: block;
 }
 
 /*.responsive-menu {
@@ -133,16 +145,10 @@ a:hover{
       display:none;
     }
 
-    .main-nav {
-      display:inline-block;
-    }
-
     .main-nav ul li {
       display:inline-block;
       padding:0.5% 5%;
     }
-
-
 
     .hero {
       background-position:50% 50%;
@@ -155,12 +161,4 @@ a:hover{
       display:block;
       float:left;
     }
-
-}
-
-footer {
-  clear:both;
-  padding:1%;
-  color:#FFF;
-  background-color:#003459;
 }
