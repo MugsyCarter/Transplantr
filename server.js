@@ -1,3 +1,6 @@
+
+
+
 // Let's build a server!
 var express = require('express'),
   requestProxy = require('express-request-proxy'),
@@ -7,21 +10,20 @@ var express = require('express'),
 
 
 function proxyZillow(request, response) {
-  console.log('Routing Zillow request for', request.params[0]);
+  console.log('Routing Zillow request for', request.params);
   (requestProxy({
     method: 'GET',
     dataType: 'xml',
     url:'http://www.zillow.com/webservice/GetRegionChildren.htm',
     query: {
       'zws-id': zillowKey,
-      state: 'wa',
-      city: 'seattle',
-      childtype: 'neighborhood'
+      state: request.params.state,
+      county: request.params.county
     }
   }))(request, response);
 };
 
-app.get('/zillow/*', proxyZillow);
+app.get('/zillow/:state/:county', proxyZillow);
 
 // The serve-all has to be below the specific requests or it overrides them
 app.use(express.static('./'));
