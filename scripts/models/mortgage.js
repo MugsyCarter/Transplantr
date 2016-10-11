@@ -4,6 +4,7 @@ available to the Transplantr app
 To use handlebars, my data needs to be stored as an array of objects.
  */
 
+(function(module) {
 
 function MortgageData (data) {
     // Loop through the data and make it into a MortgageData object
@@ -35,3 +36,5 @@ MortgageData.fetchZillow = function() {
     })
 };
 
+    module.MortgageData = MortgageData;
+})(window);
