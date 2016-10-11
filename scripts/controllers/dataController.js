@@ -1,9 +1,9 @@
 (function(module) {
-  var infoController = {};
+  var dataController = {};
 
-  infoController.reveal = function() {
+  dataController.reveal = function() {
     $('div').not('.hero, .icon-menu').hide();
-    $('.search-page').show();
+    $('#data-page').show();
     $('li').show();
     $('ul li:nth-child(4)').hide();
     $('.hero').fadeOut(function() {
@@ -11,5 +11,5 @@
     });
   };
 
-  module.infoController = infoController;
+  module.dataController = dataController;
 })(window);

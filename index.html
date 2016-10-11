@@ -25,8 +25,8 @@
           <div class="icon-menu"></div>
           <li><a href="/" id="home-link">Home</a></li>
           <li><a href="about" id="about-link">About</a></li>
-          <li><a href="info" id="info-link">Enter Info</a></li>
-          <li><a href="city-comparison" id="city-link">City Comparison</a></li>
+          <li><a href="city-data" id="data-link">City Data</a></li>
+          <li><a href="city-comparison" id="graphs-link">City Comparison</a></li>
         </ul>
       </nav>
     </header>
@@ -39,11 +39,11 @@
           Transplantr: The Smarter Way to Move
           <h1>
         </div>
-        <div class="about-page">
+        <div id="about-page">
           About stuff Here
           <b>PUT SOMETHING HERE</b>
         </div>
-        <div class="search-page">
+        <div id="data-page">
           <form id="#current-city-input"
             <label for="state-choice">Enter State:</label>
             <select id="state-choice">
@@ -114,10 +114,10 @@
 
             </div>
         </div>
-        <div class="city-comparison-page">
+        <div id="graphs-page">
           City Comparison Stuff Here
         </div>
-        <div class="threeColumnHome">
+        <div id="threeColumnHome">
           <div class="home_column">
             <h2>Who</h2>
             <p>Every year, approximately 14% of Americans move. Whether it be to another part of their city or to another state entirely, over 40 million Americans are scouring the internet and other resources to find the information and tools they need to relocate.</p>
@@ -144,7 +144,6 @@
     <script src="vendor/scripts/handlebars.js"></script>
     <script src="vendor/scripts/page.js"></script>
     <!-- Model Files -->
-    <script src="scripts/models/chartr.js"></script>
     <script src="scripts/models/city.js"></script>
     <script src="scripts/models/mortgage.js"></script>
     <script src="scripts/models/rental.js"></script>
@@ -153,11 +152,10 @@
     <script src="scripts/views/cityView.js"></script>
     <!-- Controller Files -->
     <script src="scripts/controllers/aboutController.js"></script>
-    <script src="scripts/controllers/chartrController.js"></script>
-    <script src="scripts/controllers/cityController.js"></script>
-    <script src="scripts/controllers/rentalController.js"></script>
-    <script src="scripts/controllers/infoController.js"></script>
+    <script src="scripts/controllers/dataController.js"></script>
+    <script src="scripts/controllers/graphsController.js"></script>
     <script src="scripts/controllers/homeController.js"></script>
+    <script src="scripts/controllers/rentalController.js"></script>
     <script src="scripts/controllers/routes.js"></script>
   </body>
 </html>

@@ -1,9 +1,9 @@
 (function(module) {
-  var cityController = {};
+  var graphsController = {};
 
-  cityController.reveal = function() {
+  graphsController.reveal = function() {
     $('div').not('.hero, .icon-menu').hide();
-    $('.city-comparison-page').show();
+    $('#graphs-page').show();
     $('li').show();
     //be more specific thatn "li"
     //then update all the other controllers
@@ -11,5 +11,5 @@
     $('.hero').text('City Comparisons').animate({fontSize: '3em'}, 800);
   };
 
-  module.cityController = cityController;
+  module.graphsController = graphsController;
 })(window);

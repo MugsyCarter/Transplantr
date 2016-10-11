@@ -2,8 +2,7 @@
 
 page('/', homeController.reveal);
 page('/about', aboutController.reveal);
-page('/info', infoController.reveal);
-page('/city-comparison', cityController.reveal);
-page('/zillow', MortgageData.fetchZillow);
+page('/city-data', dataController.reveal);
+page('/city-comparison', graphsController.reveal);
 page();
 
