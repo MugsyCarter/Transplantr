@@ -3,13 +3,16 @@ body {
   margin: 0 auto;
   height: 100%;
   width: 100%;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-weight:300;
+  line-height:150%;
 }
 
 /* Text and heading formatting */
 h1 {       /* Styling for the hero title is in modules */
   font-size: 1.5em;
-  font-family: 'Amatic SC', serif;
+  font-family: 'Open Sans', serif;
+  font-weight:800;
   margin:0 auto;
 }
 
