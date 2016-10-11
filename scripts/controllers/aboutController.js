@@ -4,8 +4,8 @@
   aboutController.reveal = function() {
     $('.tab-content').hide();
     $('#about-page').fadeIn();
-    $('.hero').fadeOut(function() {
-      $('.hero').text('About Transplantr').fadeIn().animate({fontSize: '3em'}, 800);
+    $('#transplantr').fadeOut(function() {
+      $('#transplantr').text('About Transplantr').fadeIn();
     });
   };
 

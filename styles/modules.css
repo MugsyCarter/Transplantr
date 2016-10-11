@@ -23,8 +23,9 @@
   padding: 25%;
 }
 
-.hero h1 {
+#transplantr {
   font-family: 'Amatic SC', serif;
+  font-size: 2.5em;
   font-weight: bold;
   text-shadow: 3px 4px 4px black;
 }
@@ -67,12 +68,17 @@
   .hero {
     background-image: url('../img/map-640.png');
   }
+
+  #transplantr {
+    font-size: 2.9em;
+  }
+
 }
 
 @media only screen and (min-width: 640px) {
   /* First break point - switch to tablet design: 2+ columns */
-  h1 {
-    font-size: 1.9em;
+  #transplantr {
+    font-size: 3.6em;
   }
 
   h2 {
@@ -108,8 +114,8 @@
 
 @media only screen and (min-width: 1024px) {
   /* Minor styling: larger image and fonts to match new screen size */
-  h1 {
-    font-size: 2.8em;
+  #transplantr {
+    font-size: 3.9em;
   }
 
   .main-nav ul li {
@@ -127,8 +133,8 @@
 
 @media only screen and (min-width: 1600px) {
   /* Minor styling: larger image and fonts to match largest screen size */
-  h1 {
-    font-size: 3em;
+  #transplantr {
+    font-size: 4.2em;
   }
 
   .main-nav ul li {

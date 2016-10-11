@@ -3,9 +3,9 @@
 
   homeController.reveal = function() {
     $('.tab-content').hide();
-    $('#threeColumnHome').show();
-    $('.hero').fadeOut(function() {
-      $('.hero').text('Transplantr: The Smarter Way to Move').fadeIn().animate({fontSize: '3em'}, 800);
+    $('#threeColumnHome').fadeIn();
+    $('#transplantr').fadeOut(function() {
+      $('#transplantr').text('Transplantr: The Smarter Way to Move').fadeIn();
     });
   };
 
