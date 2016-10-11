@@ -1,35 +1,37 @@
 /* Body styling */
 body {
-    margin: 0 auto;
-    height: 100%;
-    width: 100%;
-    font-family: "Roboto", sans-serif;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
 }
+
 /* Text and heading formatting */
-h1 {
-    font-size: 1.5em;
-    margin:0 auto;
+h1 {       /* Styling for the hero title is in modules */
+  font-size: 1.5em;
+  font-family: 'Amatic SC', serif;
+  margin:0 auto;
 }
 
 h2 {
-    color: black;
-    font-size: 1.2em;
+  color: black;
+  font-size: 1.3em;
 }
 
 h3 {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 p {
-    font-size: .95em;
+  font-size: .95em;
 }
 
 ul {
-    list-style-type: none;
-    padding:0;
+  list-style: none;
+  padding:0;
 }
 
 /* Link Styles */
 a, a:link, a:active {
-    text-decoration: none;
+  text-decoration: none;
 }
