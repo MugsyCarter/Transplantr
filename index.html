@@ -14,8 +14,7 @@
 
     <!-- Use Handlebars to set up the projects body -->
     <script id="state-rental-template" type="text/x-handlebars-template">
-      <p>For the state of {{State}}, the average rental price of a
-          two-bedroom apartment is {{Avg}}.</p>
+      <p>For the state of {{State}}, the average rental price of a two-bedroom apartment is {{Avg}}.</p>
     </script>
 
   </head>
@@ -119,9 +118,10 @@
             <label for="city-input">Enter City:</label>
             <input type="text" name="city" id="city-input">
             <input type="submit" value="Go" id="zipCodeSubmit">
-            <div id="state-rentals"></div>
           </form>
-            <div id="#state-rentals"></div>
+            <div id="state-rentals">
+
+            </div>
         </div>
         <div class="city-comparison-page">
           City Comparison Stuff Here

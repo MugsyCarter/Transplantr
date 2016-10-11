@@ -43,7 +43,6 @@ RentalData.fetchStates = function() {
           break;
         }  // close if
       } // close for-loop
-
       // pass the selected RentalData state object off to the controller
       rentalController.reveal(stateObj);
     },

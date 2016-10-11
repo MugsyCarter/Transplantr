@@ -6,5 +6,5 @@ city 'page' -- city, income, mortgage, rental, CPI, etc.
 var cityView = {};
 
 cityView.handleStateRental = function(stateObj) {
-  $('#state-rentals').append(stateObj.createStateHtml());
+  $('#state-rentals').hide().html(stateObj.createStateHtml()).fadeIn('slow');
 };
