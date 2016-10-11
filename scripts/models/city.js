@@ -9,32 +9,21 @@
   // key for census API
   var censusKey = '7a3aa9d2f7fafb092b5957d10b65c477719c4c4f';
   //key for state abbreviations
-Census.stateIDKey = {
-    02: 'AK',
-    04: 'AZ',
-    05: "AR",
-    06: 'CA',
-    08: 'CO'
-  };
 
   //array of all site objects that
   Census.allData = [];
   //run census.request when state option changes
   $('#state-choice').on('change', function(){
     $('#county-filter').empty();
-    $('#city-choice').empty();
     Census.stateChoice = $(this).val();
     Census.stateChoiceName = $(this).find('option:selected').text();
-    console.log(Census.stateChoiceName);
-    console.log(Census.stateChoice);
-    Census.findAbbrev(Census.stateChoice);
     Census.request();
-    Census.findCities();
   });
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
+    MortgageData.fetchZillow();
   });
   //method to find info for county
   Census.getCountyInfo = function () {
@@ -67,27 +56,7 @@ Census.stateIDKey = {
       }
     });
   };
-//ajax call to populate the city filter
-  Census.findCities = function(callback) {
-    $.ajax({
-      method: 'GET',
-      url: '../data/city_rents.json',
-      success: function(data, status, xhr){
-        console.log(data);
-      },
-      error: function(xhr, settings, error){
-        console.log('Ajax call failed:', error);
-      }
-    });
-  };
 
-
-
-Census.findAbbrev = function(stateID){
-  var stateNum= parseInt(stateID);
-  Census.stateAbbreviation = Census.stateIDKey[stateNum];
-  console.log(Census.stateAbbreviation);
-}
 
 
   // method to take returned data from census API request and load it into Census.allData
