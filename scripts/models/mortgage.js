@@ -26,7 +26,7 @@ To use handlebars, my data needs to be stored as an array of objects.
     // This method does the API call to zillow
     $.ajax({
       method: 'GET',
-      url: '/zillow/',
+      url: '/zillow/' + Census.stateChoiceName.toLowerCase() + '/' + Census.countyChoiceName.toLowerCase(),
       success: function(data, status, xhr) {
         console.log('inside the fetch ajax call, data is:', data);
       },

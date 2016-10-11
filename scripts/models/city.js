@@ -14,13 +14,15 @@
   $('#state-choice').on('change', function(){
     $('#county-filter').empty();
     Census.stateChoice = $(this).val();
+    Census.stateChoiceName = $(this).find('option:selected').text();
+    console.log(Census.stateChoiceName);
     console.log(Census.stateChoice);
     Census.request();
   });
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
     Census.countyChoice = $(this).val();
-    console.log(Census.countyChoice);
+    Census.countyChoiceName = Census.countyChoice.replace(' County', '');
   });
   //method to find info for county
   Census.getCountyInfo = function () {
