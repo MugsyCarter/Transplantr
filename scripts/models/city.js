@@ -8,6 +8,8 @@
   }
   // key for census API
   var censusKey = '7a3aa9d2f7fafb092b5957d10b65c477719c4c4f';
+  //key for state abbreviations
+
   //array of all site objects that
   Census.allData = [];
   //run census.request when state option changes
@@ -15,14 +17,13 @@
     $('#county-filter').empty();
     Census.stateChoice = $(this).val();
     Census.stateChoiceName = $(this).find('option:selected').text();
-    console.log(Census.stateChoiceName);
-    console.log(Census.stateChoice);
     Census.request();
   });
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
+    MortgageData.fetchZillow();
   });
   //method to find info for county
   Census.getCountyInfo = function () {
@@ -55,6 +56,9 @@
       }
     });
   };
+
+
+
   // method to take returned data from census API request and load it into Census.allData
   Census.loadData = function(data) {
     Census.allData = data.map(function(county) {

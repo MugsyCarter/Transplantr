@@ -17,6 +17,15 @@
       <p>For the state of {{State}}, the average rental price of a two-bedroom apartment is {{Avg}}.</p>
     </script>
 
+    <script id="city-mean-rental-template" type="text/x-handlebars-template">
+      <p>In the city {{City}}, the average mean rental price of a one-bedroom apartment is {{Mean_1-Bdrm_Price}}.</p>
+    </script>
+
+    <script id="city-rental-template" type="text/x-handlebars-template">
+      <p>For the city of {{City}}, the average rental price of a two-bedroom apartment is {{twoBDAvg}}.</p>
+      <p>The average rental price of a one-bedroom apartment is {{oneBDAvg}}.</p>
+    </script>
+
   </head>
   <body>
     <header>
@@ -45,7 +54,7 @@
         </div>
         <div id="data-page" class="tab-content">
           <form id="#current-city-input">
-            <label for="state-choice">Enter State:</label>
+            <label for="state-choice">Choose State:</label>
             <select id="state-choice">
                 <option value="">Choose State</option>
                 <option value="01">Alabama</option>
@@ -101,20 +110,23 @@
                 <option value="56">Wyoming</option>
                 <option value="72">Puerto Rico</option>
             </select>
-            <label for="county-filter">Enter County:</label>
+            <label for="county-filter">Choose County:</label>
             <select id="county-filter">
               <option value="">Choose County</option>
               <!-- dynamically created -->
             </select>
-            <label for="city-input">Enter City:</label>
+            <label for="city-choice">Choose City:</label>
+            <select id="city-choice">
+              <option value="">Choose City</option>
+                <!-- dynamically created -->
+            </select>
+
             <input type="text" name="city" id="city-input">
-            <input type="submit" value="Go" id="zipCodeSubmit">
+            <!-- <input type="submit" value="Go" id="zipCodeSubmit"> -->
           </form>
-            <div id="state-rentals">
-
-            </div>
-        </div>
-
+            <div id="state-rentals"></div>
+            <div id="city-mean-rentals"></div>
+            <div id="city-rentals"></div>
 
         <div id="graphs-page" class="tab-content">
           <div id="chart_container">
@@ -153,6 +165,7 @@
     <script src="scripts/models/city.js"></script>
     <script src="scripts/models/mortgage.js"></script>
     <script src="scripts/models/rental.js"></script>
+    <!-- <script src="scripts/models/cityrental.js"></script> -->
     <!-- View Files -->
     <script src="scripts/views/chartrView.js"></script>
     <script src="scripts/views/cityView.js"></script>
