@@ -4,19 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Transplantr: The Smarter Way to Move</title>
-    <link rel="stylesheet" href="vendor/style/normalize.css">
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto" />
+    <link rel="stylesheet" href="vendor/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans" />
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+    <link rel="stylesheet" href="styles/icons.css">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
+
+    <!-- Use Handlebars to set up the projects body -->
+    <script id="state-rental-template" type="text/x-handlebars-template">
+      <p>For the state of {{State}}, the average rental price of a two-bedroom apartment is {{Avg}}.</p>
+    </script>
+
+    <script id="city-mean-rental-template" type="text/x-handlebars-template">
+      <p>In the city {{City}}, the average mean rental price of a one-bedroom apartment is {{Mean_1-Bdrm_Price}}.</p>
+    </script>
+
+    <script id="city-rental-template" type="text/x-handlebars-template">
+      <p>For the city of {{City}}, the average rental price of a two-bedroom apartment is {{twoBDAvg}}.</p>
+      <p>The average rental price of a one-bedroom apartment is {{oneBDAvg}}.</p>
+    </script>
+
   </head>
   <body>
     <header>
       <nav class="main-nav">
         <ul>
-          <li>About</li>
-          <li>Enter Info</li>
-          <li>City Comparison</li>
+          <div class="icon-menu"></div>
+          <li class="link"><a href="/" id="home-link">Home</a></li>
+          <li class="link"><a href="about" id="about-link">About</a></li>
+          <li class="link"><a href="city-data" id="data-link">City Data</a></li>
+          <li class="link"><a href="city-comparison" id="graphs-link">City Comparison</a></li>
         </ul>
       </nav>
     </header>
@@ -25,20 +44,105 @@
 
       <section>
         <div class="hero">
-          kjhkjh
+          <h1 id="transplantr" class="tagline">
+          Transplantr: The Smarter Way to Move
+          </h1>
         </div>
-        <div class="threeColumnHome">
+        <div id="about-page" class="tab-content">
+          About stuff Here
+          <b>PUT SOMETHING HERE</b>
+        </div>
+        <div id="data-page" class="tab-content">
+          <form id="#current-city-input">
+            <label for="state-choice">Choose State:</label>
+            <select id="state-choice">
+                <option value="">Choose State</option>
+                <option value="01">Alabama</option>
+                <option value="02">Alaska</option>
+                <option value="04">Arizona</option>
+                <option value="05">Arkansas</option>
+                <option value="06">California</option>
+                <option value="08">Colorado</option>
+                <option value="09">Connecticut</option>
+                <option value="10">Delaware</option>
+                <option value="11">District of Columbia</option>
+                <option value="12">Florida</option>
+                <option value="13">Georgia</option>
+                <option value="15">Hawaii</option>
+                <option value="16">Idaho</option>
+                <option value="17">Illinois</option>
+                <option value="18">Indiana</option>
+                <option value="19">Iowa</option>
+                <option value="20">Kansas</option>
+                <option value="21">Kentucky</option>
+                <option value="22">Louisiana</option>
+                <option value="23">Maine</option>
+                <option value="24">Maryland</option>
+                <option value="25">Massachusetts</option>
+                <option value="26">Michigan</option>
+                <option value="27">Minnesota</option>
+                <option value="28">Mississippi</option>
+                <option value="29">Missouri</option>
+                <option value="30">Montana</option>
+                <option value="31">Nebraska</option>
+                <option value="32">Nevada</option>
+                <option value="33">New Hampshire</option>
+                <option value="34">New Jersey</option>
+                <option value="35">New Mexico</option>
+                <option value="36">New York</option>
+                <option value="37">North Carolina</option>
+                <option value="38">North Dakota</option>
+                <option value="39">Ohio</option>
+                <option value="40">Oklahoma</option>
+                <option value="41">Oregon</option>
+                <option value="42">Pennsylvania</option>
+                <option value="44">Rhodes Island</option>
+                <option value="45">South Carolina</option>
+                <option value="46">South Dakota</option>
+                <option value="47">Tennessee</option>
+                <option value="48">Texas</option>
+                <option value="49">Utah</option>
+                <option value="50">Vermont</option>
+                <option value="51">Virgina</option>
+                <option value="53">Washington</option>
+                <option value="54">West Virginia</option>
+                <option value="55">Wisconsin</option>
+                <option value="56">Wyoming</option>
+                <option value="72">Puerto Rico</option>
+            </select>
+            <label for="county-filter">Choose County:</label>
+            <select id="county-filter">
+              <option value="">Choose County</option>
+              <!-- dynamically created -->
+            </select>
+            <label for="city-choice">Choose City:</label>
+            <select id="city-choice">
+              <option value="">Choose City</option>
+                <!-- dynamically created -->
+            </select>
+
+            <input type="text" name="city" id="city-input">
+            <!-- <input type="submit" value="Go" id="zipCodeSubmit"> -->
+          </form>
+            <div id="state-rentals"></div>
+            <div id="city-mean-rentals"></div>
+            <div id="city-rentals"></div>
+
+        <div id="graphs-page" class="tab-content">
+          City Comparison Stuff Here
+        </div>
+        <div id="threeColumnHome" class="tab-content">
           <div class="home_column">
-            <h1>What</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h2>Who</h2>
+            <p>Every year, approximately 14% of Americans move. Whether it be to another part of their city or to another state entirely, over 40 million Americans are scouring the internet and other resources to find the information and tools they need to relocate.</p>
           </div>
           <div class="home_column">
-            <h1>Why</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h2>What</h2>
+            <p><b>Transplantr</b> was established in 2016 with a mission to provide Americans with the information they need to plan their move. While a plethora of websites can provide this information, Transplantr serves to be an all-in-one resource.</p>
           </div>
           <div class="home_column">
-            <h1>Who</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h2>Why</h2>
+            <p>Zillow, a popular real estate website, provides users with property listings in a given area but does not offer the average salary and cost of living in that area. BestPlaces is a website that helps users compare the average cost of living in their current city to their provided destination. While both tools are userful, they fail to take into account the average housing prices in relation to the cost of living in that area. As a result, <b>Transplantr</b> combines this information with the added feature of comparing this information to the national average to give the user a comprehensive side-by-side comparison.</p>
           </div>
         </div>
       </section>
@@ -54,15 +158,19 @@
     <script src="vendor/scripts/handlebars.js"></script>
     <script src="vendor/scripts/page.js"></script>
     <!-- Model Files -->
-    <script src="scripts/models/chartr.js"></script>
     <script src="scripts/models/city.js"></script>
+    <script src="scripts/models/mortgage.js"></script>
+    <script src="scripts/models/rental.js"></script>
+    <!-- <script src="scripts/models/cityrental.js"></script> -->
     <!-- View Files -->
     <script src="scripts/views/chartrView.js"></script>
     <script src="scripts/views/cityView.js"></script>
     <!-- Controller Files -->
     <script src="scripts/controllers/aboutController.js"></script>
-    <script src="scripts/controllers/chartrController.js"></script>
-    <script src="scripts/controllers/cityController.js"></script>
+    <script src="scripts/controllers/dataController.js"></script>
+    <script src="scripts/controllers/graphsController.js"></script>
+    <script src="scripts/controllers/homeController.js"></script>
+    <script src="scripts/controllers/rentalController.js"></script>
     <script src="scripts/controllers/routes.js"></script>
   </body>
 </html>

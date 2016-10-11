@@ -3,8 +3,24 @@ nav {
   margin:0 auto;
 }
 
+nav a {
+  color:#FFF;
+}
+
+
+label {
+  padding-left:2%;
+}
+
+footer {
+  clear:both;
+  padding:1%;
+  color:#FFF;
+  background-color:#003459;
+}
+
 .clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }

@@ -1,117 +1,155 @@
-/* Media Query Stuff */
-/* These need to updated with correct font sizes and padding spacing as
-the page is filled in, but this should give a skeleton to work from. */
-
-@media only screen and (min-width: 450px) {
-
-    h1 {
-        font-size: 1.7em;
-    }
-
-    h2 {
-        font-size: 1.3em;
-    }
-
-    .main-nav ul {
-        display: block;
-        margin:0 auto;
-        padding:2%;
-        background-color:#00171F;
-        opacity:0.85;
-        list-style: none;
-        position: absolute;
-        width: 96%;
-    }
-
-    .main-nav ul li {
-        display: inline-block;
-        padding: 1% 5%;
-        text-align: center;
-        font-size: .95em;
-    }
-
-    .hero {
-      color:#FFF;
-      background-image:url('https://static.pexels.com/photos/88725/pexels-photo-88725.jpeg');
-      background-size:cover;
-      background-attachment:fixed;
-      display:block;
-      padding: 30%;
-    }
-
-    /* Set me to the correct class to hide the hamburger menu
-    .hamburger {
-        display: none;
-    } */
+.main-nav {
+  display: block;
+  margin:0 auto;
+  background-color:#00171F;
+  opacity:0.85;
+  list-style: none;
+  position: absolute;
+  width: 100%;
 }
 
-
-@media only screen and (min-width: 640px) {
-
-    h1 {
-        font-size: 1.9em;
-    }
-
-    h2 {
-        color: #260126;
-        font-size: 1.5em;
-    }
-
-    p {
-        font-size: 1em;
-    }
-
-    .hero {
-      padding: 20%;
-    }
-
-    /* Set me to the correct class to hide the hamburger menu
-    .hamburger {
-        display: none;
-    } */
-
+.main-nav ul li {
+  display: block;
+  padding: 1% 5%;
+  text-align: center;
+  font-size: .95em;
 }
 
-/* Goal is to have this display two+ columns */
-@media only screen and (min-width: 900px) {
+.hero {
+  color:#FFF;
+  background-image:url('../img/map-450.png');
+  background-size:cover;
+  background-attachment:fixed;
+  padding: 25%;
+}
 
-    h1 {
-        font-size: 1.9em;
-    }
+#transplantr {
+  font-family: 'Amatic SC', serif;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-shadow: 3px 4px 4px black;
+}
 
-    h2 {
-        font-size: 1.5em;
-    }
+.icon-menu {
+  text-align: center;
+  font-size: 2em;
+}
 
-    p {
-        font-size: 1em;
-    }
+.icon-menu:hover {
+  color: grey;
+}
 
-    .main-nav ul li {
-        padding:0.5% 5%;
-    }
+a:hover{
+  font-style: italic;
+}
 
-    .hero {
-      background-position:50% 50%;
-      padding: 15%;
-    }
+.icon-menu:hover ul li {
+  display: block;
+  line-height: 200%;
+  padding-top: 5%
+}
 
-    /* Set me to the correct class to hide the hamburger menu
-    .hamburger {
-        display: none;
-    } */
+.icon-menu:active ul li {
+  display: block;
+  line-height:200%;
+}
+
+.search-page {
+  text-align:center;
+  padding:3%;
 }
 
 .home_column {
-  width:29.33%;
-  padding:2%;
-  display:inline-block;
-  float:left;
+  width:94%;
+  padding:3%;
+  display:block;
 }
 
-footer {
-  clear:both;
-  padding:1%;
-  color:#FFF;
-  background-color:#003459;
+/* Media Query Stuff */
+
+@media only screen and (min-width: 450px) {
+  /* Larger cell screen, changes image only */
+  .hero {
+    background-image: url('../img/map-640.png');
+  }
+
+  #transplantr {
+    font-size: 2.9em;
+  }
+
+}
+
+@media only screen and (min-width: 640px) {
+  /* First break point - switch to tablet design: 2+ columns */
+  #transplantr {
+    font-size: 3.6em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  .main-nav ul li {
+    display: inline-block;
+    padding: 0.5% 5%;
+  }
+
+  .hero {
+    background-image: url('../img/map-1024.png');
+    background-position:50% 50%;
+    padding: 15%;
+  }
+
+  .icon-menu {
+    display: none;
+  }
+
+  .home_column {
+    width:29.33%;
+    padding:2%;
+    display:block;
+    float:left;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  /* Minor styling: larger image and fonts to match new screen size */
+  #transplantr {
+    font-size: 3.9em;
+  }
+
+  .main-nav ul li {
+    padding: 1% 5%;
+  }
+
+  .hero {
+    background-image: url('../img/map-1600.png');
+  }
+
+  .icon-menu {
+    font-size: 1.1em;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  /* Minor styling: larger image and fonts to match largest screen size */
+  #transplantr {
+    font-size: 4.2em;
+  }
+
+  .main-nav ul li {
+    padding: 1% 8%;
+  }
+
+  .hero {
+    background-image: url('../img/map-2000.png');
+  }
+
+  .icon-menu {
+    font-size: 1.2em;
+  }
 }

@@ -1,34 +1,29 @@
+
+
+
 // Let's build a server!
 var express = require('express'),
-  proxy = require('express-request-proxy'),
+  requestProxy = require('express-request-proxy'),
   port = process.env.PORT || 3000,
+  zillowKey = 'X1-ZWz19jfw5ars3v_1oefy',
   app = express();
 
 
-/* app.get('/github/*', function(request, response){
-  console.log('External Github request made: ', request.url);
-  // If a git hub request happens internally, glue it together here:
-  (proxy({
-    url: 'https://api.github.com/' + request.params[0],
-    headers: {
-      Authorization: 'token ' + process.env.GITHUB_TOKEN
+function proxyZillow(request, response) {
+  console.log('Routing Zillow request for', request.params);
+  (requestProxy({
+    method: 'GET',
+    dataType: 'xml',
+    url:'http://www.zillow.com/webservice/GetRegionChildren.htm',
+    query: {
+      'zws-id': zillowKey,
+      state: request.params.state,
+      county: request.params.county
     }
   }))(request, response);
-});
-*/
+};
 
-/*
-app.get('/twitter/*', function(request, response){
-  console.log('External Twitter request made: ', request.url);
-  // If a twitter request happens internally, glue it together here:
-  (proxy({
-    url: '	https://api.twitter.com/oauth/access_token' + request.params[0],
-    headers: {
-      Authorization: 'token ' + process.env.TWITTER_TOKEN
-    }
-  }))(request, response);
-});
-*/
+app.get('/zillow/:state/:county', proxyZillow);
 
 // The serve-all has to be below the specific requests or it overrides them
 app.use(express.static('./'));
