@@ -3,7 +3,7 @@
 
   aboutController.reveal = function() {
     $('div').not('.hero, .icon-menu').hide();
-    $('.about-page').show();
+    $('#about-page').show();
     $('li').show();
     $('ul li:nth-child(3)').hide();
     $('.hero').fadeOut(function() {

@@ -3,7 +3,7 @@
 
   homeController.reveal = function() {
     $('div').not('.hero, .icon-menu').hide();
-    $('.threeColumnHome').show();
+    $('#threeColumnHome').show();
     $('.home_column').show();
     $('.hero').text('Transplantr: The Smarter Way to Move');
     $('li').show();

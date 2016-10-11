@@ -3,6 +3,11 @@ nav {
   margin:0 auto;
 }
 
+nav a {
+  color:#FFF;
+}
+
+
 label {
   padding-left:2%;
 }
