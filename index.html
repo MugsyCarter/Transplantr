@@ -17,6 +17,10 @@
       <p>For the state of {{State}}, the average rental price of a two-bedroom apartment is {{Avg}}.</p>
     </script>
 
+    <script id="city-mean-rental-template" type="text/x-handlebars-template">
+      <p>In the city {{City}}, the average mean rental price of a one-bedroom apartment is {{Mean_1-Bdrm_Price}}.</p>
+    </script>
+
   </head>
   <body>
     <header>
@@ -110,9 +114,8 @@
             <input type="text" name="city" id="city-input">
             <input type="submit" value="Go" id="zipCodeSubmit">
           </form>
-            <div id="state-rentals">
-
-            </div>
+            <div id="state-rentals"></div>
+            <div id="city-mean-rentals"></div>
         </div>
         <div id="graphs-page" class="tab-content">
           City Comparison Stuff Here

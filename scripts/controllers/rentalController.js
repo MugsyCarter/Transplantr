@@ -1,8 +1,12 @@
 (function(module) {
   var rentalController = {};
 
-  rentalController.reveal = function(stateObj) {
+  rentalController.revealState = function(stateObj) {
     cityView.handleStateRental(stateObj);
+  };
+
+  rentalController.revealCityMean = function(cityMeanObj) {
+    cityView.handleCityMeanRental(cityMeanObj);
   };
 
   module.rentalController = rentalController;

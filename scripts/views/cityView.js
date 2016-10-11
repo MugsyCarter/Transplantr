@@ -9,4 +9,10 @@ cityView.handleStateRental = function(stateObj) {
   $('#state-rentals').hide().html(stateObj.createStateHtml()).fadeIn('slow');
 };
 
+cityView.handleCityMeanRental = function(cityMeanObj) {
+  console.log('in the view, cityMeanObj is', cityMeanObj);
+  $('#city-mean-rentals').hide().html(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
+};
+
+
 MortgageData.fetchZillow();
