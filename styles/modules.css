@@ -2,6 +2,13 @@
 /* These need to updated with correct font sizes and padding spacing as
 the page is filled in, but this should give a skeleton to work from. */
 
+.hero {
+    font-family: 'Amatic SC', serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 3px 4px 4px black;
+}
+
 .icon-menu {
   font-size: 2em;
   text-align:center;
