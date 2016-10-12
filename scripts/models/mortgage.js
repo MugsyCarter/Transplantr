@@ -27,7 +27,7 @@ To use handlebars, the data needs to be stored as an array of objects.
       method: 'GET',
       url: '/zillow/' + Census.stateChoiceName.toLowerCase() + '/' + Census.countyChoiceName.toLowerCase(),
       success: function(data, status, xhr) {
-        console.log('inside the fetch ajax call, data is:', data);
+        console.log('inside the fetch ajax call, data is:', data)
         /*xmlData.forEach(function(city){
           if (city[0] !== 'NAME') {
             var $option = $('<option></option>');
@@ -35,8 +35,8 @@ To use handlebars, the data needs to be stored as an array of objects.
             $option.text(city[0]);
             $('#county-filter').append($option);
           }
-        };
-      },*/
+        }; */
+      },
       error: function(xhr, settings, error) {
         console.log('Server returned a ', xhr.status + ' ' + error + ' error.');
       }

@@ -16,3 +16,7 @@ cityView.handleCityMeanRental = function(cityMeanObj) {
 cityView.handleCityMedianRental = function(cityMedianObj) {
   $('#city-median-rentals').hide().html(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
 };
+
+cityView.handleEcon = function(econObj) {
+  $('#county-econ').hide().html(econObj.createEconHtml()).fadeIn('slow');
+};
