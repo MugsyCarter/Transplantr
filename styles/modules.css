@@ -65,6 +65,14 @@ a:hover{
   display:block;
 }
 
+.comparison_table {
+  padding: 1%;
+}
+
+.chartSize {
+  padding:1%;
+}
+
 /* Media Query Stuff */
 
 @media only screen and (min-width: 450px) {
@@ -133,6 +141,16 @@ a:hover{
 
   .icon-menu {
     font-size: 1.1em;
+  }
+
+  .comparison_table {
+    width:48%;
+    float:left;
+  }
+
+  .chartSize {
+    width: 48%;
+    float:right;
   }
 }
 
