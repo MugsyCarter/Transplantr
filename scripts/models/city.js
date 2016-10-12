@@ -11,7 +11,7 @@
   Census.allData = [];
   Census.economicData = [];
 
-  //sets up the source vaiable true = origin false = destination
+  //sets up the source variable true = origin false = destination
   Census.source = true;
 
 //dummy value templates
@@ -97,6 +97,7 @@
       success: function(data, status, xhr){
         Census.loadData(data);    // turn census data into Census objects
         // We loop through all the data once, grabbing different things out
+        Census.economicData = [];
         Census.allData.forEach(function(county) {
           if (county[0] !== 'NAME') {
             // populate the county filter with the received census data
@@ -112,8 +113,7 @@
               $('#destination-county-filter').append($option);
             }
             // grab the income and poverty data, make into a census object
-
-            Census.economicData = (new Census({
+            Census.economicData.push(new Census({
                 "county": county[0],
                 "medianIncome": "$" + county[1],
                 "percentPoverty": county[2] + "%"

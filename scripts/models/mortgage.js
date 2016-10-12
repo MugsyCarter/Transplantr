@@ -60,6 +60,7 @@ To use handlebars, the data needs to be stored as an array of objects.
 
 //this function appends cities to the city filter in index.html
   MortgageData.fillCityFilter = function(cityNames){
+    console.log('the city names are ', cityNames);
     cityNames.forEach(function(city){
       var filterEntry = $('<option value="'+ city +'"></option>').text(city);
       if (Census.source === true){
@@ -85,6 +86,7 @@ To use handlebars, the data needs to be stored as an array of objects.
   $('#destination-city-choice').on('change', function(){
     console.log('changed destination city');
     MortgageData.cityChoice = $(this).val();
+    dataController.mortgageReveal(MortgageData.housePrices);
     MortgageData.findHomes(MortgageData.cityChoice);
     RentalData.fetchCityMean();
     RentalData.fetchCityMedian();
