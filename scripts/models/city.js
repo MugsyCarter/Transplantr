@@ -11,11 +11,29 @@
   Census.allData = [];
   Census.economicData = [];
 
+  //sets up the source vaiable true = origin false = destination
+  Census.source = true;
+
+//dummy value templates
+  var defaultCityEntry = $('<option value=""></option>').text('Choose City');
+  var defaultCountyEntry = $('<option value=""></option>').text('Choose County');
+
   //request when state option changes
   $('#state-choice').on('change', function(){
     $('#county-filter').empty();
-    var defaultCountyEntry = $('<option value=""></option>').text('Choose County');
     $('#county-filter').append(defaultCountyEntry);
+    Census.source = true;
+    Census.stateChoice = $(this).val();
+    Census.stateChoiceName = $(this).find('option:selected').text();
+    Census.request();
+  });
+
+  //request when destination state option changes
+  $('#destination-state-choice').on('change', function(){
+    $('#destination-county-filter').empty();
+    $('#destination-county-filter').append(defaultCountyEntry);
+    Census.source = false;
+    console.log('Im working!');
     Census.stateChoice = $(this).val();
     Census.stateChoiceName = $(this).find('option:selected').text();
     Census.request();
@@ -24,7 +42,6 @@
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
     $('#city-choice').empty();
-    var defaultCityEntry = $('<option value=""></option>').text('Choose City');
     $('#city-choice').append(defaultCityEntry);
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
@@ -32,6 +49,18 @@
     incomeController.revealEcon(Census.getEconInfo());
     MortgageData.fetchZillow();
   });
+
+  //same as above but for destination
+  $('#destination-county-filter').on('change', function(){
+    $('#destination-city-choice').empty();
+    $('#destination-city-choice').append(defaultCityEntry);
+    Census.countyChoice = $(this).val();
+    Census.countyChoiceName = Census.countyChoice.replace(' County', '');
+    // grab the county's econ data and pass it to the controller
+    incomeController.revealEcon(Census.getEconInfo());
+    MortgageData.fetchZillow();
+  });
+
 
   //method to find info for county
   Census.getCountyInfo = function() {
@@ -59,6 +88,7 @@
     return template(this);
   };
 
+
   //ajax call gets routed to the express server and then out to the census
   Census.request = function() {
     $.ajax({
@@ -73,8 +103,16 @@
             var $option = $('<option></option>');
             $option.val(county[0]);
             $option.text(county[0]);
-            $('#county-filter').append($option);
+
+            if (Census.source === true){
+              $('#county-filter').append($option);
+            }
+            else {
+              console.log('destination county');
+              $('#destination-county-filter').append($option);
+            }
             // grab the income and poverty data, make into a census object
+
             Census.economicData = (new Census({
                 "county": county[0],
                 "medianIncome": "$" + county[1],

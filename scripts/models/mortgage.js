@@ -62,7 +62,12 @@ To use handlebars, the data needs to be stored as an array of objects.
   MortgageData.fillCityFilter = function(cityNames){
     cityNames.forEach(function(city){
       var filterEntry = $('<option value="'+ city +'"></option>').text(city);
-      $('#city-choice').append(filterEntry);
+      if (Census.source === true){
+        $('#city-choice').append(filterEntry);
+      }
+      else {
+        $('#destination-city-choice').append(filterEntry);
+      }
     });
   };
 
@@ -75,6 +80,16 @@ To use handlebars, the data needs to be stored as an array of objects.
     RentalData.fetchCityMean();
     RentalData.fetchCityMedian();
   });
+
+  //same as above, but for the destination city
+  $('#destination-city-choice').on('change', function(){
+    console.log('changed destination city');
+    MortgageData.cityChoice = $(this).val();
+    MortgageData.findHomes(MortgageData.cityChoice);
+    RentalData.fetchCityMean();
+    RentalData.fetchCityMedian();
+  });
+
 
   MortgageData.findHomes = function(cityChoice){
     var x = MortgageData.cityNames.indexOf(MortgageData.cityChoice) + 1;
