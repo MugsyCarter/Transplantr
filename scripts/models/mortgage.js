@@ -75,5 +75,12 @@ To use handlebars, my data needs to be stored as an array of objects.
   };
 
 
+//assigns the user's city choice to the variable MortgageData.cityChoice.
+  $('#city-choice').on('change', function(){
+    MortgageData.cityChoice = $(this).val();
+  });
+
+
+
   module.MortgageData = MortgageData;
 })(window);
