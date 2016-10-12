@@ -9,5 +9,9 @@
     cityView.handleCityMeanRental(cityMeanObj);
   };
 
+  rentalController.revealCityMedian = function(cityMedianObj) {
+    cityView.handleCityMedianRental(cityMedianObj);
+  };
+
   module.rentalController = rentalController;
 })(window);

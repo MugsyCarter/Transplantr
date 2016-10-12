@@ -39,7 +39,6 @@
       method: 'GET',
       url: '/census/' + Census.stateChoice,
       success: function(data, status, xhr){
-        console.log('the census api call returned: ', data, status, xhr);
         Census.loadData(data);    // turn census data into Census objects
         // populate the county filter with the received census data
         data.forEach(function(county){
