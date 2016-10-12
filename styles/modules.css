@@ -86,11 +86,8 @@ a:hover{
 #destination-city-choice:focus,
 #current-income:focus {
   outline: none;
-  box-shadow: inset 0 0 5px 1px #add8e6;
+  box-shadow: inset 0 0 5px 2px #add8e6;
 }
-
-
-
 
 #current-income {
   text-align: center;
@@ -131,7 +128,23 @@ a:hover{
 
 #current-submit:hover {
   transform: scale(1.2);
+}
 
+#county-econ,
+#state-rentals,
+#city-mean-rentals,
+#city-median-rentals {
+  margin: 5% 0;
+  background-color: white;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+#county-econ:empty,
+#state-rentals:empty,
+#city-mean-rentals:empty,
+#city-median-rentals:empty {
+  display: none;
 }
 
 .comparison_table {
