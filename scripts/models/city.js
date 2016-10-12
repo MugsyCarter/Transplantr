@@ -10,6 +10,7 @@
   //array of all site objects that run census.
   Census.allData = [];
   Census.economicData = [];
+  Census.incomeData = [];
 
   //sets up the source variable true = origin false = destination
   Census.source = true;
@@ -35,7 +36,9 @@
     console.log(parseInt(Census.economicData[0].medianIncome.replace('$', '')));
     console.log(Census.curIncRatio);
 
-
+    // Some stuff for putting this income into handlebars
+    Census.loadIncome([{"currentIncome": Census.currentIncome}]);
+    dataController.incomeReveal(Census.currentIncome[0]);
   });
 
   //request when destination state option changes
@@ -97,6 +100,11 @@
     return template(this);
   };
 
+  Census.prototype.createIncomeHtml = function() {
+    var template = Handlebars.compile($('#income-input-template').html());
+    return template(this);
+  };
+
 
   //ajax call gets routed to the express server and then out to the census
   Census.request = function() {
@@ -143,6 +151,13 @@
     });
   };
 
+  Census.loadIncome = function(data) {
+    console.log('loadIncome data ', data);
+    Census.incomeData = [];
+    Census.incomeData = data.map(function(income) {
+      return new Census(income);
+    })
+  };
   // make Census available globally
   module.Census = Census;
 })(window);

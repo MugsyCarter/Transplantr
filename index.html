@@ -15,7 +15,7 @@
     <!-- Use Handlebars to set up the projects body -->
     <script id="county-econ-template" type="text/x-handlebars-template">
       <h3>Income</h3>
-
+      <p id="user_income"></p>
       <p>Median Income: <b>{{medianIncome}}</b> (household)</p>
       <p>Federal Median Income: <b>$56516</b> (household)</p>
       <p>Federal Minimum: <b>$15080</b> (individual)</p>
@@ -26,6 +26,10 @@
           all school districts, counties, and states in the US.</p>
       <p> According to the SAIPE Census in 2012, in {{county}}, the median income was <b>{{medianIncome}}</b>.</p>
       <p><b>{{percentPoverty}}</b> of people in the county were living at or below the Federal Poverty Line.</p>
+    </script>
+
+    <script id="income-input-template" type="text/x-handlebars-template">
+      Your Income: <b>{{currentIncome}}</b>
     </script>
 
     <script id="mortgage-template" type="text/x-handlebars-template">
