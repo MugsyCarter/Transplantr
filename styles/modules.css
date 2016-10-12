@@ -130,10 +130,14 @@ a:hover{
   transform: scale(1.2);
 }
 
-#county-econ,
+#county-econ, 
+#mortgage-data,
 #state-rentals,
-#city-mean-rentals,
-#city-median-rentals {
+#city-rentals,
+#destination-econ,
+#destination-mortgage-data,
+#destination-state-rentals,
+#destination-city-rentals {
   margin: 5% 0;
   background-color: white;
   border-radius: 15px;
@@ -143,7 +147,11 @@ a:hover{
 #county-econ:empty,
 #state-rentals:empty,
 #city-mean-rentals:empty,
-#city-median-rentals:empty {
+#city-median-rentals:empty,
+#destination-econ:empty,
+#destination-mortgage-data:empty,
+#destination-state-rentals:empty,
+#destination-city-rentals:empty {
   display: none;
 }
 

@@ -15,23 +15,23 @@ cityView.handleStateRental = function(stateObj) {
   }
 };
 
-cityView.handleCityMeanRental = function(cityMeanObj) {
+cityView.handleCityMedianRental = function(cityMedianObj) {
   if(Census.source){
-    $('#city-mean-rentals').hide().html(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
+    $('#city-rentals').hide().append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
   }
-  else{
-    $('#destination-city-mean-rentals').hide().html(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
-    console.log('city mean');
+  else {
+    $('#destination-city-rentals').hide().append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
+    console.log('city median');
   }
 };
 
-cityView.handleCityMedianRental = function(cityMedianObj) {
+cityView.handleCityMeanRental = function(cityMeanObj) {
   if(Census.source){
-    $('#city-median-rentals').hide().html(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
+    $('#city-rentals').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
   }
-  else {
-    $('#destination-city-rentals').hide().html(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
-    console.log('city median');
+  else{
+    $('#destination-city-rentals').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
+    console.log('city mean');
   }
 };
 
