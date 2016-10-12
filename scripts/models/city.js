@@ -21,10 +21,12 @@
 
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
+    $('#city-choice').empty();
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
     // grab the county's econ data and pass it to the controller
     incomeController.revealEcon(Census.getEconInfo());
+    MortgageData.fetchZillow();
   });
 
   //method to find info for county

@@ -27,15 +27,24 @@ To use handlebars, the data needs to be stored as an array of objects.
       method: 'GET',
       url: '/zillow/' + Census.stateChoiceName.toLowerCase() + '/' + Census.countyChoiceName.toLowerCase(),
       success: function(data, status, xhr) {
-        console.log('inside the fetch ajax call, data is:', data)
-        /*xmlData.forEach(function(city){
-          if (city[0] !== 'NAME') {
-            var $option = $('<option></option>');
-            $option.val(city[0]);
-            $option.text(city[0]);
-            $('#county-filter').append($option);
-          }
-        }; */
+
+        console.log('inside the fetch ajax call, data is:', data);
+        MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
+        // create arrays to hold the cities XML objects and the city names as strings
+        MortgageData.cities=[];
+        MortgageData.cityNames=[];
+
+        //populate the array of city names ignoring the 1st item
+        for (var i= 1; i <MortgageData.citiesList.length; i++)
+        {
+          MortgageData.cities.push(data.childNodes[0].childNodes[2].childNodes[2].childNodes[i].childNodes[1]);
+        }
+        MortgageData.cityNames = MortgageData.cities.map(function(city){
+          return city.innerHTML;
+        });
+        //call the function to populate the city filter
+        MortgageData.fillCityFilter(MortgageData.cityNames);
+
       },
       error: function(xhr, settings, error) {
         console.log('Server returned a ', xhr.status + ' ' + error + ' error.');
@@ -43,5 +52,18 @@ To use handlebars, the data needs to be stored as an array of objects.
     });
   };
 
+//this function appends cities to the city filter in index.html
+  MortgageData.fillCityFilter = function(cityNames){
+    cityNames.forEach(function(city){
+      var filterEntry = $('<option value="'+ city +'"></option>').text(city);
+      $('#city-choice').append(filterEntry);
+    });
+  };
+
+//assigns the user's city choice to the variable MortgageData.cityChoice.
+  $('#city-choice').on('change', function(){
+    MortgageData.cityChoice = $(this).val();
+  });
+  
   module.MortgageData = MortgageData;
 })(window);
