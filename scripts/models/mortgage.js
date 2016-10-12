@@ -18,10 +18,12 @@ To use handlebars, the data needs to be stored as an array of objects.
   MortgageData.cities=[];
   MortgageData.cityNames=[];
 
+
   MortgageData.prototype.createHtml = function() {
     // Grab the handlebars template, compile it
     // return the finished html
   };
+
 
   MortgageData.fetchZillow = function() {
     // The call to /zillow is routed by page to the node server and out to Zillow
@@ -32,7 +34,9 @@ To use handlebars, the data needs to be stored as an array of objects.
 
         console.log('inside the fetch ajax call, data is:', data);
         MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
-        // empty the arrays holding the cities XML objects and the city names as strings
+        MortgageData.citiesNodes = data.childNodes[0].childNodes[2].childNodes[2];
+
+        // create arrays to hold the cities XML objects and the city names as strings
         MortgageData.cities=[];
         MortgageData.cityNames=[];
 
@@ -60,13 +64,23 @@ To use handlebars, the data needs to be stored as an array of objects.
       $('#city-choice').append(filterEntry);
     });
   };
-
+  
 //assigns the user's city choice to the variable MortgageData.cityChoice.
   $('#city-choice').on('change', function(){
     MortgageData.cityChoice = $(this).val();
+    MortgageData.findHomes(MortgageData.cityChoice);
     RentalData.fetchCityMean();
     RentalData.fetchCityMedian();
   });
-  
+
+  MortgageData.findHomes = function(cityChoice){
+    console.log(MortgageData.cityChoice);
+    var x = MortgageData.cityNames.indexOf(MortgageData.cityChoice) + 1;
+    console.log(MortgageData.citiesNodes.childNodes[x].childNodes[2]);
+    // console.log(MortgageData.citiesNodes);
+//parse the ajax data for the mean home price for this choice
+  };
+
+
   module.MortgageData = MortgageData;
 })(window);
