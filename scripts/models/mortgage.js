@@ -33,7 +33,6 @@ To use handlebars, the data needs to be stored as an array of objects.
       url: '/zillow/' + Census.stateChoiceName.toLowerCase() + '/' + Census.countyChoiceName.toLowerCase(),
       success: function(data, status, xhr) {
 
-        console.log('inside the fetch ajax call, data is:', data);
         MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
         MortgageData.citiesNodes = data.childNodes[0].childNodes[2].childNodes[2];
 
@@ -60,7 +59,6 @@ To use handlebars, the data needs to be stored as an array of objects.
 
 //this function appends cities to the city filter in index.html
   MortgageData.fillCityFilter = function(cityNames){
-    console.log('the city names are ', cityNames);
     cityNames.forEach(function(city){
       var filterEntry = $('<option value="'+ city +'"></option>').text(city);
       if (Census.source === true){
@@ -78,7 +76,6 @@ To use handlebars, the data needs to be stored as an array of objects.
     MortgageData.findHomes(MortgageData.cityChoice);
     dataController.mortgageReveal(MortgageData.housePrices);
     RentalData.fetchStates();
-    RentalData.fetchCityMean();
     RentalData.fetchCityMedian();
   });
 
@@ -88,7 +85,7 @@ To use handlebars, the data needs to be stored as an array of objects.
     MortgageData.cityChoice = $(this).val();
     dataController.mortgageReveal(MortgageData.housePrices);
     MortgageData.findHomes(MortgageData.cityChoice);
-    RentalData.fetchCityMean();
+    RentalData.fetchStates();
     RentalData.fetchCityMedian();
   });
 

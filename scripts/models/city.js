@@ -43,7 +43,6 @@
     $('#destination-county-filter').empty();
     $('#destination-county-filter').append(defaultCountyEntry);
     Census.source = false;
-    console.log('Im working!');
     Census.stateChoice = $(this).val();
     Census.stateChoiceName = $(this).find('option:selected').text();
     Census.request();
@@ -119,7 +118,6 @@
               $('#county-filter').append($option);
             }
             else {
-              console.log('destination county');
               $('#destination-county-filter').append($option);
             }
             // grab the income and poverty data, make into a census object

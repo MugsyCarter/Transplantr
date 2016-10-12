@@ -5,12 +5,12 @@
     cityView.handleStateRental(stateObj);
   };
 
-  rentalController.revealCityMean = function(cityMeanObj) {
-    cityView.handleCityMeanRental(cityMeanObj);
-  };
-
   rentalController.revealCityMedian = function(cityMedianObj) {
     cityView.handleCityMedianRental(cityMedianObj);
+  };
+
+  rentalController.revealCityMean = function(cityMeanObj) {
+    cityView.handleCityMeanRental(cityMeanObj);
   };
 
   module.rentalController = rentalController;

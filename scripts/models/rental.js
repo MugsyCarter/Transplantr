@@ -65,6 +65,39 @@ a useable data structure to display on the main page
     })
   };
 
+  RentalData.fetchCityMedian = function() {
+    $.ajax({
+      method: 'GET',
+      url: '../data/city_rents-median.json',
+      timeout: 2000,
+
+      success: function(data, status, xhr) {
+        // loop through the json data, turn it into a RentalData object
+        RentalData.cityMedianData = RentalData.loadData(data);
+
+        // grab only the RentalData obj you need:
+        for (var i=0; i < RentalData.cityMedianData.length; i++) {
+          if (RentalData.cityMedianData[i]["City"] == MortgageData.cityChoice) {
+            var cityMedianObj = RentalData.cityMedianData[i];
+            break;
+          }  // close if
+        } // close for-loop
+        // pass the selected RentalData city object off to the controller
+        if (cityMedianObj) {
+          rentalController.revealCityMedian(cityMedianObj);
+        }
+        // make sure the mean is called after the median, so the templating looks right
+        RentalData.fetchCityMean();
+      },
+      error: function(xhr, settings, error) {
+        var message = 'Server returned a '
+            + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
+            + ' error message. <br />Please try again later.</div>';
+        console.log(message);
+      }
+    });
+  };
+
   RentalData.fetchCityMean = function() {
     $.ajax({
       method: 'GET',
@@ -94,37 +127,6 @@ a useable data structure to display on the main page
         console.log(message);
       }
     })
-  };
-
-  RentalData.fetchCityMedian = function() {
-    $.ajax({
-      method: 'GET',
-      url: '../data/city_rents-median.json',
-      timeout: 2000,
-
-      success: function(data, status, xhr) {
-        // loop through the json data, turn it into a RentalData object
-        RentalData.cityMedianData = RentalData.loadData(data);
-
-        // grab only the RentalData obj you need:
-        for (var i=0; i < RentalData.cityMedianData.length; i++) {
-          if (RentalData.cityMedianData[i]["City"] == MortgageData.cityChoice) {
-            var cityMedianObj = RentalData.cityMedianData[i];
-            break;
-          }  // close if
-        } // close for-loop
-        // pass the selected RentalData city object off to the controller
-        if (cityMedianObj) {
-          rentalController.revealCityMedian(cityMedianObj);
-        }
-      },
-      error: function(xhr, settings, error) {
-        var message = 'Server returned a '
-            + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
-            + ' error message. <br />Please try again later.</div>';
-        console.log(message);
-      }
-    });
   };
 
   // method to take returned data from ajax request and load it into RentalData.cityData
