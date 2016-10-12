@@ -75,6 +75,7 @@ To use handlebars, the data needs to be stored as an array of objects.
 //assigns the user's city choice to the variable MortgageData.cityChoice.
   $('#city-choice').on('change', function(){
     MortgageData.cityChoice = $(this).val();
+
     MortgageData.findHomes(MortgageData.cityChoice);
     dataController.mortgageReveal(MortgageData.housePrices);
     RentalData.fetchStates();
@@ -86,6 +87,7 @@ To use handlebars, the data needs to be stored as an array of objects.
   $('#destination-city-choice').on('change', function(){
     console.log('changed destination city');
     MortgageData.cityChoice = $(this).val();
+
     dataController.mortgageReveal(MortgageData.housePrices);
     MortgageData.findHomes(MortgageData.cityChoice);
     RentalData.fetchCityMean();
@@ -105,6 +107,12 @@ To use handlebars, the data needs to be stored as an array of objects.
       "city": MortgageData.cityChoice,
       "aveHousePrice": houseprice
     }));
+    if (Census.source){
+      Data.home = new Data.location(Census.stateChoiceName, Census.countyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
+    }
+    else {
+      Data.away = new Data.location(Census.stateChoiceName, Census.countyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
+    }
   };
 
 

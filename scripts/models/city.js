@@ -33,7 +33,6 @@
     $('#destination-county-filter').empty();
     $('#destination-county-filter').append(defaultCountyEntry);
     Census.source = false;
-    console.log('Im working!');
     Census.stateChoice = $(this).val();
     Census.stateChoiceName = $(this).find('option:selected').text();
     Census.request();
@@ -79,6 +78,9 @@
         break;
       }
     }
+    Census.econObj = econObj;
+    //invoke the function to retrieve the data values
+    Data.parseEconData(Census.econObj);
     return econObj;
   };
 
@@ -109,15 +111,14 @@
               $('#county-filter').append($option);
             }
             else {
-              console.log('destination county');
               $('#destination-county-filter').append($option);
             }
             // grab the income and poverty data, make into a census object
             Census.economicData.push(new Census({
-                "county": county[0],
-                "medianIncome": "$" + county[1],
-                "percentPoverty": county[2] + "%"
-              }));
+              "county": county[0],
+              "medianIncome": "$" + county[1],
+              "percentPoverty": county[2] + "%"
+            }));
           } // close if
         }); // close forEach
         // The rental data can't run until census populates, call it here
