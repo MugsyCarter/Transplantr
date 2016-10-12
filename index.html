@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="styles/modules.css">
 
     <!-- Use Handlebars to set up the projects body -->
+    <script id="mortgage-template" type="text/x-handlebars-template">
+      <p>According to Zillow.com, in {{city}}, the median house price is {{aveHousePrice}}</p>
+    </script>
+
     <script id="county-econ-template" type="text/x-handlebars-template">
       <p>In 2012, in {{county}}, the median income was {{medianIncome}}.</p>
       <p>{{percentPoverty}} of people in the county were living at or below the Federal Poverty Line.</p>
@@ -135,6 +139,7 @@
             </form>
             <div id="county-econ"></div>
             <div id="state-rentals"></div>
+            <div id="mortgage-data"></div>
             <div id="city-median-rentals"></div>
             <div id="city-mean-rentals"></div>
           </div>

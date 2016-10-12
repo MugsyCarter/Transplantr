@@ -75,7 +75,7 @@
             $option.text(county[0]);
             $('#county-filter').append($option);
             // grab the income and poverty data, make into a census object
-            Census.economicData.push(new Census({
+            Census.economicData = (new Census({
                 "county": county[0],
                 "medianIncome": "$" + county[1],
                 "percentPoverty": county[2] + "%"
@@ -83,7 +83,6 @@
           } // close if
         }); // close forEach
         // The rental data can't run until census populates, call it here
-        RentalData.fetchStates();
       },
       error: function(xhr, settings, error){
         console.log('Ajax call failed:', error);

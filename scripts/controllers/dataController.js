@@ -11,5 +11,9 @@
     });
   };
 
+  dataController.mortgageReveal = function(mortgageObj) {
+    cityView.handleMortgage(mortgageObj);
+  };
+
   module.dataController = dataController;
 })(window);
