@@ -18,25 +18,6 @@ To use handlebars, my data needs to be stored as an array of objects.
   // Create the array to hold the objects from the AJAX call
   MortgageData.allData = [];
 
-  MortgageData.prototype.createHtml = function() {
-    // Grab the handlebars template, compile it
-    // return the finished html
-  };
-
-  // $('#county-filter').on('change', function(){
-  //   $('#city-choice').empty();
-  //   Mortgage.countyChoice = $(this).val();
-  //   console.log(Mortgage.countyChoice);
-    // Census.stateChoiceName = $(this).find('option:selected').text();
-    // console.log(Census.stateChoiceName);
-    // console.log(Census.stateChoice);
-    // Census.findAbbrev(Census.stateChoice);
-  //   MortgageData.fetchZillow();
-  // });
-
-
-
-
   MortgageData.fetchZillow = function() {
     // This method does the API call to zillow
     $.ajax({
@@ -45,6 +26,7 @@ To use handlebars, my data needs to be stored as an array of objects.
       success: function(data, status, xhr) {
         console.log('inside the fetch ajax call, data is:', data);
         MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
+        MortgageData.citiesNodes = data.childNodes[0].childNodes[2].childNodes[2];
         // create arrays to hold the cities XML objects and the city names as strings
         MortgageData.cities=[];
         MortgageData.cityNames=[];
@@ -74,11 +56,22 @@ To use handlebars, my data needs to be stored as an array of objects.
     });
   };
 
+  MortgageData.findHomes = function(cityChoice){
+    console.log(MortgageData.cityChoice);
+    var x = MortgageData.cityNames.indexOf(MortgageData.cityChoice) + 1;
+    console.log(MortgageData.citiesNodes.childNodes[x].childNodes[2]);
+    // console.log(MortgageData.citiesNodes);
+//parse the ajax data for the mean home price for this choice
+  };
 
 //assigns the user's city choice to the variable MortgageData.cityChoice.
   $('#city-choice').on('change', function(){
     MortgageData.cityChoice = $(this).val();
+    MortgageData.findHomes(MortgageData.cityChoice);
   });
+
+
+
 
 
 

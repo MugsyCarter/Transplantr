@@ -15,6 +15,8 @@
   //run census.request when state option changes
   $('#state-choice').on('change', function(){
     $('#county-filter').empty();
+    var defaultCountyEntry = $('<option value=""></option>').text('Choose County');
+    $('#county-filter').append(defaultCountyEntry);
     Census.stateChoice = $(this).val();
     Census.stateChoiceName = $(this).find('option:selected').text();
     Census.request();
@@ -22,6 +24,8 @@
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
     $('#city-choice').empty();
+    var defaultCityEntry = $('<option value=""></option>').text('Choose City');
+    $('#city-choice').append(defaultCityEntry);
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
     MortgageData.fetchZillow();
