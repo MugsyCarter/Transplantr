@@ -95,6 +95,9 @@
         break;
       }
     }
+    Census.econObj = econObj;
+    //invoke the function to retrieve the data values
+    Data.parseEconData(Census.econObj);
     return econObj;
   };
 
