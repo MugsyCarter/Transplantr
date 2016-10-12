@@ -13,27 +13,47 @@
     <link rel="stylesheet" href="styles/modules.css">
 
     <!-- Use Handlebars to set up the projects body -->
-    <script id="mortgage-template" type="text/x-handlebars-template">
-      <p>According to Zillow.com, in {{city}}, the median house price is {{aveHousePrice}}</p>
+    <script id="county-econ-template" type="text/x-handlebars-template">
+      <h3>Income</h3>
+
+      <p>Median Income: <b>{{medianIncome}}</b> (household)</p>
+      <p>Federal Median Income: <b>$56516</b> (household)</p>
+      <p>Federal Minimum: <b>$15080</b> (individual)</p>
+      <p>{{county}} Percentage Poverty: <b>{{percentPoverty}}</b></p>
+      <br />
+      <p>We get our median income and poverty data from the U.S. Census Bureau's Small Area Income and Poverty
+          Estimates (SAIPE) program's 2012 census. The program provides estimates of income and poverty levels for
+          all school districts, counties, and states in the US.</p>
+      <p> According to the SAIPE Census in 2012, in {{county}}, the median income was <b>{{medianIncome}}</b>.</p>
+      <p><b>{{percentPoverty}}</b> of people in the county were living at or below the Federal Poverty Line.</p>
     </script>
 
-    <script id="county-econ-template" type="text/x-handlebars-template">
-      <p>In 2012, in {{county}}, the median income was {{medianIncome}}.</p>
-      <p>{{percentPoverty}} of people in the county were living at or below the Federal Poverty Line.</p>
+    <script id="mortgage-template" type="text/x-handlebars-template">
+      <h3>House Prices</h3>
+      <p>Median House Price: <b>{{aveHousePrice}}</b></p>
+      <br />
+      <p>We get our house price data from Zillow.com, an online superstore for buying and selling homes.
+          According to Zillow, in {{city}} the <b>median house price</b> is <b>{{aveHousePrice}}</b></p>
     </script>
 
     <script id="state-rental-template" type="text/x-handlebars-template">
-      <p>For the state of {{State}}, the average rental price of a two-bedroom apartment is {{Avg}}.</p>
+      <h3>Rental Market</h3>
+      <p>State Average: {{Avg}}</p>
+      <br />
+      <p>Our rental data comes from a variety of sources, all of which track rental markets using real online
+      listings. Our data set for the median price (that is, the dollar amount that falls in the exact middle of
+      all rents) is more comprehensive. Where possible, we include mean (average) rent prices, too.</p>
+      <p>For the <b>state</b> of {{State}}, the average rental price of a two-bedroom apartment is <b>{{Avg}}</b>.</p>
     </script>
 
     <script id="city-median-rental-template" type="text/x-handlebars-template">
-      <p>In the city of {{City}}:</p>
-      <p>The median rental price of a one-bedroom apartment is {{Median_1_BR_price}}.</p>
-      <p>The median rental price of a two-bedroom apartment is {{Median_2_BR_price}}.</p>
+      <p>In the <b>city</b> of {{City}}:</p>
+      <p>Median price (1 bdrm apartment): <b>{{Median_1_BR_price}}</b></p>
+      <p>Median price (2 bdrm apartment): <b>{{Median_2_BR_price}}</b></p>
     </script>
 
     <script id="city-mean-rental-template" type="text/x-handlebars-template">
-      <p>The average (mean) rental price of a one-bedroom apartment is {{Mean_1-Bdrm_Price}}.</p>
+      <p>Mean price (1 bdrm apartment): <b>{{Mean_1-Bdrm_Price}}</b></p>
     </script>
 
 
@@ -139,8 +159,7 @@
             </form>
             <div id="county-econ"></div>
             <div id="mortgage-data"></div>
-            <div id="state-rentals"></div>
-            <div id="city-rentals"></div>
+            <div id="rental-data"></div>
 
           </div>
 
@@ -215,8 +234,7 @@
             </form>
             <div id="destination-econ"></div>
             <div id="destination-mortgage-data"></div>
-            <div id="destination-state-rentals"></div>
-            <div id="destination-city-rentals"></div>
+            <div id="destination-rental-data"></div>
           </div>
 
         </div>

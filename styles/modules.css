@@ -132,12 +132,10 @@ a:hover{
 
 #county-econ, 
 #mortgage-data,
-#state-rentals,
-#city-rentals,
+#rental-data,
 #destination-econ,
 #destination-mortgage-data,
-#destination-state-rentals,
-#destination-city-rentals {
+#destination-rental-data {
   margin: 5% 0;
   background-color: white;
   border-radius: 15px;
@@ -150,8 +148,7 @@ a:hover{
 #city-median-rentals:empty,
 #destination-econ:empty,
 #destination-mortgage-data:empty,
-#destination-state-rentals:empty,
-#destination-city-rentals:empty {
+#destination-rental-data:empty {
   display: none;
 }
 

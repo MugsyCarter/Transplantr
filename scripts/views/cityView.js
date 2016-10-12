@@ -5,36 +5,6 @@ city 'page' -- city, income, mortgage, rental, CPI, etc.
 
 var cityView = {};
 
-cityView.handleStateRental = function(stateObj) {
-  if(Census.source){
-    $('#state-rentals').hide().html(stateObj.createStateHtml()).fadeIn('slow');
-  }
-  else{
-    $('#destination-state-rentals').hide().html(stateObj.createStateHtml()).fadeIn('slow');
-    console.log('state rentals');
-  }
-};
-
-cityView.handleCityMedianRental = function(cityMedianObj) {
-  if(Census.source){
-    $('#city-rentals').hide().append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
-  }
-  else {
-    $('#destination-city-rentals').hide().append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
-    console.log('city median');
-  }
-};
-
-cityView.handleCityMeanRental = function(cityMeanObj) {
-  if(Census.source){
-    $('#city-rentals').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
-  }
-  else{
-    $('#destination-city-rentals').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
-    console.log('city mean');
-  }
-};
-
 cityView.handleEcon = function(econObj) {
   if(Census.source){
     $('#county-econ').hide().html(econObj.createEconHtml()).fadeIn('slow');
@@ -50,6 +20,36 @@ cityView.handleMortgage = function(mortgageObj) {
     $('#mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
   } else {
     $('#destination-mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
+  }
+};
+
+cityView.handleStateRental = function(stateObj) {
+  if(Census.source){
+    $('#rental-data').hide().html(stateObj.createStateHtml()).fadeIn('slow');
+  }
+  else{
+    $('#destination-rental-data').hide().html(stateObj.createStateHtml()).fadeIn('slow');
+    console.log('state rentals');
+  }
+};
+
+cityView.handleCityMedianRental = function(cityMedianObj) {
+  if(Census.source){
+    $('#rental-data').append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
+  }
+  else {
+    $('#destination-rental-data').append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
+    console.log('city median');
+  }
+};
+
+cityView.handleCityMeanRental = function(cityMeanObj) {
+  if(Census.source){
+    $('#rental-data').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
+  }
+  else{
+    $('#destination-rental-data').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
+    console.log('city mean');
   }
 };
 
