@@ -54,7 +54,6 @@ a useable data structure to display on the main page
         }
         // pass the selected RentalData state object off to the controller
         rentalController.revealState(stateObj);
-        RentalData.fetchCityMean();
       },
 
       error: function(xhr, settings, error) {
@@ -75,21 +74,17 @@ a useable data structure to display on the main page
       success: function(data, status, xhr) {
         // loop through the json data, turn it into a RentalData object
         RentalData.cityMeanData = RentalData.loadData(data);
-
-        // grab the state name of the selected state
-        var cityChoice = "San Francisco";
-        // selectedCity = $('option[value="'+ cityChoice +'"]').text();
-
         // grab only the RentalData obj you need:
         for (var i=0; i < RentalData.cityMeanData.length; i++) {
-          if (RentalData.cityMeanData[i]["City"] == cityChoice) {
+          if (RentalData.cityMeanData[i]["City"] == MortgageData.cityChoice) {
             var cityMeanObj = RentalData.cityMeanData[i];
             break;
           }  // close if
         } // close for-loop
         // pass the selected RentalData city object off to the controller
-        rentalController.revealCityMean(cityMeanObj);
-        RentalData.fetchCityMedian();
+        if (cityMeanObj) {
+          rentalController.revealCityMean(cityMeanObj);
+        }
       },
 
       error: function(xhr, settings, error) {
@@ -111,19 +106,17 @@ a useable data structure to display on the main page
         // loop through the json data, turn it into a RentalData object
         RentalData.cityMedianData = RentalData.loadData(data);
 
-        // grab the state name of the selected state
-        var cityChoice = "San Francisco";
-        // selectedCity = $('option[value="'+ cityChoice +'"]').text();
-
         // grab only the RentalData obj you need:
         for (var i=0; i < RentalData.cityMedianData.length; i++) {
-          if (RentalData.cityMedianData[i]["City"] == cityChoice) {
+          if (RentalData.cityMedianData[i]["City"] == MortgageData.cityChoice) {
             var cityMedianObj = RentalData.cityMedianData[i];
             break;
           }  // close if
         } // close for-loop
         // pass the selected RentalData city object off to the controller
-        rentalController.revealCityMedian(cityMedianObj);
+        if (cityMedianObj) {
+          rentalController.revealCityMedian(cityMedianObj);
+        }
       },
       error: function(xhr, settings, error) {
         var message = 'Server returned a '
