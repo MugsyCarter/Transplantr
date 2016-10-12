@@ -61,8 +61,9 @@
         </div>
         <div id="data-page" class="tab-content">
           <div id="current-side">
+            <h2>Your Current City</h2>
             <form id="#current-city-input">
-              <label for="state-choice">Choose State:</label>
+              <label for="state-choice">Current State:</label>
               <select id="state-choice">
                 <option value="">Choose State</option>
                 <option value="01">Alabama</option>
@@ -118,18 +119,19 @@
                 <option value="56">Wyoming</option>
                 <option value="72">Puerto Rico</option>
               </select>
-              <label for="county-filter">Choose County:</label>
+              <label for="county-filter">Current County:</label>
               <select id="county-filter">
                 <option value="">Choose County</option>
                 <!-- dynamically created -->
               </select>
-              <label for="city-choice">Choose City:</label>
+              <label for="city-choice">Current City:</label>
               <select id="city-choice">
                 <option value="">Choose City</option>
                   <!-- dynamically created -->
               </select>
-              <input type="text" name="city" id="city-input">
-              <!-- <input type="submit" value="Go" id="zipCodeSubmit"> -->
+              <label for="current-income">Current Income:</label>
+              <input type="text" name="current-income" id="current-income">
+              <input type="submit" value="Go" id="current-submit">
             </form>
             <div id="county-econ"></div>
             <div id="state-rentals"></div>
@@ -140,6 +142,7 @@
 
           <div id="destination-side">
             <form id="#destination-city-input">
+              <h2>Destination City</h2>
               <label for="destination-state-choice">Choose State:</label>
               <select id="destination-state-choice">
                 <option value="">Choose State</option>
@@ -204,7 +207,6 @@
               <select id="destination-city-choice">
                 <option value="">Choose City</option>
               </select>
-              <input type="text" name="city" id="destination-city-input">
               <input type="submit" value="Go" id="destination-submit">
             </form>
             <div id="destination-econ"></div>

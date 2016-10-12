@@ -15,6 +15,8 @@ To use handlebars, the data needs to be stored as an array of objects.
 
   // Create the array to hold the objects from the AJAX call
   MortgageData.allData = [];
+  MortgageData.cities=[];
+  MortgageData.cityNames=[];
 
   MortgageData.prototype.createHtml = function() {
     // Grab the handlebars template, compile it
@@ -30,7 +32,7 @@ To use handlebars, the data needs to be stored as an array of objects.
 
         console.log('inside the fetch ajax call, data is:', data);
         MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
-        // create arrays to hold the cities XML objects and the city names as strings
+        // empty the arrays holding the cities XML objects and the city names as strings
         MortgageData.cities=[];
         MortgageData.cityNames=[];
 
@@ -44,7 +46,6 @@ To use handlebars, the data needs to be stored as an array of objects.
         });
         //call the function to populate the city filter
         MortgageData.fillCityFilter(MortgageData.cityNames);
-
       },
       error: function(xhr, settings, error) {
         console.log('Server returned a ', xhr.status + ' ' + error + ' error.');

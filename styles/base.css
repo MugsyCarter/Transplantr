@@ -37,3 +37,8 @@ ul {
 a, a:link, a:active {
   text-decoration: none;
 }
+
+label {
+  margin: 0;
+  padding: 0;
+}
