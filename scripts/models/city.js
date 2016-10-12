@@ -38,7 +38,7 @@
 
     // Some stuff for putting this income into handlebars
     Census.loadIncome([{"currentIncome": Census.currentIncome}]);
-    dataController.incomeReveal(Census.currentIncome[0]);
+    dataController.incomeReveal(Census.incomeData[0]);
   });
 
   //request when destination state option changes
@@ -152,12 +152,12 @@
   };
 
   Census.loadIncome = function(data) {
-    console.log('loadIncome data ', data);
     Census.incomeData = [];
     Census.incomeData = data.map(function(income) {
       return new Census(income);
     })
   };
+
   // make Census available globally
   module.Census = Census;
 })(window);
