@@ -186,8 +186,12 @@ a:hover{
   display: none;
 }
 
+#graphs-page {
+  padding:2%;
+}
+
 .comparison_table {
-  padding: 1%;
+  padding:1%;
 }
 
 .chartSize {
