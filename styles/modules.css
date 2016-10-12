@@ -74,22 +74,77 @@ a:hover{
 #current-income {
   display: block;
   margin: 0 auto 2%;
-  max-width: 220px;
+  width: 175px;
+  border-radius: 15px;
+}
+
+#state-choice:focus,
+#county-filter:focus,
+#city-choice:focus,
+#destination-state-choice:focus,
+#destination-county-filter:focus,
+#destination-city-choice:focus,
+#current-income:focus {
+  outline: none;
+  box-shadow: inset 0 0 5px 2px #add8e6;
+}
+
+#current-income {
+  text-align: center;
+  padding: 3px 0;
+  border: none;
+}
+
+#current-income:focus {
+  outline: none;
+  box-shadow: inset 0 0 5px 1px #add8e6;
 }
 
 #current-side,
 #destination-side {
+  box-sizing: border-box;
   text-align: center;
-  padding: 2% 0 5%;
+  padding: 3%;
 }
 
 #current-city-input,
 #destination-city-input {
-  margin-bottom: 5%;
+  padding-bottom: 5%;
 }
 
 #current-side {
   background-color: #e9e9e9;
+}
+
+#current-submit {
+  border-radius: 15px;
+  border: none;
+  width: 50px;
+  transition: transform .5s;
+  padding-top: 4px;
+  margin:10px 0 15px;
+  background-color: #bdbdbd;
+}
+
+#current-submit:hover {
+  transform: scale(1.2);
+}
+
+#county-econ,
+#state-rentals,
+#city-mean-rentals,
+#city-median-rentals {
+  margin: 5% 0;
+  background-color: white;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+#county-econ:empty,
+#state-rentals:empty,
+#city-mean-rentals:empty,
+#city-median-rentals:empty {
+  display: none;
 }
 
 .comparison_table {
