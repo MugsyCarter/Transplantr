@@ -13,6 +13,8 @@ nav a {
 
 footer {
   clear:both;
+  text-align:center;
+  font-size:0.75em;
   padding:1%;
   color:#FFF;
   background-color:#003459;
