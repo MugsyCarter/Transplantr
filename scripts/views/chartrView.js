@@ -30,9 +30,6 @@ function drawChart() {
       }]
     },
     options: {
-      title: {
-        fontFamily: "'Open Sans', sans-serif"
-      },
       xAxes: [{
         ticks: {
           beginAtZero:true
