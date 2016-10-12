@@ -9,7 +9,7 @@
 }
 
 .main-nav ul li {
-  display: block;
+  display: none;
   padding: 1% 5%;
   text-align: center;
   font-size: .95em;
@@ -37,21 +37,21 @@
 
 .icon-menu:hover {
   color: grey;
+  padding-bottom:2%;
+}
+
+.icon-menu:hover ~ li{
+  display: block;
+  padding:2%;
+}
+
+.icon-menu:active ~ li{
+  display: block;
+  padding:2%;
 }
 
 a:hover{
   font-style: italic;
-}
-
-.icon-menu:hover ul li {
-  display: block;
-  line-height: 200%;
-  padding-top: 5%
-}
-
-.icon-menu:active ul li {
-  display: block;
-  line-height:200%;
 }
 
 .search-page {
