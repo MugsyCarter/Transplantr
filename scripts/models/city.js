@@ -21,6 +21,7 @@
   });
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
+    $('#city-choice').empty();
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
     MortgageData.fetchZillow();

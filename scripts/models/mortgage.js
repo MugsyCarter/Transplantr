@@ -13,6 +13,8 @@ To use handlebars, my data needs to be stored as an array of objects.
     }
   }
 
+
+
   // Create the array to hold the objects from the AJAX call
   MortgageData.allData = [];
 
@@ -43,12 +45,40 @@ To use handlebars, my data needs to be stored as an array of objects.
       url: '/zillow/' + Census.stateChoiceName.toLowerCase() + '/' + Census.countyChoiceName.toLowerCase(),
       success: function(data, status, xhr) {
         console.log('inside the fetch ajax call, data is:', data);
+        MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
+        // var cityList = data.childNodes[0].childNodes[2].childNodes[2];
+        console.log(MortgageData.citiesList);
+        MortgageData.cities=[];
+        MortgageData.cityNames=[];
+        for (var i= 1; i <MortgageData.citiesList.length; i++)
+        {
+          MortgageData.cities.push(data.childNodes[0].childNodes[2].childNodes[2].childNodes[i].childNodes[1]);
+        }
+        console.log(MortgageData.cities);
+        MortgageData.cityNames = MortgageData.cities.map(function(city){
+          return city.innerHTML;
+        });
+
+        console.log(MortgageData.cityNames);
+        MortgageData.fillCityFilter(MortgageData.cityNames);
       },
       error: function(xhr, settings, error) {
         console.log('Server returned a ', xhr.status + ' ' + error + ' error.');
       }
     });
   };
+
+  MortgageData.fillCityFilter = function(cityNames){
+    console.log('city filter function called');
+    console.log(cityNames);
+    console.log('after loggin cityNames');
+    cityNames.forEach(function(city){
+      console.log(city);
+      var filterEntry = $('<option value="'+ city +'"></option>').text(city);
+      $('#city-choice').append(filterEntry);
+    });
+  };
+
 
   module.MortgageData = MortgageData;
 })(window);
