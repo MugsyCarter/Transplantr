@@ -35,8 +35,8 @@ To use handlebars, the data needs to be stored as an array of objects.
             $option.text(city[0]);
             $('#county-filter').append($option);
           }
-        };
-      },*/
+        };*/
+      },
       error: function(xhr, settings, error) {
         console.log('Server returned a ', xhr.status + ' ' + error + ' error.');
       }

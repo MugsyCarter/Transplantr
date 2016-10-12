@@ -65,6 +65,36 @@ a:hover{
   display:block;
 }
 
+#state-choice,
+#county-filter,
+#city-choice,
+#destination-state-choice,
+#destination-county-filter,
+#destination-city-choice,
+#current-income {
+  display: block;
+  margin: 0 auto 2%;
+  max-width: 220px;
+}
+
+#current-side,
+#destination-side {
+  text-align: center;
+  padding: 2% 0 5%;
+}
+
+#current-city-input,
+#destination-city-input {
+  margin-bottom: 5%;
+}
+
+
+
+#current-side {
+  background-color: #e9e9e9;
+}
+
+
 /* Media Query Stuff */
 
 @media only screen and (min-width: 450px) {
@@ -75,6 +105,11 @@ a:hover{
 
   #transplantr {
     font-size: 2.9em;
+  }
+
+  #current-side {
+    width: 50%;
+    float: left;
   }
 
 }
@@ -115,6 +150,7 @@ a:hover{
     float:left;
     line-height:150%;
   }
+
 }
 
 @media only screen and (min-width: 1024px) {
