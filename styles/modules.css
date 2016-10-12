@@ -30,6 +30,14 @@
   text-shadow: 3px 4px 4px black;
 }
 
+.branding {
+  font-family: 'Amatic SC', serif;
+  color:#FFF;
+  font-size:1.75em;
+  font-weight: bold;
+  text-shadow: 3px 4px 4px black;
+}
+
 .icon-menu {
   text-align: center;
   font-size: 2em;
@@ -134,7 +142,7 @@ a:hover{
   outline: none;
 }
 
-#county-econ, 
+#county-econ,
 #mortgage-data,
 #rental-data,
 #destination-econ,
