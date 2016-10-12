@@ -1,7 +1,7 @@
 /* This script handles pulling data from the Zillow API and making it
 available to the Transplantr app
 
-To use handlebars, my data needs to be stored as an array of objects.
+To use handlebars, the data needs to be stored as an array of objects.
  */
 
 (function(module) {
@@ -21,23 +21,8 @@ To use handlebars, my data needs to be stored as an array of objects.
     // return the finished html
   };
 
-  // $('#county-filter').on('change', function(){
-  //   $('#city-choice').empty();
-  //   Mortgage.countyChoice = $(this).val();
-  //   console.log(Mortgage.countyChoice);
-    // Census.stateChoiceName = $(this).find('option:selected').text();
-    // console.log(Census.stateChoiceName);
-    // console.log(Census.stateChoice);
-    // Census.findAbbrev(Census.stateChoice);
-  //   MortgageData.fetchZillow();
-  // });
-
-
-
-
   MortgageData.fetchZillow = function() {
-    console.log('im in the fetchZillow function');
-    // This method does the API call to zillow
+    // The call to /zillow is routed by page to the node server and out to Zillow
     $.ajax({
       method: 'GET',
       url: '/zillow/' + Census.stateChoiceName.toLowerCase() + '/' + Census.countyChoiceName.toLowerCase(),

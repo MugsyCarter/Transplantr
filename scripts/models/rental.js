@@ -1,14 +1,15 @@
 /* This file does an AJAX call to the local JSON data in order to make
 a useable data structure to display on the main page
  */
+
 (function(module) {
 
-  function RentalData (data) {
+function RentalData (data) {
     // Loop through the data and make it into a RentalData object
     for (key in data) {
-      this[key] = data[key];
+        this[key] = data[key]
     }
-  }
+}
 
 // Create the array to hold the objects from the AJAX call
 RentalData.stateData = [];
@@ -39,16 +40,13 @@ RentalData.fetchStates = function() {
         return new RentalData(state);
       });
 
-      // grab the state name of the selected state
-      selectedState = $('option[value="'+ Census.stateChoice +'"]').text();
-
       // grab only the RentalData obj you need:
       for (var i=0; i < RentalData.stateData.length; i++) {
-        if (RentalData.stateData[i]["State"] == selectedState) {
+        if (RentalData.stateData[i]["State"] === Census.stateChoiceName) {
           var stateObj = RentalData.stateData[i];
           break;
-        }  // close if
-      } // close for-loop
+        }
+      }
       // pass the selected RentalData state object off to the controller
       rentalController.revealState(stateObj);
       RentalData.fetchCityMean();

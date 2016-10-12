@@ -1,16 +1,13 @@
-
-
-
 // Let's build a server!
 var express = require('express'),
   requestProxy = require('express-request-proxy'),
   port = process.env.PORT || 3000,
+  app = express(),
   zillowKey = 'X1-ZWz19jfw5ars3v_1oefy',
-  app = express();
-
+  censusKey = '7a3aa9d2f7fafb092b5957d10b65c477719c4c4f';
 
 function proxyZillow(request, response) {
-  console.log('Routing Zillow request for', request.params);
+  console.log('Routing Zillow request for', request.params[0]);
   (requestProxy({
     method: 'GET',
     dataType: 'xml',
@@ -21,9 +18,26 @@ function proxyZillow(request, response) {
       county: request.params.county
     }
   }))(request, response);
-};
+}
+
+function proxyCensus(request, response) {
+  console.log('Routing Census request for', request.params);
+  (requestProxy({
+    method: 'GET',
+    url:'http://api.census.gov/data/timeseries/poverty/saipe',
+    query: {
+      'get': 'NAME,SAEMHI_PT,SAEPOVRTALL_PT',
+      'for': 'county:*',
+      'in': 'state:' + request.params.state,
+      time: '2012',
+      key: censusKey
+    }
+  }))(request, response);
+}
 
 app.get('/zillow/:state/:county', proxyZillow);
+
+app.get('/census/:state', proxyCensus);
 
 // The serve-all has to be below the specific requests or it overrides them
 app.use(express.static('./'));
