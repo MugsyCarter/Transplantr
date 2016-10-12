@@ -4,98 +4,142 @@ a useable data structure to display on the main page
 
 (function(module) {
 
-function RentalData (data) {
+  function RentalData (data) {
     // Loop through the data and make it into a RentalData object
     for (key in data) {
-        this[key] = data[key]
+      this[key] = data[key]
     }
-}
+  }
 
-// Create the array to hold the objects from the AJAX call
-RentalData.stateData = [];
-RentalData.cityMeanData = [];
+  // Create arrays to hold the objects from the three AJAX calls
+  RentalData.stateData = [];
+  RentalData.cityMeanData = [];
+  RentalData.cityMedianData = [];
 
-// Do some basic handlebars templating
-RentalData.prototype.createStateHtml = function() {
-  var template = Handlebars.compile($('#state-rental-template').html());
-  return template(this);
-};
+  // Handlebars templating to create the html
+  RentalData.prototype.createStateHtml = function() {
+    var template = Handlebars.compile($('#state-rental-template').html());
+    return template(this);
+  };
 
-RentalData.prototype.createCityMeanHtml = function() {
-  var template = Handlebars.compile($('#city-mean-rental-template').html());
-  return template(this);
-};
+  RentalData.prototype.createCityMeanHtml = function() {
+    var template = Handlebars.compile($('#city-mean-rental-template').html());
+    return template(this);
+  };
 
+  RentalData.prototype.createCityMedianHtml = function() {
+    var cityTemplate = Handlebars.compile($('#city-median-rental-template').html());
+      return cityTemplate(this);
+    };
 
-RentalData.fetchStates = function() {
-  $.ajax({
-    method: 'GET',
-    url: '../data/state_rents.json',
-    timeout: 2000,
+  // All three AJAX calls, one per data source:
 
-    success: function(data, status, xhr) {
+  RentalData.fetchStates = function() {
+    $.ajax({
+      method: 'GET',
+      url: '../data/state_rents.json',
+      timeout: 2000,
 
-      // loop through the json data, turn it into a RentalData object
-      RentalData.stateData = data.map(function(state) {
-        return new RentalData(state);
-      });
+      success: function(data, status, xhr) {
 
-      // grab only the RentalData obj you need:
-      for (var i=0; i < RentalData.stateData.length; i++) {
-        if (RentalData.stateData[i]['State'] == Census.stateChoiceName) {
-          var stateObj = RentalData.stateData[i];
-          break;
+        // loop through the json data, turn it into a RentalData object
+        RentalData.stateData = RentalData.loadData(data);
+
+        // grab only the RentalData obj you need:
+        for (var i=0; i < RentalData.stateData.length; i++) {
+          if (RentalData.stateData[i]['State'] == Census.stateChoiceName) {
+            var stateObj = RentalData.stateData[i];
+            break;
+          }
         }
+        // pass the selected RentalData state object off to the controller
+        rentalController.revealState(stateObj);
+        RentalData.fetchCityMean();
+      },
+
+      error: function(xhr, settings, error) {
+        var message = 'Server returned a '
+          + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
+          + ' error message. <br />Please try again later.</div>';
+        console.log(message);
       }
-      // pass the selected RentalData state object off to the controller
-      rentalController.revealState(stateObj);
-      RentalData.fetchCityMean();
-    },
+    })
+  };
 
-    error: function(xhr, settings, error) {
-      var message = 'Server returned a '
-        + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
-        + ' error message. <br />Please try again later.</div>';
-      console.log(message);
-    }
-  })
-};
+  RentalData.fetchCityMean = function() {
+    $.ajax({
+      method: 'GET',
+      url: '../data/city_rents-mean.json',
+      timeout: 2000,
 
-RentalData.fetchCityMean = function() {
-  $.ajax({
-    method: 'GET',
-    url: '../data/city_rents-mean.json',
-    timeout: 2000,
+      success: function(data, status, xhr) {
+        // loop through the json data, turn it into a RentalData object
+        RentalData.cityMeanData = RentalData.loadData(data);
 
-    success: function(data, status, xhr) {
-      // loop through the json data, turn it into a RentalData object
-      RentalData.cityMeanData = data.map(function(city) {
-        return new RentalData(city);
-      });
+        // grab the state name of the selected state
+        var cityChoice = "San Francisco";
+        // selectedCity = $('option[value="'+ cityChoice +'"]').text();
 
-      // grab the state name of the selected state
-      var cityChoice = "San Francisco";
-      // selectedCity = $('option[value="'+ cityChoice +'"]').text();
+        // grab only the RentalData obj you need:
+        for (var i=0; i < RentalData.cityMeanData.length; i++) {
+          if (RentalData.cityMeanData[i]["City"] == cityChoice) {
+            var cityMeanObj = RentalData.cityMeanData[i];
+            break;
+          }  // close if
+        } // close for-loop
+        // pass the selected RentalData city object off to the controller
+        rentalController.revealCityMean(cityMeanObj);
+        RentalData.fetchCityMedian();
+      },
 
-      // grab only the RentalData obj you need:
-      for (var i=0; i < RentalData.cityMeanData.length; i++) {
-        if (RentalData.cityMeanData[i]["City"] == cityChoice) {
-          var cityMeanObj = RentalData.cityMeanData[i];
-          break;
-        }  // close if
-      } // close for-loop
-      // pass the selected RentalData city object off to the controller
-      rentalController.revealCityMean(cityMeanObj);
-    },
+      error: function(xhr, settings, error) {
+        var message = 'Server returned a '
+          + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
+          + ' error message. <br />Please try again later.</div>';
+        console.log(message);
+      }
+    })
+  };
 
-    error: function(xhr, settings, error) {
-      var message = 'Server returned a '
-        + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
-        + ' error message. <br />Please try again later.</div>';
-      console.log(message);
-    }
-  })
-};
+  RentalData.fetchCityMedian = function() {
+    $.ajax({
+      method: 'GET',
+      url: '../data/city_rents-median.json',
+      timeout: 2000,
+
+      success: function(data, status, xhr) {
+        // loop through the json data, turn it into a RentalData object
+        RentalData.cityMedianData = RentalData.loadData(data);
+
+        // grab the state name of the selected state
+        var cityChoice = "San Francisco";
+        // selectedCity = $('option[value="'+ cityChoice +'"]').text();
+
+        // grab only the RentalData obj you need:
+        for (var i=0; i < RentalData.cityMedianData.length; i++) {
+          if (RentalData.cityMedianData[i]["City"] == cityChoice) {
+            var cityMedianObj = RentalData.cityMedianData[i];
+            break;
+          }  // close if
+        } // close for-loop
+        // pass the selected RentalData city object off to the controller
+        rentalController.revealCityMedian(cityMedianObj);
+      },
+      error: function(xhr, settings, error) {
+        var message = 'Server returned a '
+            + '<b>' + jqXHR.status + ' ' + thrownError + '</b>'
+            + ' error message. <br />Please try again later.</div>';
+        console.log(message);
+      }
+    });
+  };
+
+  // method to take returned data from ajax request and load it into RentalData.cityData
+  RentalData.loadData = function(jsondata) {
+    return jsondata.map(function(obj) {
+      return new RentalData(obj);
+    });
+  };
 
   module.RentalData = RentalData;
 })(window);
