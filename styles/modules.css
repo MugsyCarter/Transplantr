@@ -88,10 +88,16 @@ a:hover{
   margin-bottom: 5%;
 }
 
-
-
 #current-side {
   background-color: #e9e9e9;
+}
+
+.comparison_table {
+  padding: 1%;
+}
+
+.chartSize {
+  padding:1%;
 }
 
 
@@ -169,6 +175,16 @@ a:hover{
 
   .icon-menu {
     font-size: 1.1em;
+  }
+
+  .comparison_table {
+    width:48%;
+    float:left;
+  }
+
+  .chartSize {
+    width: 48%;
+    float:right;
   }
 }
 
