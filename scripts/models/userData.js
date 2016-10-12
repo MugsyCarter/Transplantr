@@ -19,6 +19,18 @@
     Data.econPoverty= obj.percentPoverty;
   };
 
+  Data.storeData = function(obj){
+    if(Census.source){
+      var tag = 'home';
+    }
+    else {
+      var tag = 'away';
+    }
+    console.log('storing ', obj);
+    for (key in obj){
+      localStorage.setItem(tag+key, obj[key]);
+    }
+  };
 
   module.Data = Data;
 })(window);
