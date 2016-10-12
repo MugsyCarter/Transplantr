@@ -18,12 +18,14 @@
     </script>
 
     <script id="city-mean-rental-template" type="text/x-handlebars-template">
-      <p>In the city {{City}}, the average mean rental price of a one-bedroom apartment is {{Mean_1-Bdrm_Price}}.</p>
+      <p>In the city of {{City}}:</p>
+        <p>The average (mean) rental price of a one-bedroom apartment is {{Mean_1-Bdrm_Price}}.</p>
     </script>
 
-    <script id="city-rental-template" type="text/x-handlebars-template">
-      <p>For the city of {{City}}, the average rental price of a two-bedroom apartment is {{twoBDAvg}}.</p>
-      <p>The average rental price of a one-bedroom apartment is {{oneBDAvg}}.</p>
+    <script id="city-median-rental-template" type="text/x-handlebars-template">
+      <p>The median rental price of a one-bedroom apartment is {{Median_1_BR_price}}.</p>
+      <p>The median rental price of a two-bedroom apartment is {{Median_2_BR_price}}.</p>
+
     </script>
 
   </head>
@@ -126,7 +128,7 @@
             </form>
             <div id="state-rentals"></div>
             <div id="city-mean-rentals"></div>
-            <div id="city-rentals"></div>
+            <div id="city-median-rentals"></div>
           </div>
 
 
