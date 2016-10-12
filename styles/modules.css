@@ -91,6 +91,10 @@ a:hover{
   background-color:#003459;
 }
 
+#about-page {
+  padding:3%;
+}
+
 #state-choice,
 #county-filter,
 #city-choice,
