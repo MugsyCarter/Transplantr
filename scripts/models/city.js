@@ -31,11 +31,13 @@
   //compute income ration when submit button is pressed
   $('#current-submit').on('click', function() {
     Census.currentIncome = $('#current-income').val();
-    Census.curIncRatio = (Census.currentIncome)/(parseInt(Census.economicData[0].medianIncome.replace('$', '')));
-    console.log(parseInt(Census.economicData[0].medianIncome.replace('$', '')));
-    console.log(Census.curIncRatio);
-
-
+    for (var i = 0; i < Census.economicData.length; i++) {
+      if (Census.economicData[i].county === Census.countyChoice) {
+        Census.curIncRatio = (Census.currentIncome)/(parseInt(Census.economicData[i].medianIncome.replace('$', '')));
+        console.log(parseInt(Census.economicData[i].medianIncome.replace('$', '')));
+        console.log(Census.curIncRatio);
+      }
+    }
   });
 
   //request when destination state option changes
