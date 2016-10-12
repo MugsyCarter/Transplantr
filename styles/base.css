@@ -24,6 +24,10 @@ h3 {
   font-size: 1.1em;
 }
 
+b {
+  font-weight:600;
+}
+
 p {
   font-size: .95em;
 }
