@@ -15,6 +15,11 @@ cityView.handleEcon = function(econObj) {
   }
 };
 
+cityView.handleIncome = function(incomeObj) {
+  $('#user_income').html('Your Income: <b>$' + incomeObj + '</b>').fadeIn('slow');
+};
+
+
 cityView.handleMortgage = function(mortgageObj) {
   if(Census.source) {
     $('#mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');

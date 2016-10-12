@@ -10,6 +10,7 @@
   //array of all site objects that run census.
   Census.allData = [];
   Census.economicData = [];
+  Census.incomeData = [];
 
   //sets up the source variable true = origin false = destination
   Census.source = true;
@@ -38,6 +39,10 @@
         console.log(Census.curIncRatio);
       }
     }
+
+    // Call this here so it waits for the input to load
+    dataController.incomeReveal(Census.currentIncome);
+
   });
 
   //request when destination state option changes
@@ -99,6 +104,11 @@
     return template(this);
   };
 
+  Census.prototype.createIncomeHtml = function() {
+    var template = Handlebars.compile($('#income-input-template').html());
+    return template(this);
+  };
+
 
   //ajax call gets routed to the express server and then out to the census
   Census.request = function() {
@@ -144,6 +154,7 @@
       return new Census(county);
     });
   };
+
 
   // make Census available globally
   module.Census = Census;

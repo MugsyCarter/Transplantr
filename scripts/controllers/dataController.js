@@ -15,5 +15,10 @@
     cityView.handleMortgage(mortgageObj);
   };
 
+  dataController.incomeReveal = function(incomeObj) {
+    cityView.handleIncome(incomeObj);
+  };
+
+
   module.dataController = dataController;
 })(window);
