@@ -38,7 +38,6 @@ To use handlebars, my data needs to be stored as an array of objects.
 
 
   MortgageData.fetchZillow = function() {
-    console.log('im in the fetchZillow function');
     // This method does the API call to zillow
     $.ajax({
       method: 'GET',
@@ -46,20 +45,19 @@ To use handlebars, my data needs to be stored as an array of objects.
       success: function(data, status, xhr) {
         console.log('inside the fetch ajax call, data is:', data);
         MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
-        // var cityList = data.childNodes[0].childNodes[2].childNodes[2];
-        console.log(MortgageData.citiesList);
+        // create arrays to hold the cities XML objects and the city names as strings
         MortgageData.cities=[];
         MortgageData.cityNames=[];
+
+        //populate the array of city names ignoring the 1st item
         for (var i= 1; i <MortgageData.citiesList.length; i++)
         {
           MortgageData.cities.push(data.childNodes[0].childNodes[2].childNodes[2].childNodes[i].childNodes[1]);
         }
-        console.log(MortgageData.cities);
         MortgageData.cityNames = MortgageData.cities.map(function(city){
           return city.innerHTML;
         });
-
-        console.log(MortgageData.cityNames);
+        //call the function to populate the city filter
         MortgageData.fillCityFilter(MortgageData.cityNames);
       },
       error: function(xhr, settings, error) {
@@ -68,12 +66,9 @@ To use handlebars, my data needs to be stored as an array of objects.
     });
   };
 
+//this function appends cities to the city filter in index.html
   MortgageData.fillCityFilter = function(cityNames){
-    console.log('city filter function called');
-    console.log(cityNames);
-    console.log('after loggin cityNames');
     cityNames.forEach(function(city){
-      console.log(city);
       var filterEntry = $('<option value="'+ city +'"></option>').text(city);
       $('#city-choice').append(filterEntry);
     });
