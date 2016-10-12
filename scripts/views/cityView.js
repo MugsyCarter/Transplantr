@@ -52,4 +52,3 @@ cityView.handleMortgage = function(mortgageObj) {
     $('#destination-mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
   }
 };
-

@@ -130,6 +130,10 @@ a:hover{
   transform: scale(1.2);
 }
 
+#current-submit:focus {
+  outline: none;
+}
+
 #county-econ,
 #state-rentals,
 #city-mean-rentals,

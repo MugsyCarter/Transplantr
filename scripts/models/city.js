@@ -28,6 +28,16 @@
     Census.request();
   });
 
+  //compute income ration when submit button is pressed
+  $('#current-submit').on('click', function() {
+    Census.currentIncome = $('#current-income').val();
+    Census.curIncRatio = (Census.currentIncome)/(parseInt(Census.economicData[0].medianIncome.replace('$', '')));
+    console.log(parseInt(Census.economicData[0].medianIncome.replace('$', '')));
+    console.log(Census.curIncRatio);
+
+
+  });
+
   //request when destination state option changes
   $('#destination-state-choice').on('change', function(){
     $('#destination-county-filter').empty();
@@ -74,7 +84,7 @@
   // method to grab just the county selected and put it's econ data on the page
   Census.getEconInfo = function() {
     for (var i=0; i < Census.economicData.length; i++) {
-      if (Census.economicData[i]['county'] == Census.countyChoice) {
+      if (Census.economicData[i]['county'] === Census.countyChoice) {
         var econObj = Census.economicData[i];
         break;
       }
@@ -114,10 +124,10 @@
             }
             // grab the income and poverty data, make into a census object
             Census.economicData.push(new Census({
-                "county": county[0],
-                "medianIncome": "$" + county[1],
-                "percentPoverty": county[2] + "%"
-              }));
+              'county': county[0],
+              'medianIncome': '$' + county[1],
+              'percentPoverty': county[2] + '%'
+            }));
           } // close if
         }); // close forEach
         // The rental data can't run until census populates, call it here
