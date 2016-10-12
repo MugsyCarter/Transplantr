@@ -16,8 +16,7 @@ cityView.handleEcon = function(econObj) {
 };
 
 cityView.handleIncome = function(incomeObj) {
-  console.log('incomeobj is ', incomeObj);
-  $('#user_income').html(incomeObj.createIncomeHtml()).fadeIn('slow');
+  $('#user_income').html('Your Income: <b>$' + incomeObj + '</b>').fadeIn('slow');
 };
 
 

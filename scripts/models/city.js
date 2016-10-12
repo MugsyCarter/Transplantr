@@ -36,9 +36,8 @@
     console.log(parseInt(Census.economicData[0].medianIncome.replace('$', '')));
     console.log(Census.curIncRatio);
 
-    // Some stuff for putting this income into handlebars
-    Census.loadIncome([{"currentIncome": Census.currentIncome}]);
-    dataController.incomeReveal(Census.incomeData[0]);
+    // Call this here so it waits for the input to load
+    dataController.incomeReveal(Census.currentIncome);
   });
 
   //request when destination state option changes
@@ -151,12 +150,6 @@
     });
   };
 
-  Census.loadIncome = function(data) {
-    Census.incomeData = [];
-    Census.incomeData = data.map(function(income) {
-      return new Census(income);
-    })
-  };
 
   // make Census available globally
   module.Census = Census;
