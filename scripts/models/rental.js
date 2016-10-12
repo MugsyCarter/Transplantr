@@ -42,7 +42,7 @@ RentalData.fetchStates = function() {
 
       // grab only the RentalData obj you need:
       for (var i=0; i < RentalData.stateData.length; i++) {
-        if (RentalData.stateData[i]["State"] === Census.stateChoiceName) {
+        if (RentalData.stateData[i]['State'] == Census.stateChoiceName) {
           var stateObj = RentalData.stateData[i];
           break;
         }
