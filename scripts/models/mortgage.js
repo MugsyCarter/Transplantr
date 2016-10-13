@@ -109,7 +109,7 @@ To use handlebars, the data needs to be stored as an array of objects.
       Data.storeData(Data.home);
     }
     else {
-      Data.away = new Data.location(Census.stateChoiceName, Census.countyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
+      Data.away = new Data.location(Census.destinationStateChoiceName, Census.destinationCountyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
       Data.storeData(Data.away);
     }
   };
