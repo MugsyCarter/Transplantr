@@ -16,6 +16,7 @@
     <script id="county-econ-template" type="text/x-handlebars-template">
       <h3>Income</h3>
       <p id="user_income"></p>
+      <p id="income_needed_median"></p>
       <p>Median Income: <b>{{medianIncome}}</b> (household)</p>
       <p>Federal Median Income: <b>$56516</b> (household)</p>
       <p>Federal Minimum: <b>$15080</b> (individual)</p>
@@ -31,30 +32,40 @@
     <script id="mortgage-template" type="text/x-handlebars-template">
       <h3>House Prices</h3>
       <p>Median House Price: <b>{{aveHousePrice}}</b></p>
+      <p id="income_needed_mortgage"></p>
       <br />
       <p>We get our house price data from Zillow.com, an online superstore for buying and selling homes.
           According to Zillow, in {{city}} the <b>median house price</b> is <b>{{aveHousePrice}}</b></p>
     </script>
 
-    <script id="state-rental-template" type="text/x-handlebars-template">
-      <h3>Rental Market</h3>
+    <script id="state-curr-rental-template" type="text/x-handlebars-template">
+      <h3>Your Rental Market</h3>
       <p>State Average: {{Avg}}</p>
+      <p id="curr_city_rental_info"></p>
+      <p id="curr_city_mean_1bdrm"></p>
+      <p id="curr_city_median_1bdrm"></p>
+      <p id="curr_city_median_2bdrm"></p>
+      <p id="curr_income_needed_rental"></p>
       <br />
       <p>Our rental data comes from a variety of sources, all of which track rental markets using real online
       listings. Our data set for the median price (that is, the dollar amount that falls in the exact middle of
       all rents) is more comprehensive. Where possible, we include mean (average) rent prices, too.</p>
-      <p>For the state of <b>{{State}}</b>, the average rental price of a two-bedroom apartment is <b>{{Avg}}</b>.</p>
     </script>
 
-    <script id="city-median-rental-template" type="text/x-handlebars-template">
-      <p>In the city of <b>{{City}}</b>:</p>
-      <p>Median price (1 bdrm apartment): <b>{{Median_1_BR_price}}</b></p>
-      <p>Median price (2 bdrm apartment): <b>{{Median_2_BR_price}}</b></p>
+    <script id="state-dest-rental-template" type="text/x-handlebars-template">
+      <h3>Their Rental Market</h3>
+      <p>State Average: {{Avg}}</p>
+      <p id="dest_city_rental_info"></p>
+      <p id="dest_city_mean_1bdrm"></p>
+      <p id="dest_city_median_1bdrm"></p>
+      <p id="dest_city_median_2bdrm"></p>
+      <p id="dest_income_needed_rental"></p>
+      <br />
+      <p>Given the equivalent income (based on your relation to the median), your economic strength in the
+      new rental market is ~~~ (put stuff here).</p>
     </script>
 
-    <script id="city-mean-rental-template" type="text/x-handlebars-template">
-      <p>Mean price (1 bdrm apartment): <b>{{Mean_1-Bdrm_Price}}</b></p>
-    </script>
+
 
 
   </head>

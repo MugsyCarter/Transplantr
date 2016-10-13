@@ -19,24 +19,20 @@ a useable data structure to display on the main page
   RentalData.currentCityMedianData = [];
   RentalData.destinationCityMedianData = [];
 
-  // Handlebars templating to create the html
-  RentalData.prototype.createStateHtml = function() {
-    var template = Handlebars.compile($('#state-rental-template').html());
+  // Handlebars templating to create the html for state, city rental info
+  // is added dynamically by jQuery
+  RentalData.prototype.createCurrentStateHtml = function() {
+    var template = Handlebars.compile($('#state-curr-rental-template').html());
     return template(this);
   };
 
-  RentalData.prototype.createCityMeanHtml = function() {
-    var template = Handlebars.compile($('#city-mean-rental-template').html());
+  RentalData.prototype.createDestinationStateHtml = function() {
+    var template = Handlebars.compile($('#state-dest-rental-template').html());
     return template(this);
   };
 
-  RentalData.prototype.createCityMedianHtml = function() {
-    var cityTemplate = Handlebars.compile($('#city-median-rental-template').html());
-    return cityTemplate(this);
-  };
 
-  // All three AJAX calls, one per data source:
-
+/********* All three AJAX calls, one per data source:  ************/
   RentalData.fetchStates = function() {
     var isCurrent = MortgageData.source;
 
@@ -100,6 +96,7 @@ a useable data structure to display on the main page
           }  // close if
         } // close for-loop
         // pass the selected RentalData city object off to the controller
+        console.log('the cityMedianObj is ', cityMedianObj);
         if (cityMedianObj) {
           rentalController.revealCityMedian(cityMedianObj, isCurrent);
         }
