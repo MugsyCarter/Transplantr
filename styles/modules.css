@@ -100,6 +100,10 @@ a:hover{
   padding:3%;
 }
 
+.datacontainer {
+  overflow:hidden;
+}
+
 #state-choice,
 #county-filter,
 #city-choice,
@@ -140,7 +144,6 @@ a:hover{
   box-sizing: border-box;
   text-align: center;
   padding: 3%;
-  width:50%;
 }
 
 #current-city-input,
@@ -150,7 +153,6 @@ a:hover{
 
 #current-side {
   background-color: #e9e9e9;
-  float:left;
 }
 
 #current-submit {
@@ -245,6 +247,7 @@ a:hover{
 
   #destination-side {
     float: right;
+    width:50%;
   }
 
   .icon-menu {
@@ -254,6 +257,11 @@ a:hover{
   .main-nav ul li {
     display: inline-block;
     padding: 0.5% 5%;
+  }
+
+  .emptybox {
+    content:'';
+    height:12%;
   }
 }
 
