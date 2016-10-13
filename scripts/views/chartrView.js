@@ -59,8 +59,6 @@ function drawChart() {
   }, 300);
 };
 
-drawChart();
-
 function drawChart2() {
   setTimeout(function() {
 
@@ -112,4 +110,7 @@ function drawChart2() {
   }, 300);
 };
 
-drawChart2();
+$('#graphs-link').on('click', function(){
+  drawChart();
+  drawChart2();
+});
