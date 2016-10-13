@@ -12,9 +12,12 @@ a useable data structure to display on the main page
   }
 
   // Create arrays to hold the objects from the three AJAX calls
-  RentalData.stateData = [];
-  RentalData.cityMeanData = [];
-  RentalData.cityMedianData = [];
+  RentalData.currentStateData = [];
+  RentalData.destinationStateData = [];
+  RentalData.currentCityMeanData = [];
+  RentalData.destinationCityMeanData = [];
+  RentalData.currentCityMedianData = [];
+  RentalData.destinationCityMedianData = [];
 
   // Handlebars templating to create the html
   RentalData.prototype.createStateHtml = function() {
