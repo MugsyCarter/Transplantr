@@ -7,7 +7,7 @@ a useable data structure to display on the main page
   function RentalData (data) {
     // Loop through the data and make it into a RentalData object
     for (key in data) {
-      this[key] = data[key]
+      this[key] = data[key];
     }
   }
 
@@ -29,8 +29,8 @@ a useable data structure to display on the main page
 
   RentalData.prototype.createCityMedianHtml = function() {
     var cityTemplate = Handlebars.compile($('#city-median-rental-template').html());
-      return cityTemplate(this);
-    };
+    return cityTemplate(this);
+  };
 
   // All three AJAX calls, one per data source:
 
@@ -62,7 +62,7 @@ a useable data structure to display on the main page
           + ' error message. <br />Please try again later.</div>';
         console.log(message);
       }
-    })
+    });
   };
 
   RentalData.fetchCityMedian = function() {
@@ -77,7 +77,7 @@ a useable data structure to display on the main page
 
         // grab only the RentalData obj you need:
         for (var i=0; i < RentalData.cityMedianData.length; i++) {
-          if (RentalData.cityMedianData[i]["City"] == MortgageData.cityChoice) {
+          if (RentalData.cityMedianData[i]['City'] == MortgageData.cityChoice) {
             var cityMedianObj = RentalData.cityMedianData[i];
             break;
           }  // close if
@@ -109,7 +109,7 @@ a useable data structure to display on the main page
         RentalData.cityMeanData = RentalData.loadData(data);
         // grab only the RentalData obj you need:
         for (var i=0; i < RentalData.cityMeanData.length; i++) {
-          if (RentalData.cityMeanData[i]["City"] == MortgageData.cityChoice) {
+          if (RentalData.cityMeanData[i]['City'] == MortgageData.cityChoice) {
             var cityMeanObj = RentalData.cityMeanData[i];
             break;
           }  // close if
@@ -126,7 +126,7 @@ a useable data structure to display on the main page
           + ' error message. <br />Please try again later.</div>';
         console.log(message);
       }
-    })
+    });
   };
 
   // method to take returned data from ajax request and load it into RentalData.cityData
