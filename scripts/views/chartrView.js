@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 function drawChart() {
   setTimeout(function() {
     var homecity = localStorage.getItem('homecity');
@@ -9,7 +7,8 @@ function drawChart() {
     var homehome = localStorage.getItem('homehomePrice');
     var awayhome = localStorage.getItem('awayhomePrice');
     var ctx = $('#chart_canvas');
-
+    $('#housing-graph-description').empty().html('This graph shows the average home prices(in US dollars) in '+homecity+' and '+awaycity+', as well as the national average home price.');
+    $('#income-graph-description').empty().html('This graph shows the average incomes (in US dollars) in '+homecity+' and '+awaycity+', as well as the national median income.');
     new Chart(ctx, {
       type: 'bar',
       data: {
