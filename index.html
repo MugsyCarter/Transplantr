@@ -13,10 +13,9 @@
     <link rel="stylesheet" href="styles/modules.css">
 
     <!-- Use Handlebars to set up the projects body -->
-    <script id="county-econ-template" type="text/x-handlebars-template">
+    <script id="county-curr-econ-template" type="text/x-handlebars-template">
       <h3>Income</h3>
       <p id="user_income"></p>
-      <p id="income_needed_median"></p>
       <p>Median Income: <b>{{medianIncome}}</b> (household)</p>
       <p>Federal Median Income: <b>$56516</b> (household)</p>
       <p>Federal Minimum: <b>$15080</b> (individual)</p>
@@ -29,13 +28,33 @@
       <p><b>{{percentPoverty}}</b> of people in the county were living at or below the Federal Poverty Line.</p>
     </script>
 
-    <script id="mortgage-template" type="text/x-handlebars-template">
+    <script id="county-dest-econ-template" type="text/x-handlebars-template">
+      <h3>Income</h3>
+      <p id="income_needed_median"></p>
+      <p>Median Income: <b>{{medianIncome}}</b> (household)</p>
+      <p>Federal Median Income: <b>$56516</b> (household)</p>
+      <p>Federal Minimum: <b>$15080</b> (individual)</p>
+      <p>{{county}} Percentage Poverty: <b>{{percentPoverty}}</b></p>
+      <br />
+      <p>TEXT ABOUT INCOME COMPARISON CAN JUST GO HERE DIRECTLY</p>
+    </script>
+
+    <script id="curr-mortgage-template" type="text/x-handlebars-template">
       <h3>House Prices</h3>
       <p>Median House Price: <b>{{aveHousePrice}}</b></p>
-      <p id="income_needed_mortgage"></p>
+      <p id="curr-income_to_mortgage"></p>
       <br />
       <p>We get our house price data from Zillow.com, an online superstore for buying and selling homes.
           According to Zillow, in {{city}} the <b>median house price</b> is <b>{{aveHousePrice}}</b></p>
+    </script>
+
+    <script id="dest-mortgage-template" type="text/x-handlebars-template">
+      <h3>House Prices</h3>
+      <p>Median House Price: <b>{{aveHousePrice}}</b></p>
+      <p id="dest-income_to_mortgage"></p>
+      <br />
+      <p>We get our house price data from Zillow.com, an online superstore for buying and selling homes.
+        According to Zillow, in {{city}} the <b>median house price</b> is <b>{{aveHousePrice}}</b></p>
     </script>
 
     <script id="state-curr-rental-template" type="text/x-handlebars-template">

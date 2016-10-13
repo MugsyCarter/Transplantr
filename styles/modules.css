@@ -6,6 +6,7 @@
   list-style: none;
   position: absolute;
   width: 100%;
+  z-index:2;
 }
 
 
@@ -27,6 +28,7 @@
   background-size: auto auto;
   background-attachment:fixed;
   padding: 25%;
+  z-index:1;
 }
 
 #transplantr {
@@ -263,7 +265,7 @@ a:hover{
 
   .emptybox {
     content:'';
-    height:12%;
+    height:100px;
   }
 }
 

@@ -19,8 +19,13 @@
   Census.source = true;
 
   // Handlebars templating to create the html
-  Census.prototype.createEconHtml = function() {
-    var template = Handlebars.compile($('#county-econ-template').html());
+  Census.prototype.createCurrentEconHtml = function() {
+    var template = Handlebars.compile($('#county-curr-econ-template').html());
+    return template(this);
+  };
+
+  Census.prototype.createDestinationEconHtml = function() {
+    var template = Handlebars.compile($('#county-dest-econ-template').html());
     return template(this);
   };
 
