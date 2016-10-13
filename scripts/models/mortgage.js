@@ -14,7 +14,6 @@ To use handlebars, the data needs to be stored as an array of objects.
   }
 
   // Create the array to hold the objects from the AJAX call
-  MortgageData.allData = [];
   MortgageData.currentCities = [];
   MortgageData.destinationCities = [];
   MortgageData.currentCityNames = [];
@@ -33,6 +32,8 @@ To use handlebars, the data needs to be stored as an array of objects.
     var currentState = Census.source ? Census.stateChoiceName : Census.destinationStateChoiceName;
     var currentCounty = Census.source ? Census.countyChoiceName : Census.destinationCountyChoiceName;
     var isCurrent = Census.source;
+
+    console.log('in fetchZillow, state county', currentState, currentCounty);
 
     $.ajax({
       method: 'GET',
@@ -98,9 +99,12 @@ To use handlebars, the data needs to be stored as an array of objects.
   $('#city-choice').on('change', function(){
     MortgageData.currentCityChoice = $(this).val();
     MortgageData.source = true;
-    MortgageData.fetchZillow();
+    var isCurrent = MortgageData.source;
     MortgageData.findHomes();
-    dataController.mortgageReveal(MortgageData.currentHousePrices);
+    MortgageData.fetchZillow();
+    // this change needs to update the zillow template on the page
+    console.log('on change, city county are', MortgageData.currentCityChoice, Census.countyChoiceName);
+    dataController.mortgageReveal(MortgageData.currentHousePrices, isCurrent);
     // Call the rental stuff now that city is populated
     RentalData.fetchStates();
     RentalData.fetchCityMedian();
@@ -110,16 +114,17 @@ To use handlebars, the data needs to be stored as an array of objects.
   $('#destination-city-choice').on('change', function(){
     MortgageData.destinationCityChoice = $(this).val();
     MortgageData.source = false;
+    var isCurrent = MortgageData.source;
     MortgageData.fetchZillow();
     MortgageData.findHomes();
-    dataController.mortgageReveal(MortgageData.destinationHousePrices);
+    dataController.mortgageReveal(MortgageData.destinationHousePrices, isCurrent);
     // Call the rental stuff now that city is populated
     RentalData.fetchStates();
     RentalData.fetchCityMedian();
   });
 
 
-  MortgageData.findHomes = function(){
+  MortgageData.findHomes = function(dummy){
     var cityChoice = Census.source ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice;
     var cityNames = Census.source ? MortgageData.currentCityNames : MortgageData.destinationCityNames;
     var citiesNodes = Census.source ? MortgageData.currentCitiesNodes : MortgageData.destinationCitiesNodes;

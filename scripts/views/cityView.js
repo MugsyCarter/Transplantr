@@ -19,8 +19,8 @@ cityView.handleIncome = function(incomeObj) {
 };
 
 
-cityView.handleMortgage = function(mortgageObj) {
-  if(MortgageData.source) {
+cityView.handleMortgage = function(mortgageObj, isCurrent) {
+  if(isCurrent) {
     $('#mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
   } else {
     $('#destination-mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
