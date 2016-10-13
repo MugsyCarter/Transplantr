@@ -97,7 +97,7 @@ To use handlebars, the data needs to be stored as an array of objects.
 //assigns the user's city choice to the variable MortgageData.cityChoice.
   $('#city-choice').on('change', function(){
     MortgageData.currentCityChoice = $(this).val();
-    MortgageData.source = true;
+    Census.source = true;
     var isCurrent = MortgageData.source;
     MortgageData.findHomes();
     MortgageData.fetchZillow();
@@ -112,7 +112,7 @@ To use handlebars, the data needs to be stored as an array of objects.
   //same as above, but for the destination city
   $('#destination-city-choice').on('change', function(){
     MortgageData.destinationCityChoice = $(this).val();
-    MortgageData.source = false;
+    Census.source = false;
     var isCurrent = MortgageData.source;
     MortgageData.fetchZillow();
     MortgageData.findHomes();
@@ -127,8 +127,7 @@ To use handlebars, the data needs to be stored as an array of objects.
     var cityChoice = Census.source ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice;
     var cityNames = Census.source ? MortgageData.currentCityNames : MortgageData.destinationCityNames;
     var citiesNodes = Census.source ? MortgageData.currentCitiesNodes : MortgageData.destinationCitiesNodes;
-    var x = cityNames.indexOf(cityChoice) + 1;
-
+    var x = cityNames.indexOf(cityChoice)+1;
     // This is where the zindex is, if it doesn't return a number, change the message
     if (isNaN(citiesNodes.childNodes[x].childNodes[2].innerHTML)) {
       var houseprice = "not available for " + cityChoice + "."

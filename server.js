@@ -2,7 +2,7 @@
 var express = require('express'),
   requestProxy = require('express-request-proxy'),
   port = process.env.PORT || 3000,
-  zillowKey = 'X1-ZWz19jfw5ars3v_1oefy',
+  zillowKey = 'X1-ZWz19jgzlx0vm3_avwne'
   censusKey = '7a3aa9d2f7fafb092b5957d10b65c477719c4c4f',
   app = express();
 
