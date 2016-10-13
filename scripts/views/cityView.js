@@ -48,11 +48,12 @@ cityView.handleCityMedianRental = function(cityMedianObj, isCurrent) {
 };
 
 cityView.handleCityMeanRental = function(cityMeanObj, isCurrent) {
+  console.log('in the view, the obj is ', cityMeanObj);
   if(isCurrent){
-    $('#curr_city_mean_1bdrm').html('<p>Mean price (1 bdrm apartment): <b>' + cityMeanObj.Mean_1-Bdrm_Price + '</b></p>').fadeIn('slow');
+    $('#curr_city_mean_1bdrm').html('<p>Mean price (1 bdrm apartment): <b>' + cityMeanObj.Mean_1_Bdrm_Price + '</b></p>').fadeIn('slow');
   }
   else{
-    $('#dest_city_mean_1bdrm').html('<p>Mean price (1 bdrm apartment): <b>' + cityMeanObj.Mean_1-Bdrm_Price + '</b></p>').fadeIn('slow');
+    $('#dest_city_mean_1bdrm').html('<p>Mean price (1 bdrm apartment): <b>' + cityMeanObj.Mean_1_Bdrm_Price + '</b></p>').fadeIn('slow');
   }
 };
 
