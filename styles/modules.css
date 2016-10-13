@@ -67,6 +67,15 @@ a:hover{
   font-style: italic;
 }
 
+#chart-submit:hover, .get-started-btn:hover{
+  background-color: grey;
+  cursor:pointer;
+}
+
+select:hover{
+  cursor:pointer;
+}
+
 .search-page {
   text-align:center;
   padding:3%;
@@ -209,8 +218,12 @@ a:hover{
 
 #graphs-page {
   padding:2%;
+  padding-top: 1vw;
 }
 
+.graph-title{
+  padding: 0 12vw;
+}
 .comparison_table {
   padding:1%;
 }
@@ -279,13 +292,12 @@ a:hover{
     font-size: 1em;
   }
 
-
-
   .hero {
     background-image: url('../img/map-1024.png');
     background-position:50% 50%;
     padding: 15%;
   }
+
 
 
 
@@ -317,15 +329,24 @@ a:hover{
     font-size: 1.1em;
   }
 
-  .comparison_table {
-    width:48%;
-    float:left;
-  }
-
   .chartSize {
     width: 48%;
     float:right;
+    padding: 0.5em 2em;
   }
+
+  #chart_container{
+    width: 40vw;
+    float: left;
+  }
+
+  #chart2_container{
+    width: 40vw;
+    float: left;
+  }
+
+
+
 }
 
 @media only screen and (min-width: 1600px) {
