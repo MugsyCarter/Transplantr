@@ -66,6 +66,7 @@
       }
     } // income called here so it waits for the input to load
     dataController.incomeReveal(Census.currentIncome);
+    $('.showChartContainer').css('display', 'block');
   });
 
 /****************** DESTINATION CITY INFORMATION ******************/
