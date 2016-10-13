@@ -21,39 +21,36 @@ cityView.handleIncome = function(incomeObj) {
 
 
 cityView.handleMortgage = function(mortgageObj) {
-  if(Census.source) {
+  if(MortgageData.source) {
     $('#mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
   } else {
     $('#destination-mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
   }
 };
 
-cityView.handleStateRental = function(stateObj) {
-  if(Census.source){
+cityView.handleStateRental = function(stateObj, isCurrent) {
+  if(isCurrent){
     $('#rental-data').hide().html(stateObj.createStateHtml()).fadeIn('slow');
   }
   else{
     $('#destination-rental-data').hide().html(stateObj.createStateHtml()).fadeIn('slow');
-    console.log('state rentals');
   }
 };
 
-cityView.handleCityMedianRental = function(cityMedianObj) {
-  if(Census.source){
+cityView.handleCityMedianRental = function(cityMedianObj, isCurrent) {
+  if(isCurrent){
     $('#rental-data').append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
   }
   else {
     $('#destination-rental-data').append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
-    console.log('city median');
   }
 };
 
-cityView.handleCityMeanRental = function(cityMeanObj) {
-  if(Census.source){
+cityView.handleCityMeanRental = function(cityMeanObj, isCurrent) {
+  if(isCurrent){
     $('#rental-data').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
   }
   else{
     $('#destination-rental-data').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
-    console.log('city mean');
   }
 };
