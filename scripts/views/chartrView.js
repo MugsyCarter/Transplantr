@@ -55,7 +55,8 @@ function drawChart2() {
   setTimeout(function() {
     var homecity = localStorage.getItem('homecity');
     var awaycity = localStorage.getItem('awaycity');
-    var myIncome = parseInt(localStorage.getItem('income'));
+    var modifiedIncome = localStorage.getItem('income').match(/\d/g);
+    var myIncome = parseInt(modifiedIncome.join(''));
     var homeincome = localStorage.getItem('homeincome');
     var awayincome = localStorage.getItem('awayincome');
     var ctx = $('#chart2_canvas');
