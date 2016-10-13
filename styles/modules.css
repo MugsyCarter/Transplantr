@@ -147,6 +147,7 @@ a:hover{
   box-sizing: border-box;
   text-align: center;
   padding: 3%;
+  position: relative;
 }
 
 #current-city-input,
@@ -166,7 +167,6 @@ a:hover{
   padding-top: 4px;
   margin:10px 0 15px;
   background-color: #bdbdbd;
-  position: absolute;
 }
 
 #current-submit:hover {
@@ -232,6 +232,12 @@ a:hover{
   /* Larger cell screen, changes image only */
   .hero {
     background-image: url('../img/map-640.png');
+  }
+
+  #current-submit {
+    position: absolute;
+    left: -25px;
+    top: 150px;
   }
 
   #transplantr {

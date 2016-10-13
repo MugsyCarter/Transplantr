@@ -62,21 +62,34 @@
   //compute income ration when submit button is pressed
   $('#current-submit').on('click', function() {
     Census.currentIncome = $('#current-income').val();
+    localStorage.setItem('income', Census.currentIncome);
+    //get stripped down number for current income
     var myIncParts = Census.currentIncome.match(/\d/g);
     var myIncome = parseInt(myIncParts.join(''));
-    console.log('My income:', myIncome);
-    localStorage.setItem('income', Census.currentIncome);
+    //get stripped down number for current median income
     var medIncParts = localStorage.getItem('homeincome').match(/\d/g);
     var localMedianIncome = parseInt(medIncParts.join(''));
+    //get current income to local median income ratio
     Census.curIncRatio = (myIncome)/(localMedianIncome);
-    console.log('Local Median Income:', localMedianIncome);
-    console.log('Ratio to Median:', Census.curIncRatio);
+    //get stripped down number for destination median income
     var desMedIncParts = localStorage.getItem('awayincome').match(/\d/g);
     var desMedianIncome = parseInt(desMedIncParts.join(''));
+    //get income needed in destination city to maintain same ratio
     Census.incNeeded = Math.round((desMedianIncome)*(Census.curIncRatio));
-    console.log(Census.incNeeded);
+    //add needed income figure and description to page
     $('#income_needed_median').html('You would need to make <b>$' + Census.incNeeded + '</b> in order to maintain the same relationship to the median income.');
-
+    //get stripped down number for local avg house price
+    var curHomePriceParts = localStorage.getItem('homehomePrice').match(/\d/g);
+    var curHomePrice = parseInt(curHomePriceParts.join(''));
+    //get ratio of current income to local home price
+    Census.curHomePriceRatio = (myIncome)/(curHomePrice);
+    //get stripped down number for destination city avg home price
+    var desHomePriceParts = localStorage.getItem('awayhomePrice').match(/\d/g);
+    var desHomePrice = parseInt(desHomePriceParts.join(''));
+    //get income needed to have same buying power in new city
+    Census.incNeededHomePrice = Math.round((desHomePrice)*(Census.curHomePriceRatio));
+    //add needed income figure and description to page
+    $('#dest-income_to_mortgage').html('You would need to make <b>$' + Census.incNeededHomePrice + '</b> in order to have the same home buying power in your new city.');
     // income called here so it waits for the input to load
     dataController.incomeReveal(Census.currentIncome);
     $('.showChartContainer').css('display', 'block');
