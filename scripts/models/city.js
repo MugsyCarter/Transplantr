@@ -49,6 +49,8 @@
     var isCurrent = true;
     incomeController.revealEcon(Census.getEconInfo(), isCurrent);
     MortgageData.fetchZillow();
+      //call the function to populate the city filter
+    MortgageData.fillCityFilter();
   });
 
   //compute income ration when submit button is pressed
@@ -86,6 +88,8 @@
     var isCurrent = false;
     incomeController.revealEcon(Census.getEconInfo(), isCurrent);
     MortgageData.fetchZillow();
+      //call the function to populate the city filter
+    MortgageData.fillCityFilter();
   });
 
 
