@@ -9,6 +9,7 @@
   z-index:2;
 }
 
+
 .link {
   display: none;
   padding: 1% 5%;
@@ -155,6 +156,7 @@ select:hover{
   box-sizing: border-box;
   text-align: center;
   padding: 3%;
+  position: relative;
 }
 
 #current-city-input,
@@ -243,6 +245,12 @@ select:hover{
   /* Larger cell screen, changes image only */
   .hero {
     background-image: url('../img/map-640.png');
+  }
+
+  #current-submit {
+    position: absolute;
+    left: -25px;
+    top: 150px;
   }
 
   #transplantr {
