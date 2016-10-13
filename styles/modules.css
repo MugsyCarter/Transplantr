@@ -135,6 +135,7 @@ a:hover{
   box-sizing: border-box;
   text-align: center;
   padding: 3%;
+  width:50%;
 }
 
 #current-city-input,
@@ -144,6 +145,7 @@ a:hover{
 
 #current-side {
   background-color: #e9e9e9;
+  float:left;
 }
 
 #current-submit {
@@ -191,6 +193,13 @@ a:hover{
   display: none;
 }
 
+.showChartContainer {
+  clear:both;
+  text-align:center;
+  padding:3%;
+  display:none;
+}
+
 #graphs-page {
   padding:2%;
 }
@@ -202,6 +211,8 @@ a:hover{
 .chartSize {
   padding:1%;
 }
+
+
 
 
 /* Media Query Stuff */
@@ -216,7 +227,7 @@ a:hover{
     font-size: 2.9em;
   }
 
-  #data-page {
+  .datacontainer {
     display: flex;
   }
 
@@ -228,7 +239,6 @@ a:hover{
   }
 
   #destination-side {
-    width: 50%;
     float: right;
   }
 }
