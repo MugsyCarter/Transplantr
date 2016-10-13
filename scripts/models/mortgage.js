@@ -14,11 +14,12 @@ To use handlebars, the data needs to be stored as an array of objects.
   }
 
   // Create the array to hold the objects from the AJAX call
-  MortgageData.allData = [];
-  MortgageData.cities=[];
-  MortgageData.cityNames=[];
-  MortgageData.housePrices = []; // this holds the $ for handlebars
-
+  MortgageData.currentCities = [];
+  MortgageData.destinationCities = [];
+  MortgageData.currentCityNames = [];
+  MortgageData.destinationCityNames = [];
+  MortgageData.currentHousePrices = []; // this holds the $ for handlebars
+  MortgageData.destinationHousePrices = [];
 
   MortgageData.prototype.createMortgageHtml = function() {
     var template = Handlebars.compile($('#mortgage-template').html());
@@ -28,28 +29,51 @@ To use handlebars, the data needs to be stored as an array of objects.
 
   MortgageData.fetchZillow = function() {
     // The call to /zillow is routed by page to the node server and out to Zillow
+    var currentState = Census.source ? Census.stateChoiceName : Census.destinationStateChoiceName;
+    var currentCounty = Census.source ? Census.countyChoiceName : Census.destinationCountyChoiceName;
+    var isCurrent = Census.source;
+
+    console.log('in fetchZillow, state county', currentState, currentCounty);
+
     $.ajax({
       method: 'GET',
-      url: '/zillow/' + Census.stateChoiceName.toLowerCase() + '/' + Census.countyChoiceName.toLowerCase(),
+      url: '/zillow/' + currentState.toLowerCase() + '/' + currentCounty.toLowerCase(),
       success: function(data, status, xhr) {
 
-        MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
-        MortgageData.citiesNodes = data.childNodes[0].childNodes[2].childNodes[2];
+        if (isCurrent) {
+          MortgageData.currentCitiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
+          MortgageData.currentCitiesNodes = data.childNodes[0].childNodes[2].childNodes[2];
+        } else {
+          MortgageData.destinationCitiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;
+          MortgageData.destinationCitiesNodes = data.childNodes[0].childNodes[2].childNodes[2];
+        }
 
-        // create arrays to hold the cities XML objects and the city names as strings
-        MortgageData.cities=[];
-        MortgageData.cityNames=[];
+        // empty the arrays to hold the cities XML objects and the city names as strings
+        MortgageData.currentCities = [];
+        MortgageData.destinationCities = [];
+        MortgageData.currentCityNames = [];
+        MortgageData.destinationCityNames = [];
 
         //populate the array of city names ignoring the 1st item
-        for (var i= 1; i <MortgageData.citiesList.length; i++)
-        {
-          MortgageData.cities.push(data.childNodes[0].childNodes[2].childNodes[2].childNodes[i].childNodes[1]);
+        var citiesList = isCurrent ? MortgageData.currentCitiesList : MortgageData.destinationCitiesList;
+        var citiesArray = isCurrent ? MortgageData.currentCities : MortgageData.destinationCities;
+        for (var i=1; i < citiesList.length; i++) {
+          citiesArray.push(data.childNodes[0].childNodes[2].childNodes[2].childNodes[i].childNodes[1]);
         }
-        MortgageData.cityNames = MortgageData.cities.map(function(city){
-          return city.innerHTML;
-        });
+
+        if (isCurrent) {
+          MortgageData.currentCityNames = MortgageData.currentCities.map(function(city){
+            return city.innerHTML;
+          });
+        } else {
+          MortgageData.destinationCityNames = MortgageData.destinationCities.map(function(city){
+            return city.innerHTML;
+          });
+        }
+
         //call the function to populate the city filter
-        MortgageData.fillCityFilter(MortgageData.cityNames);
+        MortgageData.source = isCurrent;
+        MortgageData.fillCityFilter();
       },
       error: function(xhr, settings, error) {
         console.log('Server returned a ', xhr.status + ' ' + error + ' error.');
@@ -58,13 +82,14 @@ To use handlebars, the data needs to be stored as an array of objects.
   };
 
 //this function appends cities to the city filter in index.html
-  MortgageData.fillCityFilter = function(cityNames){
+  MortgageData.fillCityFilter = function() {
+    var cityNames = MortgageData.source ? MortgageData.currentCityNames : MortgageData.destinationCityNames;
+
     cityNames.forEach(function(city){
       var filterEntry = $('<option value="'+ city +'"></option>').text(city);
-      if (Census.source === true){
+      if (MortgageData.source) {
         $('#city-choice').append(filterEntry);
-      }
-      else {
+      } else {
         $('#destination-city-choice').append(filterEntry);
       }
     });
@@ -72,44 +97,63 @@ To use handlebars, the data needs to be stored as an array of objects.
 
 //assigns the user's city choice to the variable MortgageData.cityChoice.
   $('#city-choice').on('change', function(){
-    MortgageData.cityChoice = $(this).val();
-
-    MortgageData.findHomes(MortgageData.cityChoice);
-    dataController.mortgageReveal(MortgageData.housePrices);
+    MortgageData.currentCityChoice = $(this).val();
+    MortgageData.source = true;
+    var isCurrent = MortgageData.source;
+    MortgageData.findHomes();
+    MortgageData.fetchZillow();
+    // this change needs to update the zillow template on the page
+    console.log('on change, city county are', MortgageData.currentCityChoice, Census.countyChoiceName);
+    dataController.mortgageReveal(MortgageData.currentHousePrices, isCurrent);
+    // Call the rental stuff now that city is populated
     RentalData.fetchStates();
     RentalData.fetchCityMedian();
   });
 
   //same as above, but for the destination city
   $('#destination-city-choice').on('change', function(){
-    console.log('changed destination city');
-    MortgageData.cityChoice = $(this).val();
-
-    dataController.mortgageReveal(MortgageData.housePrices);
-    MortgageData.findHomes(MortgageData.cityChoice);
+    MortgageData.destinationCityChoice = $(this).val();
+    MortgageData.source = false;
+    var isCurrent = MortgageData.source;
+    MortgageData.fetchZillow();
+    MortgageData.findHomes();
+    dataController.mortgageReveal(MortgageData.destinationHousePrices, isCurrent);
+    // Call the rental stuff now that city is populated
     RentalData.fetchStates();
     RentalData.fetchCityMedian();
   });
 
 
-  MortgageData.findHomes = function(cityChoice){
-    var x = MortgageData.cityNames.indexOf(MortgageData.cityChoice) + 1;
+  MortgageData.findHomes = function(dummy){
+    var cityChoice = Census.source ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice;
+    var cityNames = Census.source ? MortgageData.currentCityNames : MortgageData.destinationCityNames;
+    var citiesNodes = Census.source ? MortgageData.currentCitiesNodes : MortgageData.destinationCitiesNodes;
+    var x = cityNames.indexOf(cityChoice) + 1;
+
     // This is where the zindex is, if it doesn't return a number, change the message
-    if (isNaN(MortgageData.citiesNodes.childNodes[x].childNodes[2].innerHTML)) {
-      var houseprice = "not available for this city."
+    if (isNaN(citiesNodes.childNodes[x].childNodes[2].innerHTML)) {
+      var houseprice = "not available for " + cityChoice + "."
     } else {
-      houseprice = "$" + MortgageData.citiesNodes.childNodes[x].childNodes[2].innerHTML;
+      houseprice = "$" + citiesNodes.childNodes[x].childNodes[2].innerHTML;
     }
-    MortgageData.housePrices = (new MortgageData({
-      "city": MortgageData.cityChoice,
-      "aveHousePrice": houseprice
-    }));
-    if (Census.source){
+
+    if (Census.source) {
+      MortgageData.currentHousePrices = (new MortgageData({
+        "city": MortgageData.currentCityChoice,
+        "aveHousePrice": houseprice
+      }));
+    } else {
+      MortgageData.destinationHousePrices = (new MortgageData({
+        "city": MortgageData.destinationCityChoice,
+        "aveHousePrice": houseprice
+      }));
+    }
+
+    if (Census.source) {
       Data.home = new Data.location(Census.stateChoiceName, Census.countyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
       Data.storeData(Data.home);
-    }
-    else {
-      Data.away = new Data.location(Census.stateChoiceName, Census.countyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
+    } else {
+      Data.away = new Data.location(Census.destinationStateChoiceName, Census.destinationCountyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
       Data.storeData(Data.away);
     }
   };

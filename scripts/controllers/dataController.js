@@ -11,8 +11,8 @@
     });
   };
 
-  dataController.mortgageReveal = function(mortgageObj) {
-    cityView.handleMortgage(mortgageObj);
+  dataController.mortgageReveal = function(mortgageObj, isCurrent) {
+    cityView.handleMortgage(mortgageObj, isCurrent);
   };
 
   dataController.incomeReveal = function(incomeObj) {
