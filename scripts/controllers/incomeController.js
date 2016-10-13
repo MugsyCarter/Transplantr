@@ -1,8 +1,8 @@
 (function(module) {
   var incomeController = {};
 
-  incomeController.revealEcon = function(econObj) {
-    cityView.handleEcon(econObj);
+  incomeController.revealEcon = function(econObj, isCurrent) {
+    cityView.handleEcon(econObj, isCurrent);
   };
 
   module.incomeController = incomeController;

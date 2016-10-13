@@ -5,13 +5,12 @@ city 'page' -- city, income, mortgage, rental, CPI, etc.
 
 var cityView = {};
 
-cityView.handleEcon = function(econObj) {
-  if(Census.source){
+cityView.handleEcon = function(econObj, isCurrent) {
+  if(isCurrent){
     $('#county-econ').hide().html(econObj.createEconHtml()).fadeIn('slow');
   }
   else{
     $('#destination-econ').hide().html(econObj.createEconHtml()).fadeIn('slow');
-    console.log('county econ');
   }
 };
 

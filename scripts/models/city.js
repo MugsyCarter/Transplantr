@@ -46,7 +46,8 @@
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
     // grab the county's econ data and pass it to the controller
-    incomeController.revealEcon(Census.getEconInfo());
+    var isCurrent = true;
+    incomeController.revealEcon(Census.getEconInfo(), isCurrent);
     MortgageData.fetchZillow();
   });
 
@@ -81,7 +82,8 @@
     Census.destinationCountyChoice = $(this).val();
     Census.destinationCountyChoiceName = Census.destinationCountyChoice.replace(' County', '');
     // grab the county's econ data and pass it to the controller
-    incomeController.revealEcon(Census.getEconInfo());
+    var isCurrent = false;
+    incomeController.revealEcon(Census.getEconInfo(), isCurrent);
     MortgageData.fetchZillow();
   });
 
