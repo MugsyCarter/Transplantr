@@ -54,7 +54,7 @@
     // grab the county's econ data and pass it to the controller
     var isCurrent = true;
     incomeController.revealEcon(Census.getEconInfo(), isCurrent);
-    MortgageData.fetchZillow();
+    MortgageData.fetchZillow(isCurrent);
       //call the function to populate the city filter
     MortgageData.fillCityFilter();
   });
@@ -102,7 +102,7 @@
     // grab the county's econ data and pass it to the controller
     var isCurrent = false;
     incomeController.revealEcon(Census.getEconInfo(), isCurrent);
-    MortgageData.fetchZillow();
+    MortgageData.fetchZillow(isCurrent);
       //call the function to populate the city filter
     MortgageData.fillCityFilter();
   });
