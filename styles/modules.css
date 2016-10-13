@@ -212,9 +212,9 @@ a:hover{
     font-size: 2.9em;
   }
 
-#data-page {
-  display: flex;
-}
+  #data-page {
+    display: flex;
+  }
 
   #current-side {
     align-items: stretch;
