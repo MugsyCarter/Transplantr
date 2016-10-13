@@ -32,8 +32,6 @@ To use handlebars, the data needs to be stored as an array of objects.
     var currentState = isCurrent ? Census.stateChoiceName : Census.destinationStateChoiceName;
     var currentCounty = isCurrent ? Census.countyChoiceName : Census.destinationCountyChoiceName;
 
-    console.log('in fetchZillow, current state county', isCurrent, currentState, currentCounty);
-
     $.ajax({
       method: 'GET',
       url: '/zillow/' + currentState.toLowerCase() + '/' + currentCounty.toLowerCase(),
@@ -50,8 +48,6 @@ To use handlebars, the data needs to be stored as an array of objects.
         // empty the arrays to hold the cities XML objects and the city names as strings
         MortgageData.currentCities = [];
         MortgageData.destinationCities = [];
-        MortgageData.currentCityNames = [];
-        MortgageData.destinationCityNames = [];
 
         //populate the array of city names ignoring the 1st item
         var citiesList = isCurrent ? MortgageData.currentCitiesList : MortgageData.destinationCitiesList;
@@ -61,10 +57,12 @@ To use handlebars, the data needs to be stored as an array of objects.
         }
 
         if (isCurrent) {
+          MortgageData.currentCityNames = [];
           MortgageData.currentCityNames = MortgageData.currentCities.map(function(city){
             return city.innerHTML;
           });
         } else {
+          MortgageData.destinationCityNames = [];
           MortgageData.destinationCityNames = MortgageData.destinationCities.map(function(city){
             return city.innerHTML;
           });
@@ -98,9 +96,6 @@ To use handlebars, the data needs to be stored as an array of objects.
     MortgageData.currentCityChoice = $(this).val();
     MortgageData.source = true;
     var isCurrent = true;
-
-    console.log('on change, city county current are', isCurrent, Census.countyChoiceName, MortgageData.currentCityChoice);
-
     MortgageData.fetchZillow(isCurrent);
     MortgageData.findHomes(isCurrent);
 
@@ -116,9 +111,6 @@ To use handlebars, the data needs to be stored as an array of objects.
     MortgageData.destinationCityChoice = $(this).val();
     MortgageData.source = false;
     var isCurrent = false;
-
-    console.log('on change, destination current county city  are', isCurrent, Census.destinationCountyChoiceName, MortgageData.destinationCityChoice);
-
     MortgageData.fetchZillow(isCurrent);
     MortgageData.findHomes(isCurrent);
 
@@ -131,14 +123,13 @@ To use handlebars, the data needs to be stored as an array of objects.
 
   MortgageData.findHomes = function(isCurrent){
     var citiesNodes = isCurrent ? MortgageData.currentCitiesNodes : MortgageData.destinationCitiesNodes;
+    var cityChoice = isCurrent ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice;
 
     if (isCurrent) {
-      var x = MortgageData.currentCityNames.indexOf(MortgageData.currentCityChoice) + 1;
+      var x = MortgageData.currentCityNames.indexOf(cityChoice) + 1;
     } else {
-      x = MortgageData.destinationCityNames.indexOf(MortgageData.destinationCityChoice) + 1;
+      x = MortgageData.destinationCityNames.indexOf(cityChoice) + 1;
     }
-
-    console.log('in findHomes, city choice citiesNodes and x are ', citiesNodes, x);
 
     // This is where the zindex is, if it doesn't return a number, change the message
     if (isNaN(citiesNodes.childNodes[x].childNodes[2].innerHTML)) {
