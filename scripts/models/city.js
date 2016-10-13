@@ -118,6 +118,7 @@
       for (i = 0; i < Census.destinationEconomicData.length; i++) {
         if (Census.destinationEconomicData[i]['county'] === Census.destinationCountyChoice) {
           Census.destinationEconObj = Census.destinationEconomicData[i];
+          Data.parseEconData(Census.destinationEconObj);
           return Census.destinationEconObj;
         } // close if
       } // close for
