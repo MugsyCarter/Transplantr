@@ -32,5 +32,8 @@
     }
   };
 
+  Data.income = income
+
+
   module.Data = Data;
 })(window);
