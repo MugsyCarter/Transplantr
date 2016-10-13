@@ -129,17 +129,11 @@ a useable data structure to display on the main page
         }
 
         // grab only the RentalData obj you need:
-<<<<<<< HEAD
-        for (var i=0; i < RentalData.cityMeanData.length; i++) {
-          if (RentalData.cityMeanData[i]['City'] == MortgageData.cityChoice) {
-            var cityMeanObj = RentalData.cityMeanData[i];
-=======
         var cityMeanData = isCurrent ? RentalData.currentCityMeanData : RentalData.destinationCityMeanData;
         var cityChoice = isCurrent ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice
         for (var i=0; i < cityMeanData.length; i++) {
           if (cityMeanData[i]["City"] == cityChoice) {
             var cityMeanObj = cityMeanData[i];
->>>>>>> fd4cc9c0b877cc5668039e05de519ea353875004
             break;
           }  // close if
         } // close for-loop
