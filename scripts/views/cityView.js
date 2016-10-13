@@ -38,26 +38,27 @@ cityView.handleStateRental = function(stateObj, isCurrent) {
 
 cityView.handleCityMedianRental = function(cityMedianObj, isCurrent) {
   if(isCurrent){
-    $('#curr_city_median_1bdrm').html('<p>Median price (1 bdrm apartment): <b>' + cityMedianObj + '</b></p>').fadeIn('slow');
+    $('#curr_city_median_1bdrm').html('<p>Median price (1 bdrm apartment): <b>' + cityMedianObj.Median_1_BR_price + '</b></p>').fadeIn('slow');
+    $('#curr_city_median_2bdrm').html('<p>Median price (2 bdrm apartment): <b>' + cityMedianObj.Median_2_BR_price + '</b></p>').fadeIn('slow');
   }
   else {
-    $('#dest_city_median_1bdrm').append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
+    $('#dest_city_median_1bdrm').html('<p>Median price (1 bdrm apartment): <b>' + cityMedianObj.Median_1_BR_price + '</b></p>').fadeIn('slow');
+    $('#dest_city_median_2bdrm').html('<p>Median price (2 bdrm apartment): <b>' + cityMedianObj.Median_2_BR_price + '</b></p>').fadeIn('slow');
   }
 };
 
 cityView.handleCityMeanRental = function(cityMeanObj, isCurrent) {
   if(isCurrent){
-    $('#rental-data').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
+    $('#curr_city_mean_1bdrm').html('<p>Mean price (1 bdrm apartment): <b>' + cityMeanObj.Mean_1-Bdrm_Price + '</b></p>').fadeIn('slow');
   }
   else{
-    $('#destination-rental-data').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
+    $('#dest_city_mean_1bdrm').html('<p>Mean price (1 bdrm apartment): <b>' + cityMeanObj.Mean_1-Bdrm_Price + '</b></p>').fadeIn('slow');
   }
 };
 
 /*
 <p>In the city of <b>{{City}}</b>:</p>
 
-<p>Median price (2 bdrm apartment): <b>{{Median_2_BR_price}}</b></p>
 
-<p>Mean price (1 bdrm apartment): <b>{{Mean_1-Bdrm_Price}}</b></p>
+
 */
