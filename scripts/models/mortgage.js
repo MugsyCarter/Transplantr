@@ -28,9 +28,12 @@ To use handlebars, the data needs to be stored as an array of objects.
 
   MortgageData.fetchZillow = function() {
     // The call to /zillow is routed by page to the node server and out to Zillow
+    var currentState = Census.source ? Census.stateChoiceName : Census.destinationStateChoiceName;
+    var currentCounty = Census.source ? Census.countyChoiceName : Census.destinationCountyChoiceName;
+    console.log('in fetchZillow ', currentState, currentCounty);
     $.ajax({
       method: 'GET',
-      url: '/zillow/' + Census.stateChoiceName.toLowerCase() + '/' + Census.countyChoiceName.toLowerCase(),
+      url: '/zillow/' + currentState.toLowerCase() + '/' + currentCounty.toLowerCase(),
       success: function(data, status, xhr) {
 
         MortgageData.citiesList = data.childNodes[0].childNodes[2].childNodes[2].childNodes;

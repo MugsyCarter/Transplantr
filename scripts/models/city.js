@@ -9,7 +9,8 @@
   }
 
   //array of all site objects that run census.
-  Census.allData = [];
+  Census.allCurrentData = [];
+  Census.allDestinationData = [];
   Census.economicData = [];
   Census.destinationEconomicData = [];
   Census.incomeData = [];
@@ -44,7 +45,6 @@
     $('#city-choice').empty();
     $('#city-choice').append(defaultCityEntry);
     Census.countyChoice = $(this).val();
-    console.log('you selected ', Census.countyChoice);
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
     // grab the county's econ data and pass it to the controller
     incomeController.revealEcon(Census.getEconInfo());
@@ -105,6 +105,8 @@
       for (var i = 0; i < Census.economicData.length; i++) {
         if (Census.source && Census.economicData[i]['county'] === Census.countyChoice) {
           Census.econObj = Census.economicData[i];
+          // pass the current city object to the user data storage
+          Data.parseEconData(Census.econObj);
           return Census.econObj;
         } // close if
       } // close for
@@ -116,9 +118,6 @@
         } // close if
       } // close for
     } // close else
-    // pass the correct object to the user data storage
-    currentObj = (Census.source) ? Census.econObj : Census.destinationEconObj;
-    Data.parseEconData(currentObj);
   };
 
 
@@ -127,6 +126,10 @@
     //set a local var for if current or destination called the function
     var currentChoice = Census.source ? Census.stateChoice : Census.destinationStateChoice;
     var currentEcon = Census.source ? Census.economicData : Census.destinationEconomicData;
+    var currentDataArray = Census.source ? Census.allCurrentData : Census.allDestinationData;
+
+    console.log('at the start of request ', Census.source, currentChoice, currentEcon, currentDataArray);
+
     $.ajax({
       method: 'GET',
       url: '/census/' + currentChoice,
@@ -134,7 +137,7 @@
         Census.loadData(data);    // turn census data into Census objects
         // We loop through all the data once, grabbing different things out
         currentEcon = [];
-        Census.allData.forEach(function(county) {
+        currentDataArray.forEach(function(county) {
           if (county[0] !== 'NAME') {
             // populate the county filter with the received census data
             var $option = $('<option></option>');
@@ -155,7 +158,6 @@
           } // close if
         }); // close forEach
         // The rental data can't run until census populates, call it here
-        console.log('in the request, ecodata is', currentEcon);
       },
       error: function(xhr, settings, error){
         console.log('Ajax call failed:', error);
@@ -165,9 +167,15 @@
 
   // method to take returned data from census API request and load it into Census.allData
   Census.loadData = function(data) {
-    Census.allData = data.map(function(county) {
-      return new Census(county);
-    });
+    if (Census.source) {
+      Census.allCurrentData = data.map(function(county) {
+        return new Census(county);
+      });
+    } else {
+      Census.allDestinationData = data.map(function(county) {
+        return new Census(county);
+      });
+    }
   };
 
   // make Census available globally
