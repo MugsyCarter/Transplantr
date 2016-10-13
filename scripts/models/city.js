@@ -32,6 +32,7 @@
   //compute income ration when submit button is pressed
   $('#current-submit').on('click', function() {
     Census.currentIncome = $('#current-income').val();
+    localStorage.setItem('income', Census.currentIncome);
     for (var i = 0; i < Census.economicData.length; i++) {
       if (Census.economicData[i].county === Census.countyChoice) {
         Census.curIncRatio = (Census.currentIncome)/(parseInt(Census.economicData[i].medianIncome.replace('$', '')));
