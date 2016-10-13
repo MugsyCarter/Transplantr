@@ -9,6 +9,8 @@
     $('#transplantr').fadeOut(function () {
       $('#transplantr').text('City Comparisons').fadeIn();
     });
+    drawChart();
+    drawChart2();
   };
   module.graphsController = graphsController;
 })(window);
