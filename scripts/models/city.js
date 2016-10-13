@@ -43,6 +43,7 @@
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
     $('#city-choice').empty().append(defaultCityEntry);
+    Census.source = true;
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
     // grab the county's econ data and pass it to the controller
