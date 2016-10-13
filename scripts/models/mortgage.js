@@ -30,6 +30,8 @@ To use handlebars, the data needs to be stored as an array of objects.
     // The call to /zillow is routed by page to the node server and out to Zillow
     var currentState = Census.source ? Census.stateChoiceName : Census.destinationStateChoiceName;
     var currentCounty = Census.source ? Census.countyChoiceName : Census.destinationCountyChoiceName;
+    var isCurrent = Census.source;
+
     console.log('in fetchZillow ', currentState, currentCounty);
     $.ajax({
       method: 'GET',
@@ -64,10 +66,9 @@ To use handlebars, the data needs to be stored as an array of objects.
   MortgageData.fillCityFilter = function(cityNames){
     cityNames.forEach(function(city){
       var filterEntry = $('<option value="'+ city +'"></option>').text(city);
-      if (Census.source === true){
+      if (Census.source) {
         $('#city-choice').append(filterEntry);
-      }
-      else {
+      } else {
         $('#destination-city-choice').append(filterEntry);
       }
     });
@@ -75,21 +76,20 @@ To use handlebars, the data needs to be stored as an array of objects.
 
 //assigns the user's city choice to the variable MortgageData.cityChoice.
   $('#city-choice').on('change', function(){
-    MortgageData.cityChoice = $(this).val();
-
-    MortgageData.findHomes(MortgageData.cityChoice);
+    MortgageData.currentCityChoice = $(this).val();
+    MortgageData.findHomes(MortgageData.currentCityChoice);
     dataController.mortgageReveal(MortgageData.housePrices);
+    // Call the rental stuff now that city is populated
     RentalData.fetchStates();
     RentalData.fetchCityMedian();
   });
 
   //same as above, but for the destination city
   $('#destination-city-choice').on('change', function(){
-    console.log('changed destination city');
-    MortgageData.cityChoice = $(this).val();
-
+    MortgageData.destinationCityChoice = $(this).val();
+    MortgageData.findHomes(MortgageData.destinationCityChoice);
     dataController.mortgageReveal(MortgageData.housePrices);
-    MortgageData.findHomes(MortgageData.cityChoice);
+    // Call the rental stuff now that city is populated
     RentalData.fetchStates();
     RentalData.fetchCityMedian();
   });
