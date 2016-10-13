@@ -7,10 +7,10 @@ var cityView = {};
 
 cityView.handleEcon = function(econObj, isCurrent) {
   if(isCurrent){
-    $('#county-econ').hide().html(econObj.createEconHtml()).fadeIn('slow');
+    $('#county-econ').hide().html(econObj.createCurrentEconHtml()).fadeIn('slow');
   }
   else{
-    $('#destination-econ').hide().html(econObj.createEconHtml()).fadeIn('slow');
+    $('#destination-econ').hide().html(econObj.createDestinationEconHtml()).fadeIn('slow');
   }
 };
 
@@ -21,9 +21,9 @@ cityView.handleIncome = function(incomeObj) {
 
 cityView.handleMortgage = function(mortgageObj, isCurrent) {
   if(isCurrent) {
-    $('#mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
+    $('#mortgage-data').hide().html(mortgageObj.createCurrentMortgageHtml()).fadeIn('slow');
   } else {
-    $('#destination-mortgage-data').hide().html(mortgageObj.createMortgageHtml()).fadeIn('slow');
+    $('#destination-mortgage-data').hide().html(mortgageObj.createDestinationMortgageHtml()).fadeIn('slow');
   }
 };
 
