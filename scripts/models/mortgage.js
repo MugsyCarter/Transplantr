@@ -87,7 +87,7 @@ To use handlebars, the data needs to be stored as an array of objects.
   MortgageData.fillCityFilter = function() {
     setTimeout(function(){
       var cityNames = MortgageData.source ? MortgageData.currentCityNames : MortgageData.destinationCityNames;
-
+      cityNames.sort();
       cityNames.forEach(function(city){
         var filterEntry = $('<option value="'+ city +'"></option>').text(city);
         if (MortgageData.source) {
