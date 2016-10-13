@@ -8,6 +8,7 @@
   width: 100%;
 }
 
+
 .link {
   display: none;
   padding: 1% 5%;
@@ -163,6 +164,7 @@ a:hover{
   padding-top: 4px;
   margin:10px 0 15px;
   background-color: #bdbdbd;
+  position: absolute;
 }
 
 #current-submit:hover {
