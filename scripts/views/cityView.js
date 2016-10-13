@@ -37,23 +37,31 @@ cityView.handleStateRental = function(stateObj, isCurrent) {
 };
 
 cityView.handleCityMedianRental = function(cityMedianObj, isCurrent) {
-  if(isCurrent){
+  // If the city they selected doesn't have rental info, clear the html, otherwise update the right side
+  if (cityMedianObj && isCurrent) {
     $('#curr_city_median_1bdrm').html('<p>Median price (1 bdrm apartment): <b>' + cityMedianObj.Median_1_BR_price + '</b></p>').fadeIn('slow');
     $('#curr_city_median_2bdrm').html('<p>Median price (2 bdrm apartment): <b>' + cityMedianObj.Median_2_BR_price + '</b></p>').fadeIn('slow');
-  }
-  else {
+  } else if (cityMedianObj && !isCurrent) {
     $('#dest_city_median_1bdrm').html('<p>Median price (1 bdrm apartment): <b>' + cityMedianObj.Median_1_BR_price + '</b></p>').fadeIn('slow');
     $('#dest_city_median_2bdrm').html('<p>Median price (2 bdrm apartment): <b>' + cityMedianObj.Median_2_BR_price + '</b></p>').fadeIn('slow');
+  } else if (!cityMedianObj && isCurrent) {
+    $('#curr_city_median_1bdrm').html('<p></p>');
+  } else if (!cityMedianObj && !isCurrent) {
+    $('#dest_city_median_1bdrm').html('<p></p>');
   }
 };
 
 cityView.handleCityMeanRental = function(cityMeanObj, isCurrent) {
-  console.log('in the view, the obj is ', cityMeanObj);
-  if(isCurrent){
+  // If the city they selected doesn't have rental info, clear the html, otherwise update the right side
+  if (cityMeanObj && isCurrent) {
     $('#curr_city_mean_1bdrm').html('<p>Mean price (1 bdrm apartment): <b>' + cityMeanObj.Mean_1_Bdrm_Price + '</b></p>').fadeIn('slow');
   }
-  else{
+  else if (cityMeanObj && !isCurrent) {
     $('#dest_city_mean_1bdrm').html('<p>Mean price (1 bdrm apartment): <b>' + cityMeanObj.Mean_1_Bdrm_Price + '</b></p>').fadeIn('slow');
+  } else if (!cityMeanObj && isCurrent) {
+    $('#curr_city_mean_1bdrm').html('<p></p>');
+  } else if (!cityMeanObj && !isCurrent) {
+    $('#dest_city_mean_1bdrm').html('<p></p>');
   }
 };
 
