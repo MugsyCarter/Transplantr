@@ -32,14 +32,15 @@ a useable data structure to display on the main page
 
 /********* All three AJAX calls, one per data source:  ************/
   RentalData.fetchStates = function() {
+    // cache all of the selection information before you start the async
     var isCurrent = MortgageData.source;
+    var stateChoiceName = isCurrent ? Census.stateChoiceName : Census.destinationStateChoiceName;
 
     $.ajax({
       method: 'GET',
       url: '../data/state_rents.json',
       timeout: 2000,
       success: function(data, status, xhr) {
-
         // loop through the json data, turn it into a RentalData object
         if (isCurrent) {
           RentalData.currentStateData = RentalData.loadData(data);
@@ -47,9 +48,8 @@ a useable data structure to display on the main page
           RentalData.destinationStateData = RentalData.loadData(data);
         }
 
-        // grab only the RentalData obj you need:
         var stateData = isCurrent ? RentalData.currentStateData : RentalData.destinationStateData;
-        var stateChoiceName = isCurrent ? Census.stateChoiceName : Census.destinationStateChoiceName;
+        // grab only the RentalData obj you need:
         for (var i=0; i < stateData.length; i++) {
           if (stateData[i]['State'] == stateChoiceName) {
             var stateObj = stateData[i];
@@ -70,7 +70,9 @@ a useable data structure to display on the main page
   };
 
   RentalData.fetchCityMedian = function() {
+    // cache the city choice before the async starts
     var isCurrent = MortgageData.source;
+    var cityChoice = isCurrent ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice;
 
     $.ajax({
       method: 'GET',
@@ -81,7 +83,6 @@ a useable data structure to display on the main page
         RentalData.allCityMedianData = RentalData.loadData(data);
 
         // grab only the RentalData obj you need:
-        var cityChoice = isCurrent ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice;
         for (var i=0; i < RentalData.allCityMedianData.length; i++) {
           if (RentalData.allCityMedianData[i]["City"] == cityChoice) {
             var cityMedianObj = RentalData.allCityMedianData[i];
@@ -104,6 +105,9 @@ a useable data structure to display on the main page
   };
 
   RentalData.fetchCityMean = function(isCurrent) {
+    // cache the city choice before the async starts
+    var cityChoice = isCurrent ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice
+
     $.ajax({
       method: 'GET',
       url: '../data/city_rents-mean.json',
@@ -112,7 +116,6 @@ a useable data structure to display on the main page
         // loop through the json data, turn it into a RentalData object
         RentalData.allCityMeanData = RentalData.loadData(data);
         // grab only the RentalData obj you need:
-        var cityChoice = isCurrent ? MortgageData.currentCityChoice : MortgageData.destinationCityChoice
         for (var i=0; i < RentalData.allCityMeanData.length; i++) {
           if (RentalData.allCityMeanData[i]["City"] == cityChoice) {
             var cityMeanObj = RentalData.allCityMeanData[i];
