@@ -103,6 +103,7 @@ To use handlebars, the data needs to be stored as an array of objects.
 
     MortgageData.fetchZillow(isCurrent);
     MortgageData.findHomes(isCurrent);
+
     // this change needs to update the zillow template on the page
     dataController.mortgageReveal(MortgageData.currentHousePrices, isCurrent);
     // Call the rental stuff now that city is populated
@@ -120,6 +121,7 @@ To use handlebars, the data needs to be stored as an array of objects.
 
     MortgageData.fetchZillow(isCurrent);
     MortgageData.findHomes(isCurrent);
+
     dataController.mortgageReveal(MortgageData.destinationHousePrices, isCurrent);
     // Call the rental stuff now that city is populated
     RentalData.fetchStates();
@@ -136,7 +138,7 @@ To use handlebars, the data needs to be stored as an array of objects.
       x = MortgageData.destinationCityNames.indexOf(MortgageData.destinationCityChoice) + 1;
     }
 
-    console.log('in findHomes, city choice citiesNodes and x are ', cityChoice, citiesNodes, x);
+    console.log('in findHomes, city choice citiesNodes and x are ', citiesNodes, x);
 
     // This is where the zindex is, if it doesn't return a number, change the message
     if (isNaN(citiesNodes.childNodes[x].childNodes[2].innerHTML)) {
