@@ -98,6 +98,7 @@ To use handlebars, the data needs to be stored as an array of objects.
   $('#city-choice').on('change', function(){
     MortgageData.currentCityChoice = $(this).val();
     MortgageData.source = true;
+    MortgageData.fetchZillow();
     MortgageData.findHomes();
     dataController.mortgageReveal(MortgageData.currentHousePrices);
     // Call the rental stuff now that city is populated
@@ -109,6 +110,7 @@ To use handlebars, the data needs to be stored as an array of objects.
   $('#destination-city-choice').on('change', function(){
     MortgageData.destinationCityChoice = $(this).val();
     MortgageData.source = false;
+    MortgageData.fetchZillow();
     MortgageData.findHomes();
     dataController.mortgageReveal(MortgageData.destinationHousePrices);
     // Call the rental stuff now that city is populated

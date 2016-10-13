@@ -32,8 +32,8 @@
 /****************** CURRENT CITY INFORMATION ******************/
   //request when state option changes
   $('#state-choice').on('change', function(){
-    $('#county-filter').empty();
-    $('#county-filter').append(defaultCountyEntry);
+    $('#county-filter').empty().append(defaultCountyEntry);
+    $('#city-choice').empty().append(defaultCityEntry);
     Census.source = true;
     Census.stateChoice = $(this).val();
     Census.stateChoiceName = $(this).find('option:selected').text();
@@ -42,8 +42,7 @@
 
   //assign countyChoice when county option changes
   $('#county-filter').on('change', function(){
-    $('#city-choice').empty();
-    $('#city-choice').append(defaultCityEntry);
+    $('#city-choice').empty().append(defaultCityEntry);
     Census.countyChoice = $(this).val();
     Census.countyChoiceName = Census.countyChoice.replace(' County', '');
     // grab the county's econ data and pass it to the controller
@@ -67,8 +66,8 @@
 /****************** DESTINATION CITY INFORMATION ******************/
   //set destination state option changes
   $('#destination-state-choice').on('change', function(){
-    $('#destination-county-filter').empty();
-    $('#destination-county-filter').append(defaultCountyEntry);
+    $('#destination-county-filter').empty().append(defaultCountyEntry);
+    $('#destination-city-choice').empty().append(defaultCityEntry);
     Census.source = false;
     Census.destinationStateChoice = $(this).val();
     Census.destinationStateChoiceName = $(this).find('option:selected').text();
@@ -77,8 +76,7 @@
 
   //set destination city on option change
   $('#destination-county-filter').on('change', function(){
-    $('#destination-city-choice').empty();
-    $('#destination-city-choice').append(defaultCityEntry);
+    $('#destination-city-choice').empty().append(defaultCityEntry);
     Census.source = false;
     Census.destinationCountyChoice = $(this).val();
     Census.destinationCountyChoiceName = Census.destinationCountyChoice.replace(' County', '');
