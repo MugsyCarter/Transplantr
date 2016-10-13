@@ -29,19 +29,19 @@ cityView.handleMortgage = function(mortgageObj, isCurrent) {
 
 cityView.handleStateRental = function(stateObj, isCurrent) {
   if(isCurrent){
-    $('#rental-data').hide().html(stateObj.createStateHtml()).fadeIn('slow');
+    $('#rental-data').hide().html(stateObj.createCurrentStateHtml()).fadeIn('slow');
   }
   else{
-    $('#destination-rental-data').hide().html(stateObj.createStateHtml()).fadeIn('slow');
+    $('#destination-rental-data').hide().html(stateObj.createDestinationStateHtml()).fadeIn('slow');
   }
 };
 
 cityView.handleCityMedianRental = function(cityMedianObj, isCurrent) {
   if(isCurrent){
-    $('#rental-data').append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
+    $('#curr_city_median_1bdrm').html('<p>Median price (1 bdrm apartment): <b>' + cityMedianObj + '</b></p>').fadeIn('slow');
   }
   else {
-    $('#destination-rental-data').append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
+    $('#dest_city_median_1bdrm').append(cityMedianObj.createCityMedianHtml()).fadeIn('slow');
   }
 };
 
@@ -53,3 +53,11 @@ cityView.handleCityMeanRental = function(cityMeanObj, isCurrent) {
     $('#destination-rental-data').append(cityMeanObj.createCityMeanHtml()).fadeIn('slow');
   }
 };
+
+/*
+<p>In the city of <b>{{City}}</b>:</p>
+
+<p>Median price (2 bdrm apartment): <b>{{Median_2_BR_price}}</b></p>
+
+<p>Mean price (1 bdrm apartment): <b>{{Mean_1-Bdrm_Price}}</b></p>
+*/
