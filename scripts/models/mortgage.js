@@ -91,7 +91,7 @@ To use handlebars, the data needs to be stored as an array of objects.
           $('#destination-city-choice').append(filterEntry);
         }
       });
-    }, 100);
+    }, 300);
   };
 
 //assigns the user's city choice to the variable MortgageData.cityChoice.
@@ -149,10 +149,10 @@ To use handlebars, the data needs to be stored as an array of objects.
     }
 
     if (Census.source) {
-      Data.home = new Data.location(Census.stateChoiceName, Census.countyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
+      Data.home = new Data.location(Census.stateChoiceName, Census.countyChoiceName, MortgageData.currentCityChoice, houseprice, Data.econIncome, Data.econPoverty);
       Data.storeData(Data.home);
     } else {
-      Data.away = new Data.location(Census.destinationStateChoiceName, Census.destinationCountyChoiceName, MortgageData.cityChoice, houseprice, Data.econIncome, Data.econPoverty);
+      Data.away = new Data.location(Census.destinationStateChoiceName, Census.destinationCountyChoiceName, MortgageData.destinationCityChoice, houseprice, Data.econIncome, Data.econPoverty);
       Data.storeData(Data.away);
     }
   };

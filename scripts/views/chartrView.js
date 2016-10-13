@@ -1,28 +1,20 @@
 'use strict';
 
-var homecity = localStorage.getItem('homecity');
-var awaycity = localStorage.getItem('awaycity');
-var myIncome = parseInt(localStorage.getItem('income'));
-var homeincome = localStorage.getItem('homeincome');
-var awayincome = localStorage.getItem('awayincome');
-var homehome = localStorage.getItem('homehomePrice');
-var awayhome = localStorage.getItem('awayhomePrice');
+
 
 function drawChart() {
   setTimeout(function() {
-
+    var homecity = localStorage.getItem('homecity');
+    var awaycity = localStorage.getItem('awaycity');
+    var homehome = localStorage.getItem('homehomePrice');
+    var awayhome = localStorage.getItem('awayhomePrice');
     var ctx = $('#chart_canvas');
 
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Home Values'],
+        labels: ['Home Values By Location'],
         datasets: [{
-          label: 'You',
-          data: [myIncome],
-          backgroundColor: 'rgba(0, 167, 225, 1)'
-        },
-        {
           label: homecity,
           data: [homehome.slice(1)],
           backgroundColor: 'rgba(0, 52, 89, 1)'
@@ -59,17 +51,19 @@ function drawChart() {
   }, 300);
 };
 
-drawChart();
-
 function drawChart2() {
   setTimeout(function() {
-
+    var homecity = localStorage.getItem('homecity');
+    var awaycity = localStorage.getItem('awaycity');
+    var myIncome = parseInt(localStorage.getItem('income'));
+    var homeincome = localStorage.getItem('homeincome');
+    var awayincome = localStorage.getItem('awayincome');
     var ctx = $('#chart2_canvas');
 
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Income Comparison'],
+        labels: ['Income By Location'],
         datasets: [{
           label: 'You',
           data: [myIncome],
@@ -111,5 +105,3 @@ function drawChart2() {
     });
   }, 300);
 };
-
-drawChart2();
