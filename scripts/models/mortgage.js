@@ -70,10 +70,7 @@ To use handlebars, the data needs to be stored as an array of objects.
             return city.innerHTML;
           });
         }
-
-        //call the function to populate the city filter
         MortgageData.source = isCurrent;
-        MortgageData.fillCityFilter();
       },
       error: function(xhr, settings, error) {
         console.log('Server returned a ', xhr.status + ' ' + error + ' error.');
@@ -83,16 +80,18 @@ To use handlebars, the data needs to be stored as an array of objects.
 
 //this function appends cities to the city filter in index.html
   MortgageData.fillCityFilter = function() {
-    var cityNames = MortgageData.source ? MortgageData.currentCityNames : MortgageData.destinationCityNames;
+    setTimeout(function(){
+      var cityNames = MortgageData.source ? MortgageData.currentCityNames : MortgageData.destinationCityNames;
 
-    cityNames.forEach(function(city){
-      var filterEntry = $('<option value="'+ city +'"></option>').text(city);
-      if (MortgageData.source) {
-        $('#city-choice').append(filterEntry);
-      } else {
-        $('#destination-city-choice').append(filterEntry);
-      }
-    });
+      cityNames.forEach(function(city){
+        var filterEntry = $('<option value="'+ city +'"></option>').text(city);
+        if (MortgageData.source) {
+          $('#city-choice').append(filterEntry);
+        } else {
+          $('#destination-city-choice').append(filterEntry);
+        }
+      });
+    }, 100);
   };
 
 //assigns the user's city choice to the variable MortgageData.cityChoice.
