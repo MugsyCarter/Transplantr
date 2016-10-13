@@ -21,8 +21,13 @@ To use handlebars, the data needs to be stored as an array of objects.
   MortgageData.currentHousePrices = []; // this holds the $ for handlebars
   MortgageData.destinationHousePrices = [];
 
-  MortgageData.prototype.createMortgageHtml = function() {
-    var template = Handlebars.compile($('#mortgage-template').html());
+  MortgageData.prototype.createCurrentMortgageHtml = function() {
+    var template = Handlebars.compile($('#curr-mortgage-template').html());
+    return template(this);
+  };
+
+  MortgageData.prototype.createDestinationMortgageHtml = function() {
+    var template = Handlebars.compile($('#dest-mortgage-template').html());
     return template(this);
   };
 
