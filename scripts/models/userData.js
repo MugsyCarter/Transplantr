@@ -24,7 +24,6 @@
     else {
       var tag = 'away';
     }
-    console.log('storing ', obj);
     for (key in obj){
       localStorage.setItem(tag+key, obj[key]);
     }
