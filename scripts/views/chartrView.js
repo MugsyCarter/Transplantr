@@ -19,7 +19,7 @@ function drawChart() {
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Home Values By Location'],
+        labels: ['Home Prices'],
         datasets: [{
           label: homecity,
           data: [homehome.slice(1)],
