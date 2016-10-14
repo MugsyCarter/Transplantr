@@ -108,6 +108,10 @@ select:hover{
   background-color:#003459;
 }
 
+#current-submit:hover{
+
+}
+
 #about-page {
   padding:3%;
 }
@@ -180,6 +184,8 @@ select:hover{
 
 #current-submit:hover {
   transform: scale(1.2);
+  background-color: grey;
+  cursor:pointer;
 }
 
 #current-submit:focus {
