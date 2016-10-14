@@ -95,7 +95,13 @@ a useable data structure to display on the main page
           }  // close if
         } // close for-loop
         // pass the selected RentalData city object off to the controller
-
+        if (isCurrent) {
+          RentalData.curRentMedian1bed = cityMedianObj.Median_1_BR_price;
+          RentalData.curRentMedian2bed = cityMedianObj.Median_2_BR_price;
+        } else {
+          RentalData.destRentMedian1bed = cityMedianObj.Median_1_BR_price;
+          RentalData.destRentMedian2bed = cityMedianObj.Median_2_BR_price;
+        }
         rentalController.revealCityMedian(cityMedianObj, isCurrent);
 
         // make sure the mean is called after the median, so the templating looks right

@@ -207,11 +207,16 @@
     curHomePrice = Census.parseLocalStorage('homehomePrice'),
     desHomePrice = Census.parseLocalStorage('awayhomePrice'),
     curStateRent = RentalData.currentStateRentAve,
-    destStateRent = RentalData.destinationStateRentAve;
+    destStateRent = RentalData.destinationStateRentAve,
+    cur1BedMedian = RentalData.curRentMedian1bed,
+    dest1BedMedian = RentalData.destRentMedian1bed,
+    cur2BedMedian = RentalData.curRentMedian2bed,
+    dest2BedMedian = RentalData.destRentMedian2bed;
 
     // get the rental data
     if ((curStateRent && destStateRent) && (curStateRent != destStateRent)) {
-      Census.stateRentDiffPercent = Math.round(destStateRent / curStateRent);
+      Census.stateCurRentPercent = Math.round((curStateRent * 12 * 100) / myIncome);
+      Census.stateDestRentPercent = Math.round(destStateRent * 12 * 100)/ myIncome);
     }
 
     //get ration of income to local median income & local home price
@@ -228,6 +233,8 @@
     $('#housing-diff-percent').html('House Price Change: <b>' + Census.housingDiffPercent + '%</b>');
     $('#dest-income_to_mortgage').html('Equivalent Income: <b>$' + Census.incNeededHomePrice + '</b>');
     $('#dest_rent_diff').html('Rent Price Change (state): <b>$' + Census.stateRentDiffPercent + '</b>');
+    $('#curr_state_rent_percent').html('Current Rent as % of Income: <b>$' + Census.stateCurRentPercent + '</b>');
+    $('#dest_state_rent_percent').html('Expected Rent as % of Income: <b>$' + Census.stateDestRentPercent + '</b>');
     $('.showChartContainer').css('display', 'block');
   };
 
