@@ -56,10 +56,12 @@ a useable data structure to display on the main page
             break;
           }
         }
-        if (isCurrent) {
-          RentalData.currentStateRentAve = {'state_rent' : stateObj.Avg};
+        if (isCurrent ) {
+          Data.home['state_rent'] = stateObj.Avg;
+          Data.storeData(Data.home, isCurrent);
         } else {
-          RentalData.destinationStateRentAve = {'state_rent': stateObj.Avg};
+          Data.away['state_rent'] = stateObj.Avg;
+          Data.storeData(Data.away, isCurrent);
         }
         // pass the selected RentalData state object off to the controller
         rentalController.revealState(stateObj, isCurrent);
@@ -95,22 +97,20 @@ a useable data structure to display on the main page
           }  // close if
         } // close for-loop
         // pass the selected RentalData city object off to the controller
-        if (isCurrent) {
-          RentalData.curRentMedian1bed = {'1bedMedian': cityMedianObj.Median_1_BR_price};
-          RentalData.curRentMedian2bed = {'2bedMedian': cityMedianObj.Median_2_BR_price};
-        } else {
-          RentalData.destRentMedian1bed = {'1bedMedian': cityMedianObj.Median_1_BR_price};
-          RentalData.destRentMedian2bed = {'2bedMedian': cityMedianObj.Median_2_BR_price};
+        if (isCurrent && cityMedianObj) {
+          Data.home['1bedMedian'] = cityMedianObj.Median_1_BR_price;
+          Data.home['2bedMedian'] = cityMedianObj.Median_2_BR_price;
+        } else if (!isCurrent && cityMedianObj) {
+          Data.away['1bedMedian'] = cityMedianObj.Median_1_BR_price;
+          Data.away['2bedMedian'] = cityMedianObj.Median_2_BR_price;
         }
         rentalController.revealCityMedian(cityMedianObj, isCurrent);
 
         // store the rental data to use elsewhere
-        if (isCurrent) {
-          Data.home = Data.location(RentalData.currentStateRentAve, RentalData.curRentMedian1bed, RentalData.curRentMedian2bed);
-          Data.storeData(Data.home);
+        if (isCurrent && cityMedianObj) {
+          Data.storeData(Data.home, isCurrent);
         } else {
-          Data.away = Data.location(RentalData.destinationStateRentAve, RentalData.destRentMedian1bed, RentalData.destRentMedian2bed);
-          Data.storeData(Data.away);
+          Data.storeData(Data.away, isCurrent);
         }
 
         // make sure the mean is called after the median, so the templating looks right

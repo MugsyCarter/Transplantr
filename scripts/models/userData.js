@@ -17,8 +17,8 @@
     Data.econPoverty= obj.percentPoverty;
   };
 
-  Data.storeData = function(obj){
-    if(Census.source){
+  Data.storeData = function(obj, isCurrent){
+    if(isCurrent){
       var tag = 'home';
     }
     else {
