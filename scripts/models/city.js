@@ -63,6 +63,8 @@
   $('#current-submit').on('click', function() {
     Census.currentIncome = $('#current-income').val();
     localStorage.setItem('income', Census.currentIncome);
+    dataController.incomeReveal(Census.currentIncome);
+
     //get stripped down number for current income
     var myIncParts = Census.currentIncome.match(/\d/g);
     var myIncome = parseInt(myIncParts.join(''));
@@ -91,7 +93,7 @@
     //add needed income figure and description to page
     $('#dest-income_to_mortgage').html('You would need to make <b>$' + Census.incNeededHomePrice + '</b> in order to have the same home buying power in your new city.');
     // income called here so it waits for the input to load
-    dataController.incomeReveal(Census.currentIncome);
+
     $('.showChartContainer').css('display', 'block');
   });
 
