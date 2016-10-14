@@ -156,14 +156,13 @@ To use handlebars, the data needs to be stored as an array of objects.
     }
 
     if (isCurrent) {  // state, county, city, homePrice, income, poverty
-      Data.home = new Data.location([{'state': Census.stateChoiceName}, {'county': Census.countyChoiceName}, {'city': MortgageData.currentCityChoice}, {'homePrice': houseprice}, {'income': Data.econIncome}, {'poverty': Data.econPoverty}]);
+      Data.home = new Data.location({'state': Census.stateChoiceName, 'county': Census.countyChoiceName, 'city': MortgageData.currentCityChoice, 'homePrice': houseprice, 'income': Data.econIncome, 'poverty': Data.econPoverty});
       Data.storeData(Data.home);
     } else {
-      Data.away = new Data.location([{'state': Census.destinationStateChoiceName}, {'county': Census.destinationCountyChoiceName}, {'city': MortgageData.destinationCityChoice}, {'homePrice': houseprice}, {'income': Data.econIncome}, {'poverty': Data.econPoverty}]);
+      Data.away = new Data.location({'state': Census.destinationStateChoiceName, 'county': Census.destinationCountyChoiceName, 'city': MortgageData.destinationCityChoice, 'homePrice': houseprice, 'income': Data.econIncome, 'poverty': Data.econPoverty});
       Data.storeData(Data.away);
     }
   };
-
 
   module.MortgageData = MortgageData;
 })(window);
