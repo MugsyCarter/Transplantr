@@ -206,12 +206,12 @@
     desMedianIncome = Census.parseLocalStorage('awayincome'),
     curHomePrice = Census.parseLocalStorage('homehomePrice'),
     desHomePrice = Census.parseLocalStorage('awayhomePrice'),
-    curStateRent = RentalData.currentStateRentAve,
-    destStateRent = RentalData.destinationStateRentAve,
-    cur1BedMedian = RentalData.curRentMedian1bed,
-    dest1BedMedian = RentalData.destRentMedian1bed,
-    cur2BedMedian = RentalData.curRentMedian2bed,
-    dest2BedMedian = RentalData.destRentMedian2bed;
+    curStateRent = Census.parseLocalStorage('homestate_rent'),
+    destStateRent = Census.parseLocalStorage('awaystate_rent'),
+    cur1BedMedian = Census.parseLocalStorage('home1bedMedian'),
+    dest1BedMedian = Census.parseLocalStorage('away1bedMedian'),
+    cur2BedMedian = Census.parseLocalStorage('home2bedMedian'),
+    dest2BedMedian = Census.parseLocalStorage('away2bedMedian');
 
     // get the rental data
     if ((curStateRent && destStateRent) && (curStateRent != destStateRent)) {
@@ -219,10 +219,10 @@
       Census.stateDestRentPercent = Math.round((destStateRent * 12 * 100)/ myIncome);
     }
     if ((cur1BedMedian && dest1BedMedian) && (cur1BedMedian != dest1BedMedian)) {
-
+      console.log('median 1 bed', cur1BedMedian, dest1BedMedian);
     }
     if ((cur2BedMedian && dest2BedMedian) && (cur2BedMedian != dest2BedMedian)) {
-
+      console.log('median 2 bed', cur2BedMedian, dest2BedMedian);
     }
 
     //get ration of income to local median income & local home price
