@@ -246,6 +246,16 @@ select:hover{
   line-height:150%;
 }
 
+.bio{
+  margin: 1%;
+  background-color: #e9e9e9;
+  border-radius: 15px;
+  padding: 1% 2%;
+}
+.headshot{
+  max-width: 20vw;
+  float: left;
+}
 
 /* Media Query Stuff */
 
