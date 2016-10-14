@@ -59,9 +59,15 @@
     MortgageData.fillCityFilter();
   });
 
+  Census.stripNumbers = function(numStr) {
+    var numParts = numStr.match(/\d/g);
+    return parseInt(numParts.join(''));
+  };
+
   //compute income ration when submit button is pressed
   $('#current-submit').on('click', function() {
-    Census.currentIncome = $('#current-income').val();
+    var incomeInput = $('#current-income').val();
+    Census.currentIncome = Census.stripNumbers(incomeInput);
     localStorage.setItem('income', Census.currentIncome);
     // income called here so it waits for the input to load
     dataController.incomeReveal(Census.currentIncome);
@@ -198,20 +204,20 @@
   };
 
   Census.incomeLogic = function() {
-    //get stripped down number for current income
-    var myIncome = parseInt(Census.currentIncome.match(/\d/g).join(''));
+    //set Census.currentIncome as local variable
+    var myIncome = Census.currentIncome;
 
     // pull all of the data from storage, strip char and make an int
-    var localMedianIncome = Census.parseLocalStorage('homeincome'),
-    desMedianIncome = Census.parseLocalStorage('awayincome'),
-    curHomePrice = Census.parseLocalStorage('homehomePrice'),
-    desHomePrice = Census.parseLocalStorage('awayhomePrice'),
-    curStateRent = Census.parseLocalStorage('homestate_rent'),
-    destStateRent = Census.parseLocalStorage('awaystate_rent'),
-    cur1BedMedian = Census.parseLocalStorage('home1bedMedian'),
-    dest1BedMedian = Census.parseLocalStorage('away1bedMedian'),
-    cur2BedMedian = Census.parseLocalStorage('home2bedMedian'),
-    dest2BedMedian = Census.parseLocalStorage('away2bedMedian');
+    var localMedianIncome = Census.stripNumbers(localStorage.getItem('homeincome')),
+      desMedianIncome = Census.stripNumbers(localStorage.getItem('awayincome')),
+      curHomePrice = Census.stripNumbers(localStorage.getItem('homehomePrice')),
+      desHomePrice = Census.stripNumbers(localStorage.getItem('awayhomePrice')),
+      curStateRent = Census.stripNumbers(localStorage.getItem('homestate_rent')),
+      destStateRent = Census.stripNumbers(localStorage.getItem('awaystate_rent')),
+      cur1BedMedian = Census.stripNumbers(localStorage.getItem('home1bedMedian')),
+      dest1BedMedian = Census.stripNumbers(localStorage.getItem('away1bedMedian')),
+      cur2BedMedian = Census.stripNumbers(localStorage.getItem('home2bedMedian')),
+      dest2BedMedian = Census.stripNumbers(localStorage.getItem('away2bedMedian'));
 
 
     //get ration of income to local median income & local home price
@@ -243,24 +249,11 @@
       Census.dest2BedMedianPercent = Math.round((dest2BedMedian * 12 * 100) / Census.incNeeded);
       $('#dest_median_2bdrm_percent').html('Expected Rent as % of Income: <b>' + Census.dest2BedMedianPercent + '%</b>');
     }
-
-    $('#income_needed_median').html('Equivalent Income: <b>$' + Census.incNeeded + '</b>');
-    $('#housing-diff-percent').html('House Price Change: <b>' + Census.housingDiffPercent + '%</b>');
-    $('#dest-income_to_mortgage').html('Equivalent Income: <b>$' + Census.incNeededHomePrice + '</b>');
-    $('#curr_state_rent_percent').html('Rent as % of Current Income: <b>' + Census.stateCurRentPercent + '%</b>');
-    $('#dest_state_rent_percent').html('Expected Rent as % of Income: <b>' + Census.stateDestRentPercent + '%</b>');
-
+    incomeController.revealIncomeNeeedData();
     $('.showChartContainer').css('display', 'block');
 
   };
 
-  // takes string, finds that value in localStorage, removes punctuation, returns an int
-  Census.parseLocalStorage = function(localData) {
-    if (localData) {
-      console.log(localData);
-      return parseInt(localStorage.getItem(localData).match(/\d/g).join(''));
-    }
-  };
 
   // make Census available globally
   module.Census = Census;
