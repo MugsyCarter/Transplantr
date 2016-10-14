@@ -73,6 +73,7 @@ a:hover{
 #chart-submit:hover, .get-started-btn:hover, .more-cities-btn:hover{
   background-color: grey;
   cursor:pointer;
+  text-align:center;
 }
 
 select:hover{
@@ -93,6 +94,7 @@ select:hover{
 .get-started, .more-cities{
   text-align:center;
   margin-bottom:5%;
+  clear: both;
 }
 
 .get-started-btn, .more-cities-btn {
@@ -249,10 +251,15 @@ select:hover{
   padding: 1% 2%;
   overflow:auto;
 }
-.headshot{
+.headshot {
   float: left;
   padding-right: 1%;
   padding-bottom:1%;
+}
+
+.more-cities {
+  display:block;
+  text-align:center;
 }
 
 /* Media Query Stuff */
@@ -301,6 +308,13 @@ select:hover{
   .emptybox {
     content:'';
     height:42px;
+  }
+
+  .more-cities {
+    padding-top:3%;
+    clear:both;
+    display:block;
+    text-align:center;
   }
 }
 
