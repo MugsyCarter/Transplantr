@@ -57,9 +57,9 @@ a useable data structure to display on the main page
           }
         }
         if (isCurrent) {
-          RentalData.currentStateRentAve = stateObj.Avg;
+          RentalData.currentStateRentAve = {'state_rent' : stateObj.Avg};
         } else {
-          RentalData.destinationStateRentAve = stateObj.Avg;
+          RentalData.destinationStateRentAve = {'state_rent': stateObj.Avg};
         }
         // pass the selected RentalData state object off to the controller
         rentalController.revealState(stateObj, isCurrent);
@@ -96,13 +96,22 @@ a useable data structure to display on the main page
         } // close for-loop
         // pass the selected RentalData city object off to the controller
         if (isCurrent) {
-          RentalData.curRentMedian1bed = cityMedianObj.Median_1_BR_price;
-          RentalData.curRentMedian2bed = cityMedianObj.Median_2_BR_price;
+          RentalData.curRentMedian1bed = {'1bedMedian': cityMedianObj.Median_1_BR_price};
+          RentalData.curRentMedian2bed = {'2bedMedian': cityMedianObj.Median_2_BR_price};
         } else {
-          RentalData.destRentMedian1bed = cityMedianObj.Median_1_BR_price;
-          RentalData.destRentMedian2bed = cityMedianObj.Median_2_BR_price;
+          RentalData.destRentMedian1bed = {'1bedMedian': cityMedianObj.Median_1_BR_price};
+          RentalData.destRentMedian2bed = {'2bedMedian': cityMedianObj.Median_2_BR_price};
         }
         rentalController.revealCityMedian(cityMedianObj, isCurrent);
+
+        // store the rental data to use elsewhere
+        if (isCurrent) {
+          Data.home = Data.location(RentalData.currentStateRentAve, RentalData.curRentMedian1bed, RentalData.curRentMedian2bed);
+          Data.storeData(Data.home);
+        } else {
+          Data.away = Data.location(RentalData.destinationStateRentAve, RentalData.destRentMedian1bed, RentalData.destRentMedian2bed);
+          Data.storeData(Data.away);
+        }
 
         // make sure the mean is called after the median, so the templating looks right
         RentalData.fetchCityMean(isCurrent);

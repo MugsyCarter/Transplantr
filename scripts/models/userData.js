@@ -5,13 +5,11 @@
   var Data = {};
 
 //called in Mortgage.js to create home and away objects
-  Data.location = function(state, county, city, homePrice, income, poverty){
-    this.state = state;
-    this.county = county;
-    this.city = city;
-    this.homePrice = homePrice;
-    this.income = income;
-    this.poverty = poverty;
+  // takes state, county, city, homePrice, income, poverty, and rental info
+  Data.location = function(data){
+    for (key in data) {
+      this[key] = data[key]
+    }
   };
 //called in city.js.  Needed to get usable econ data.
   Data.parseEconData = function(obj){
