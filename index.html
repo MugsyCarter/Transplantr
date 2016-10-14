@@ -20,7 +20,6 @@
       <p>Federal Median Income: <b>$56516</b> (household)</p>
       <p>Federal Minimum: <b>$15080</b> (individual)</p>
       <p>{{county}} Percentage Poverty: <b>{{percentPoverty}}</b></p>
-      <br />
       <p>We get our median income and poverty data from the U.S. Census Bureau's Small Area Income and Poverty
           Estimates (SAIPE) program's 2012 census. The program provides estimates of income and poverty levels for
           all school districts, counties, and states in the US.</p>
@@ -35,15 +34,15 @@
       <p>Federal Median Income: <b>$56516</b> (household)</p>
       <p>Federal Minimum: <b>$15080</b> (individual)</p>
       <p>{{county}} Percentage Poverty: <b>{{percentPoverty}}</b></p>
-      <br />
-      <p>TEXT ABOUT INCOME COMPARISON CAN JUST GO HERE DIRECTLY</p>
+      <p>Given your current income's relation to the median (in your current city), we've calculate
+        what you would need to make in order to maintain the same relationship to the new median income.
+        That is, to maintain approximately your lifestyle, how much do you need to make in your new city.</p>
     </script>
 
     <script id="curr-mortgage-template" type="text/x-handlebars-template">
       <h3>House Prices</h3>
       <p>Median House Price: <b>{{aveHousePrice}}</b></p>
       <p id="curr-income_to_mortgage"></p>
-      <br />
       <p>We get our house price data from Zillow.com, an online superstore for buying and selling homes.
           According to Zillow, in {{city}} the <b>median house price</b> is <b>{{aveHousePrice}}</b></p>
     </script>
@@ -52,9 +51,8 @@
       <h3>House Prices</h3>
       <p>Median House Price: <b>{{aveHousePrice}}</b></p>
       <p id="dest-income_to_mortgage"></p>
-      <br />
-      <p>We get our house price data from Zillow.com, an online superstore for buying and selling homes.
-        According to Zillow, in {{city}} the <b>median house price</b> is <b>{{aveHousePrice}}</b></p>
+      <p>Given your current income, this is how much you would need to make in order to have the same
+        home buying power in your new city.</p>
     </script>
 
     <script id="state-curr-rental-template" type="text/x-handlebars-template">
@@ -80,8 +78,9 @@
       <p id="dest_city_median_2bdrm"></p>
       <p id="dest_income_needed_rental"></p>
       <br />
-      <p>Given the equivalent income (based on your relation to the median), your economic strength in the
-      new rental market is ~~~ (put stuff here).</p>
+      <p>Our rental data comes from a variety of sources, all of which track rental markets using real online
+        listings. Our data set for the median price (that is, the dollar amount that falls in the exact middle of
+        all rents) is more comprehensive. Where possible, we include mean (average) rent prices, too.</p>
     </script>
 
 
