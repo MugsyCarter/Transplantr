@@ -199,23 +199,22 @@
 
   Census.incomeLogic = function() {
     //get stripped down number for current income
-    var myIncParts = Census.currentIncome.match(/\d/g);
-    var myIncome = parseInt(myIncParts.join(''));
+    var myIncome = parseInt(Census.currentIncome.match(/\d/g).join(''));
 
+    // pull all of the data from storage, strip char and make an int
+    var localMedianIncome = Census.parseLocalStorage('homeincome'),
+    desMedianIncome = Census.parseLocalStorage('awayincome'),
+    curHomePrice = Census.parseLocalStorage('homehomePrice'),
+    desHomePrice = Census.parseLocalStorage('awayhomePrice');
 
-    var localMedianIncome = Census.parseLocalStorage('homeincome');
-    var desMedianIncome = Census.parseLocalStorage('awayincome');
-    var curHomePrice = Census.parseLocalStorage('homehomePrice');
-    var desHomePrice = Census.parseLocalStorage('awayhomePrice');
+    //get ration of income to local median income & local home price
+    var curIncRatio = (myIncome)/(localMedianIncome);
+    var curHomePriceRatio = (myIncome)/(curHomePrice);
 
-    //get current income to local median income ratio
-    Census.curIncRatio = (myIncome)/(localMedianIncome);
     //get income needed in destination city to maintain same ratio
-    Census.incNeeded = Math.round((desMedianIncome)*(Census.curIncRatio));
-    //get ratio of current income to local home price
-    Census.curHomePriceRatio = (myIncome)/(curHomePrice);
+    Census.incNeeded = Math.round((desMedianIncome)*(curIncRatio));
     //get income needed to have same buying power in new city
-    Census.incNeededHomePrice = Math.round((desHomePrice)*(Census.curHomePriceRatio));
+    Census.incNeededHomePrice = Math.round((desHomePrice)*(curHomePriceRatio));
 
     $('#income_needed_median').html('Necessary Income: <b>$' + Census.incNeeded + '</b>');
     $('#dest-income_to_mortgage').html('Buying Power: <b>$' + Census.incNeededHomePrice + '</b>');
