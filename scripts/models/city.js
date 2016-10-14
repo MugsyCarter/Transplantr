@@ -217,25 +217,32 @@
     //get ration of income to local median income & local home price
     var curIncRatio = myIncome/localMedianIncome;
     var curHomePriceRatio = myIncome/curHomePrice;
-    // get the median rental data, if available
-    if (cur1BedMedian) {
-      Census.cur1BedMedianPercent = Math.round((cur1BedMedian * 12 * 100) / myIncome);
-    } else if (dest1BedMedian) {
-      Census.dest1BedMedianPercent = Math.round((dest1BedMedian * 12 * 100) / Census.incNeeded);
-    } else if (cur2BedMedian) {
-      Census.cur2BedMedianPercent = Math.round((cur2BedMedian * 12 * 100) / myIncome);
-    } else if (dest2BedMedian) {
-      Census.dest2BedMedianPercent = Math.round((dest2BedMedian * 12 * 100) / Census.incNeeded);
-    }
-
     //get income needed in destination city to maintain same ratio
     Census.incNeeded = Math.round(desMedianIncome * curIncRatio);
     //get income needed to have same buying power in new city
-    Census.housingDiffPercent = Math.round((desHomePrice / curHomePrice) * 100);
+    Census.housingDiffPercent = Math.round(((desHomePrice - curHomePrice) / curHomePrice) * 100);
     Census.incNeededHomePrice = Math.round(desHomePrice * curHomePriceRatio);
     // calculate rent as percentage of income
     Census.stateCurRentPercent = Math.round((curStateRent * 12 * 100) / myIncome);
     Census.stateDestRentPercent = Math.round((destStateRent * 12 * 100)/ Census.incNeeded);
+
+    // get the median rental data, if available
+    if (cur1BedMedian) {
+      Census.cur1BedMedianPercent = Math.round((cur1BedMedian * 12 * 100) / myIncome);
+      $('#curr_median_1bdrm_percent').html('Rent as % of Current Income: <b>' + Census.cur1BedMedianPercent + '%</b>');
+    }
+    if (dest1BedMedian) {
+      Census.dest1BedMedianPercent = Math.round((dest1BedMedian * 12 * 100) / Census.incNeeded);
+      $('#dest_median_1bdrm_percent').html('Expected Rent as % of Income: <b>' + Census.dest1BedMedianPercent + '%</b>');
+    }
+    if (cur2BedMedian) {
+      Census.cur2BedMedianPercent = Math.round((cur2BedMedian * 12 * 100) / myIncome);
+      $('#curr_median_2bdrm_percent').html('Rent as % of Current Income: <b>' + Census.cur2BedMedianPercent + '%</b>');
+    }
+    if (dest2BedMedian) {
+      Census.dest2BedMedianPercent = Math.round((dest2BedMedian * 12 * 100) / Census.incNeeded);
+      $('#dest_median_2bdrm_percent').html('Expected Rent as % of Income: <b>' + Census.dest2BedMedianPercent + '%</b>');
+    }
 
     $('#income_needed_median').html('Equivalent Income: <b>$' + Census.incNeeded + '</b>');
     $('#housing-diff-percent').html('House Price Change: <b>' + Census.housingDiffPercent + '%</b>');
@@ -243,10 +250,6 @@
     $('#curr_state_rent_percent').html('Rent as % of Current Income: <b>' + Census.stateCurRentPercent + '%</b>');
     $('#dest_state_rent_percent').html('Expected Rent as % of Income: <b>' + Census.stateDestRentPercent + '%</b>');
 
-    $('#curr_median_1bdrm_percent').html('Rent as % of Current Income: <b>' + Census.cur1BedMedianPercent + '%</b>');
-    $('#dest_median_1bdrm_percent').html('Expected Rent as % of Income: <b>' + Census.dest1BedMedianPercent + '%</b>');
-    $('#curr_median_2bdrm_percent').html('Rent as % of Current Income: <b>' + Census.cur2BedMedianPercent + '%</b>');
-    $('#dest_median_2bdrm_percent').html('Expected Rent as % of Income: <b>' + Census.dest2BedMedianPercent + '%</b>');
     $('.showChartContainer').css('display', 'block');
 
   };
