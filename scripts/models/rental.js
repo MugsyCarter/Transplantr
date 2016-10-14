@@ -56,6 +56,13 @@ a useable data structure to display on the main page
             break;
           }
         }
+        if (isCurrent ) {
+          Data.home['state_rent'] = stateObj.Avg;
+          Data.storeData(Data.home, isCurrent);
+        } else {
+          Data.away['state_rent'] = stateObj.Avg;
+          Data.storeData(Data.away, isCurrent);
+        }
         // pass the selected RentalData state object off to the controller
         rentalController.revealState(stateObj, isCurrent);
       },
@@ -90,7 +97,21 @@ a useable data structure to display on the main page
           }  // close if
         } // close for-loop
         // pass the selected RentalData city object off to the controller
+        if (isCurrent && cityMedianObj) {
+          Data.home['1bedMedian'] = cityMedianObj.Median_1_BR_price;
+          Data.home['2bedMedian'] = cityMedianObj.Median_2_BR_price;
+        } else if (!isCurrent && cityMedianObj) {
+          Data.away['1bedMedian'] = cityMedianObj.Median_1_BR_price;
+          Data.away['2bedMedian'] = cityMedianObj.Median_2_BR_price;
+        }
         rentalController.revealCityMedian(cityMedianObj, isCurrent);
+
+        // store the rental data to use elsewhere
+        if (isCurrent && cityMedianObj) {
+          Data.storeData(Data.home, isCurrent);
+        } else {
+          Data.storeData(Data.away, isCurrent);
+        }
 
         // make sure the mean is called after the median, so the templating looks right
         RentalData.fetchCityMean(isCurrent);

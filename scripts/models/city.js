@@ -59,42 +59,19 @@
     MortgageData.fillCityFilter();
   });
 
+  Census.stripNumbers = function(numStr) {
+    var numParts = numStr.match(/\d/g);
+    return parseInt(numParts.join(''));
+  };
+
   //compute income ration when submit button is pressed
   $('#current-submit').on('click', function() {
-    Census.currentIncome = $('#current-income').val();
+    var incomeInput = $('#current-income').val();
+    Census.currentIncome = Census.stripNumbers(incomeInput);
     localStorage.setItem('income', Census.currentIncome);
-    dataController.incomeReveal(Census.currentIncome);
-
-    //get stripped down number for current income
-    var myIncParts = Census.currentIncome.match(/\d/g);
-    var myIncome = parseInt(myIncParts.join(''));
-    //get stripped down number for current median income
-    var medIncParts = localStorage.getItem('homeincome').match(/\d/g);
-    var localMedianIncome = parseInt(medIncParts.join(''));
-    //get current income to local median income ratio
-    Census.curIncRatio = (myIncome)/(localMedianIncome);
-    //get stripped down number for destination median income
-    var desMedIncParts = localStorage.getItem('awayincome').match(/\d/g);
-    var desMedianIncome = parseInt(desMedIncParts.join(''));
-    //get income needed in destination city to maintain same ratio
-    Census.incNeeded = Math.round((desMedianIncome)*(Census.curIncRatio));
-    //add needed income figure and description to page
-    $('#income_needed_median').html('Necessary Income: $<b>' + Census.incNeeded + '</b>');
-    //get stripped down number for local avg house price
-    var curHomePriceParts = localStorage.getItem('homehomePrice').match(/\d/g);
-    var curHomePrice = parseInt(curHomePriceParts.join(''));
-    //get ratio of current income to local home price
-    Census.curHomePriceRatio = (myIncome)/(curHomePrice);
-    //get stripped down number for destination city avg home price
-    var desHomePriceParts = localStorage.getItem('awayhomePrice').match(/\d/g);
-    var desHomePrice = parseInt(desHomePriceParts.join(''));
-    //get income needed to have same buying power in new city
-    Census.incNeededHomePrice = Math.round((desHomePrice)*(Census.curHomePriceRatio));
-    //add needed income figure and description to page
-    $('#dest-income_to_mortgage').html('Buying Power: <b>$' + Census.incNeededHomePrice + '</b>');
     // income called here so it waits for the input to load
-
-    $('.showChartContainer').css('display', 'block');
+    dataController.incomeReveal(Census.currentIncome);
+    Census.incomeLogic();
   });
 
 /****************** DESTINATION CITY INFORMATION ******************/
@@ -225,6 +202,58 @@
       });
     }
   };
+
+  Census.incomeLogic = function() {
+    //set Census.currentIncome as local variable
+    var myIncome = Census.currentIncome;
+
+    // pull all of the data from storage, strip char and make an int
+    var localMedianIncome = Census.stripNumbers(localStorage.getItem('homeincome')),
+      desMedianIncome = Census.stripNumbers(localStorage.getItem('awayincome')),
+      curHomePrice = Census.stripNumbers(localStorage.getItem('homehomePrice')),
+      desHomePrice = Census.stripNumbers(localStorage.getItem('awayhomePrice')),
+      curStateRent = Census.stripNumbers(localStorage.getItem('homestate_rent')),
+      destStateRent = Census.stripNumbers(localStorage.getItem('awaystate_rent')),
+      cur1BedMedian = Census.stripNumbers(localStorage.getItem('home1bedMedian')),
+      dest1BedMedian = Census.stripNumbers(localStorage.getItem('away1bedMedian')),
+      cur2BedMedian = Census.stripNumbers(localStorage.getItem('home2bedMedian')),
+      dest2BedMedian = Census.stripNumbers(localStorage.getItem('away2bedMedian'));
+
+
+    //get ration of income to local median income & local home price
+    var curIncRatio = myIncome/localMedianIncome;
+    var curHomePriceRatio = myIncome/curHomePrice;
+    //get income needed in destination city to maintain same ratio
+    Census.incNeeded = Math.round(desMedianIncome * curIncRatio);
+    //get income needed to have same buying power in new city
+    Census.housingDiffPercent = Math.round(((desHomePrice - curHomePrice) / curHomePrice) * 100);
+    Census.incNeededHomePrice = Math.round(desHomePrice * curHomePriceRatio);
+    // calculate rent as percentage of income
+    Census.stateCurRentPercent = Math.round((curStateRent * 12 * 100) / myIncome);
+    Census.stateDestRentPercent = Math.round((destStateRent * 12 * 100)/ Census.incNeeded);
+
+    // get the median rental data, if available
+    if (cur1BedMedian) {
+      Census.cur1BedMedianPercent = Math.round((cur1BedMedian * 12 * 100) / myIncome);
+      $('#curr_median_1bdrm_percent').html('Rent as % of Current Income: <b>' + Census.cur1BedMedianPercent + '%</b>');
+    }
+    if (dest1BedMedian) {
+      Census.dest1BedMedianPercent = Math.round((dest1BedMedian * 12 * 100) / Census.incNeeded);
+      $('#dest_median_1bdrm_percent').html('Expected Rent as % of Income: <b>' + Census.dest1BedMedianPercent + '%</b>');
+    }
+    if (cur2BedMedian) {
+      Census.cur2BedMedianPercent = Math.round((cur2BedMedian * 12 * 100) / myIncome);
+      $('#curr_median_2bdrm_percent').html('Rent as % of Current Income: <b>' + Census.cur2BedMedianPercent + '%</b>');
+    }
+    if (dest2BedMedian) {
+      Census.dest2BedMedianPercent = Math.round((dest2BedMedian * 12 * 100) / Census.incNeeded);
+      $('#dest_median_2bdrm_percent').html('Expected Rent as % of Income: <b>' + Census.dest2BedMedianPercent + '%</b>');
+    }
+    incomeController.revealIncomeNeeedData();
+    $('.showChartContainer').css('display', 'block');
+
+  };
+
 
   // make Census available globally
   module.Census = Census;

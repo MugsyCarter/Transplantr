@@ -14,6 +14,14 @@ cityView.handleEcon = function(econObj, isCurrent) {
   }
 };
 
+cityView.handleIncomeNeededData = function() {
+  $('#income_needed_median').html('Equivalent Income: <b>$' + Census.incNeeded + '</b>');
+  $('#housing-diff-percent').html('House Price Change: <b>' + Census.housingDiffPercent + '%</b>');
+  $('#dest-income_to_mortgage').html('Equivalent Income: <b>$' + Census.incNeededHomePrice + '</b>');
+  $('#curr_state_rent_percent').html('Rent as % of Current Income: <b>' + Census.stateCurRentPercent + '%</b>');
+  $('#dest_state_rent_percent').html('Expected Rent as % of Income: <b>' + Census.stateDestRentPercent + '%</b>');
+};
+
 cityView.handleIncome = function(incomeObj) {
   $('#user_income').html('Your Income: <b>$' + incomeObj + '</b>').fadeIn('slow');
 };
