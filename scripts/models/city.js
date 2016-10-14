@@ -216,7 +216,13 @@
     // get the rental data
     if ((curStateRent && destStateRent) && (curStateRent != destStateRent)) {
       Census.stateCurRentPercent = Math.round((curStateRent * 12 * 100) / myIncome);
-      Census.stateDestRentPercent = Math.round(destStateRent * 12 * 100)/ myIncome);
+      Census.stateDestRentPercent = Math.round((destStateRent * 12 * 100)/ myIncome);
+    }
+    if ((cur1BedMedian && dest1BedMedian) && (cur1BedMedian != dest1BedMedian)) {
+
+    }
+    if ((cur2BedMedian && dest2BedMedian) && (cur2BedMedian != dest2BedMedian)) {
+
     }
 
     //get ration of income to local median income & local home price
@@ -226,7 +232,7 @@
     //get income needed in destination city to maintain same ratio
     Census.incNeeded = Math.round(desMedianIncome * curIncRatio);
     //get income needed to have same buying power in new city
-    Census.housingDiffPercent = Math.round(desHomePrice / curHomePrice);
+    Census.housingDiffPercent = Math.round((desHomePrice / curHomePrice) * 100);
     Census.incNeededHomePrice = Math.round(desHomePrice * curHomePriceRatio);
 
     $('#income_needed_median').html('Equivalent Income: <b>$' + Census.incNeeded + '</b>');
