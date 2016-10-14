@@ -66,6 +66,7 @@
 
   //compute income ration when submit button is pressed
   $('#current-submit').on('click', function() {
+    $('.showChartContainer').css('display', 'block');
     var incomeInput = $('#current-income').val();
     Census.currentIncome = Census.stripNumbers(incomeInput);
     localStorage.setItem('income', Census.currentIncome);
