@@ -218,12 +218,13 @@
     var curIncRatio = myIncome/localMedianIncome;
     var curHomePriceRatio = myIncome/curHomePrice;
     // get the median rental data, if available
-    if (cur1BedMedian && dest1BedMedian) {
+    if (cur1BedMedian) {
       Census.cur1BedMedianPercent = Math.round((cur1BedMedian * 12 * 100) / myIncome);
-      Census.dest1BedMedianPercent = Math.round((cur1BedMedian * 12 * 100) / Census.incNeeded);
-    }
-    if (cur2BedMedian && dest2BedMedian) {
+    } else if (dest1BedMedian) {
+      Census.dest1BedMedianPercent = Math.round((dest1BedMedian * 12 * 100) / Census.incNeeded);
+    } else if (cur2BedMedian) {
       Census.cur2BedMedianPercent = Math.round((cur2BedMedian * 12 * 100) / myIncome);
+    } else if (dest2BedMedian) {
       Census.dest2BedMedianPercent = Math.round((dest2BedMedian * 12 * 100) / Census.incNeeded);
     }
 
@@ -253,6 +254,7 @@
   // takes string, finds that value in localStorage, removes punctuation, returns an int
   Census.parseLocalStorage = function(localData) {
     if (localData) {
+      console.log(localData);
       return parseInt(localStorage.getItem(localData).match(/\d/g).join(''));
     }
   };
