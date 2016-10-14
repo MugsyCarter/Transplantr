@@ -56,6 +56,11 @@ a useable data structure to display on the main page
             break;
           }
         }
+        if (isCurrent) {
+          RentalData.currentStateRentAve = stateObj.Avg;
+        } else {
+          RentalData.destinationStateRentAve = stateObj.Avg;
+        }
         // pass the selected RentalData state object off to the controller
         rentalController.revealState(stateObj, isCurrent);
       },
@@ -90,6 +95,7 @@ a useable data structure to display on the main page
           }  // close if
         } // close for-loop
         // pass the selected RentalData city object off to the controller
+
         rentalController.revealCityMedian(cityMedianObj, isCurrent);
 
         // make sure the mean is called after the median, so the templating looks right
