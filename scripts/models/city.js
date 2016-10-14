@@ -63,38 +63,9 @@
   $('#current-submit').on('click', function() {
     Census.currentIncome = $('#current-income').val();
     localStorage.setItem('income', Census.currentIncome);
-    dataController.incomeReveal(Census.currentIncome);
-
-    //get stripped down number for current income
-    var myIncParts = Census.currentIncome.match(/\d/g);
-    var myIncome = parseInt(myIncParts.join(''));
-    //get stripped down number for current median income
-    var medIncParts = localStorage.getItem('homeincome').match(/\d/g);
-    var localMedianIncome = parseInt(medIncParts.join(''));
-    //get current income to local median income ratio
-    Census.curIncRatio = (myIncome)/(localMedianIncome);
-    //get stripped down number for destination median income
-    var desMedIncParts = localStorage.getItem('awayincome').match(/\d/g);
-    var desMedianIncome = parseInt(desMedIncParts.join(''));
-    //get income needed in destination city to maintain same ratio
-    Census.incNeeded = Math.round((desMedianIncome)*(Census.curIncRatio));
-    //add needed income figure and description to page
-    $('#income_needed_median').html('Necessary Income: $<b>' + Census.incNeeded + '</b>');
-    //get stripped down number for local avg house price
-    var curHomePriceParts = localStorage.getItem('homehomePrice').match(/\d/g);
-    var curHomePrice = parseInt(curHomePriceParts.join(''));
-    //get ratio of current income to local home price
-    Census.curHomePriceRatio = (myIncome)/(curHomePrice);
-    //get stripped down number for destination city avg home price
-    var desHomePriceParts = localStorage.getItem('awayhomePrice').match(/\d/g);
-    var desHomePrice = parseInt(desHomePriceParts.join(''));
-    //get income needed to have same buying power in new city
-    Census.incNeededHomePrice = Math.round((desHomePrice)*(Census.curHomePriceRatio));
-    //add needed income figure and description to page
-    $('#dest-income_to_mortgage').html('Buying Power: <b>$' + Census.incNeededHomePrice + '</b>');
     // income called here so it waits for the input to load
-
-    $('.showChartContainer').css('display', 'block');
+    dataController.incomeReveal(Census.currentIncome);
+    Census.incomeLogic();
   });
 
 /****************** DESTINATION CITY INFORMATION ******************/
@@ -224,6 +195,45 @@
         return new Census(county);
       });
     }
+  };
+
+  Census.incomeLogic = function() {
+    //get stripped down number for current income
+    var myIncParts = Census.currentIncome.match(/\d/g);
+    var myIncome = parseInt(myIncParts.join(''));
+
+    //get stripped down number for current median income
+    var medIncParts = localStorage.getItem('homeincome').match(/\d/g);
+    var localMedianIncome = parseInt(medIncParts.join(''));
+    //get current income to local median income ratio
+    Census.curIncRatio = (myIncome)/(localMedianIncome);
+    //get stripped down number for destination median income
+    var desMedIncParts = localStorage.getItem('awayincome').match(/\d/g);
+    var desMedianIncome = parseInt(desMedIncParts.join(''));
+    //get income needed in destination city to maintain same ratio
+    Census.incNeeded = Math.round((desMedianIncome)*(Census.curIncRatio));
+    //add needed income figure and description to page
+    $('#income_needed_median').html('Necessary Income: <b>$' + Census.incNeeded + '</b>');
+    //get stripped down number for local avg house price
+    var curHomePriceParts = localStorage.getItem('homehomePrice').match(/\d/g);
+    var curHomePrice = parseInt(curHomePriceParts.join(''));
+    //get ratio of current income to local home price
+    Census.curHomePriceRatio = (myIncome)/(curHomePrice);
+    //get stripped down number for destination city avg home price
+    var desHomePriceParts = localStorage.getItem('awayhomePrice').match(/\d/g);
+    var desHomePrice = parseInt(desHomePriceParts.join(''));
+    //get income needed to have same buying power in new city
+    Census.incNeededHomePrice = Math.round((desHomePrice)*(Census.curHomePriceRatio));
+    //add needed income figure and description to page
+    $('#dest-income_to_mortgage').html('Buying Power: <b>$' + Census.incNeededHomePrice + '</b>');
+
+
+    $('.showChartContainer').css('display', 'block');
+  };
+
+  // takes string, finds that value in localStorage, removes punctuation, returns an int
+  Census.parseLocalStorage = function(localData) {
+      return parseInt(localStorage.getItem(localData).match(/\d/g).join(''));
   };
 
   // make Census available globally
