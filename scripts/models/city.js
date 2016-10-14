@@ -207,11 +207,11 @@
     curHomePrice = Census.parseLocalStorage('homehomePrice'),
     desHomePrice = Census.parseLocalStorage('awayhomePrice'),
     curStateRent = Census.parseLocalStorage('homestate_rent'),
-    destStateRent = Census.parseLocalStorage('awaystate_rent'),
-    cur1BedMedian = Census.parseLocalStorage('home1bedMedian'),
+    destStateRent = Census.parseLocalStorage('awaystate_rent');
+    /*cur1BedMedian = Census.parseLocalStorage('home1bedMedian'),
     dest1BedMedian = Census.parseLocalStorage('away1bedMedian'),
     cur2BedMedian = Census.parseLocalStorage('home2bedMedian'),
-    dest2BedMedian = Census.parseLocalStorage('away2bedMedian');
+    dest2BedMedian = Census.parseLocalStorage('away2bedMedian');*/
 
 
     //get ration of income to local median income & local home price
@@ -226,7 +226,7 @@
     Census.stateCurRentPercent = Math.round((curStateRent * 12 * 100) / myIncome);
     Census.stateDestRentPercent = Math.round((destStateRent * 12 * 100)/ Census.incNeeded);
 
-    // get the median rental data, if available
+    /*// get the median rental data, if available
     if (cur1BedMedian) {
       Census.cur1BedMedianPercent = Math.round((cur1BedMedian * 12 * 100) / myIncome);
       $('#curr_median_1bdrm_percent').html('Rent as % of Current Income: <b>' + Census.cur1BedMedianPercent + '%</b>');
@@ -242,7 +242,7 @@
     if (dest2BedMedian) {
       Census.dest2BedMedianPercent = Math.round((dest2BedMedian * 12 * 100) / Census.incNeeded);
       $('#dest_median_2bdrm_percent').html('Expected Rent as % of Income: <b>' + Census.dest2BedMedianPercent + '%</b>');
-    }
+    }*/
 
     $('#income_needed_median').html('Equivalent Income: <b>$' + Census.incNeeded + '</b>');
     $('#housing-diff-percent').html('House Price Change: <b>' + Census.housingDiffPercent + '%</b>');
