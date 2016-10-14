@@ -36,7 +36,7 @@
       <p>{{county}} Percentage Poverty: <b>{{percentPoverty}}</b></p>
       <p>Given your current income's relation to the median (in your current city), we've calculate
         what you would need to make in order to maintain the same relationship to the new median income.
-        That is, to maintain approximately your lifestyle, how much do you need to make in your new city.</p>
+        That is, to maintain approximately your lifestyle, this is how much do you need to make in your new city.</p>
     </script>
 
     <script id="curr-mortgage-template" type="text/x-handlebars-template">
@@ -50,6 +50,7 @@
     <script id="dest-mortgage-template" type="text/x-handlebars-template">
       <h3>House Prices</h3>
       <p>Median House Price: <b>{{aveHousePrice}}</b></p>
+      <p id="housing-diff-percent"></p>
       <p id="dest-income_to_mortgage"></p>
       <p>Given your current income, this is how much you would need to make in order to have the same
         home buying power in your new city.</p>
@@ -59,6 +60,7 @@
       <h3>Your Rental Market</h3>
       <p>State Average: {{Avg}}</p>
       <p id="curr_city_rental_info"></p>
+      <p id="curr_rent_percent"></p>
       <p id="curr_city_mean_1bdrm"></p>
       <p id="curr_city_median_1bdrm"></p>
       <p id="curr_city_median_2bdrm"></p>
@@ -73,6 +75,7 @@
       <h3>Their Rental Market</h3>
       <p>State Average: {{Avg}}</p>
       <p id="dest_city_rental_info"></p>
+      <p id="dest_rent_percent"></p>
       <p id="dest_city_mean_1bdrm"></p>
       <p id="dest_city_median_1bdrm"></p>
       <p id="dest_city_median_2bdrm"></p>

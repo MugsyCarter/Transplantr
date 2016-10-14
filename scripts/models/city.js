@@ -208,16 +208,18 @@
     desHomePrice = Census.parseLocalStorage('awayhomePrice');
 
     //get ration of income to local median income & local home price
-    var curIncRatio = (myIncome)/(localMedianIncome);
-    var curHomePriceRatio = (myIncome)/(curHomePrice);
+    var curIncRatio = myIncome/localMedianIncome;
+    var curHomePriceRatio = myIncome/curHomePrice;
 
     //get income needed in destination city to maintain same ratio
-    Census.incNeeded = Math.round((desMedianIncome)*(curIncRatio));
+    Census.incNeeded = Math.round(desMedianIncome * curIncRatio);
     //get income needed to have same buying power in new city
-    Census.incNeededHomePrice = Math.round((desHomePrice)*(curHomePriceRatio));
+    Census.housingDiffPercent = Math.round(desHomePrice / curHomePrice);
+    Census.incNeededHomePrice = Math.round(desHomePrice * curHomePriceRatio);
 
-    $('#income_needed_median').html('Necessary Income: <b>$' + Census.incNeeded + '</b>');
-    $('#dest-income_to_mortgage').html('Buying Power: <b>$' + Census.incNeededHomePrice + '</b>');
+    $('#income_needed_median').html('Equivalent Income: <b>$' + Census.incNeeded + '</b>');
+    $('#housing-diff-percent').html('Price Change: <b>' + Census.housingDiffPercent + '%</b>');
+    $('#dest-income_to_mortgage').html('Equivalent Income: <b>$' + Census.incNeededHomePrice + '</b>');
     $('.showChartContainer').css('display', 'block');
   };
 
