@@ -236,7 +236,9 @@ select:hover{
   padding:1%;
 }
 
-
+#about-page {
+  line-height:150%;
+}
 
 
 /* Media Query Stuff */
