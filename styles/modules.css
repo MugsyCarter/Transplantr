@@ -1,0 +1,409 @@
+.main-nav {
+  display: block;
+  margin:0 auto;
+  background-color:#00171F;
+  opacity:0.85;
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  z-index:2;
+}
+
+
+.link {
+  display: none;
+  padding: 1% 5%;
+  text-align: center;
+  font-size: .95em;
+}
+
+.expand {
+  display: block;
+  padding: 2%;
+}
+
+.hero {
+  color:#FFF;
+  background-image:url('../img/map-450.png');
+  background-size: auto auto;
+  background-attachment:fixed;
+  padding: 25%;
+  z-index:1;
+}
+
+#transplantr {
+  font-family: 'Amatic SC', serif;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-shadow: 3px 4px 4px black;
+}
+
+.branding {
+  font-family: 'Amatic SC', serif;
+  color:#FFF;
+  font-size:1.75em;
+  font-weight: bold;
+  text-shadow: 3px 4px 4px black;
+}
+
+.icon-menu {
+  text-align: center;
+  font-size: 2em;
+}
+
+/*.icon-menu:hover {
+  color: grey;
+  padding-bottom:2%;
+}
+
+.icon-menu:hover ~ li{
+  display: block;
+  padding:2%;
+}
+
+.icon-menu:active ~ li{
+  display: block;
+  padding:2%;
+}*/
+
+a:hover{
+  font-style: italic;
+}
+
+#chart-submit:hover, .get-started-btn:hover, .more-cities-btn:hover{
+  background-color: grey;
+  cursor:pointer;
+  text-align:center;
+}
+
+select:hover{
+  cursor:pointer;
+}
+
+.search-page {
+  text-align:center;
+  padding:3%;
+}
+
+.home_column {
+  width:94%;
+  padding:3%;
+  display:block;
+}
+
+.get-started, .more-cities{
+  text-align:center;
+  margin-bottom:5%;
+  clear: both;
+}
+
+.get-started-btn, .more-cities-btn {
+  font-family:'Open Sans', sans-serif;
+  font-weight:700;
+  border:none;
+  color:#FFF;
+  background-color:#007EA7;
+  padding:1% 3%;
+}
+
+.get-started-btn:active, .more-cities-btn:active {
+  background-color:#003459;
+}
+
+#about-page {
+  padding:3%;
+}
+
+.datacontainer {
+  overflow:hidden;
+}
+
+#state-choice,
+#county-filter,
+#city-choice,
+#destination-state-choice,
+#destination-county-filter,
+#destination-city-choice,
+#current-income {
+  display: block;
+  margin: 0 auto 2%;
+  width: 175px;
+  border-radius: 15px;
+}
+
+#state-choice:focus,
+#county-filter:focus,
+#city-choice:focus,
+#destination-state-choice:focus,
+#destination-county-filter:focus,
+#destination-city-choice:focus,
+#current-income:focus {
+  outline: none;
+  box-shadow: inset 0 0 5px 2px #add8e6;
+}
+
+#current-income {
+  text-align: center;
+  padding: 3px 0;
+  border: none;
+}
+
+#current-income:focus {
+  outline: none;
+  box-shadow: inset 0 0 5px 1px #add8e6;
+}
+
+#current-side,
+#destination-side {
+  box-sizing: border-box;
+  text-align: center;
+  padding: 3%;
+  position: relative;
+}
+
+#current-city-input,
+#destination-city-input {
+  padding-bottom: 5%;
+}
+
+#current-side {
+  background-color: #e9e9e9;
+}
+
+#current-submit {
+  border-radius: 15px;
+  border: none;
+  width: 50px;
+  transition: transform .5s;
+  padding-top: 4px;
+  margin:10px 0 15px;
+  background-color: #bdbdbd;
+}
+
+#current-submit:hover {
+  transform: scale(1.2);
+  background-color: grey;
+  cursor:pointer;
+}
+
+#current-submit:focus {
+  outline: none;
+}
+
+#county-econ,
+#mortgage-data,
+#rental-data,
+#destination-econ,
+#destination-mortgage-data,
+#destination-rental-data {
+  margin: 5% 0;
+  background-color: white;
+  border-radius: 15px;
+  padding: 15px;
+}
+#destination-econ,
+#destination-mortgage-data,
+#destination-rental-data {
+  background-color: #e9e9e9;
+}
+
+
+#county-econ:empty,
+#mortgage-data:empty,
+#rental-data:empty,
+#destination-econ:empty,
+#destination-mortgage-data:empty,
+#destination-rental-data:empty {
+  display: none;
+}
+
+.showChartContainer {
+  clear:both;
+  text-align:center;
+  padding:3%;
+  display:none;
+}
+
+#graphs-page {
+  padding:2%;
+  padding-top: 1vw;
+}
+
+.graph-title{
+  padding: 0 12vw;
+}
+.comparison_table {
+  padding:1%;
+}
+
+.chartSize {
+  padding:1%;
+}
+
+#about-page {
+  line-height:150%;
+}
+
+.bio{
+  margin: 1%;
+  background-color: #e9e9e9;
+  border-radius: 15px;
+  padding: 1% 2%;
+  overflow:auto;
+}
+.headshot {
+  float: left;
+  padding-right: 1%;
+  padding-bottom:1%;
+}
+
+.more-cities {
+  display:block;
+  text-align:center;
+}
+
+/* Media Query Stuff */
+
+@media only screen and (min-width: 481px) {
+  /* Larger cell screen, changes image only */
+  .hero {
+    background-image: url('../img/map-640.png');
+  }
+
+  #current-submit {
+    position: absolute;
+    left: -25px;
+    top: 150px;
+  }
+
+  #transplantr {
+    font-size: 2.9em;
+  }
+
+  .datacontainer {
+    display: flex;
+  }
+
+  #current-side {
+    align-items: stretch;
+    flex: 1;
+    width: 50%;
+    float: left;
+  }
+
+  #destination-side {
+    float: right;
+    width:50%;
+  }
+
+  .icon-menu {
+    display: none;
+  }
+
+  .main-nav ul li {
+    display: inline-block;
+    padding: 0.5% 5%;
+  }
+
+  .emptybox {
+    content:'';
+    height:42px;
+  }
+
+  .more-cities {
+    padding-top:3%;
+    clear:both;
+    display:block;
+    text-align:center;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  /* First break point - switch to tablet design: 2+ columns */
+  #transplantr {
+    font-size: 3.6em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  .hero {
+    background-image: url('../img/map-1024.png');
+    background-position:50% 50%;
+    padding: 15%;
+  }
+
+
+
+
+  .home_column {
+    width:29.33%;
+    padding:2%;
+    display:block;
+    float:left;
+    line-height:150%;
+  }
+
+}
+
+@media only screen and (min-width: 1024px) {
+  /* Minor styling: larger image and fonts to match new screen size */
+  #transplantr {
+    font-size: 3.9em;
+  }
+
+  .main-nav ul li {
+    padding: 1% 5%;
+  }
+
+  .hero {
+    background-image: url('../img/map-1600.png');
+  }
+
+  .icon-menu {
+    font-size: 1.1em;
+  }
+
+  .chartSize {
+    width: 48%;
+    float:right;
+    padding: 0.5em 2em;
+  }
+
+  #chart_container{
+    width: 40vw;
+    float: left;
+  }
+
+  #chart2_container{
+    width: 40vw;
+    float: left;
+  }
+
+
+
+}
+
+@media only screen and (min-width: 1600px) {
+  /* Minor styling: larger image and fonts to match largest screen size */
+  #transplantr {
+    font-size: 4.2em;
+  }
+
+  .main-nav ul li {
+    padding: 1% 8%;
+  }
+
+  .hero {
+    background-image: url('../img/map-2000.png');
+  }
+
+  .icon-menu {
+    font-size: 1.2em;
+  }
+}
