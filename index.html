@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transplantr: The Smarter Way to Move</title>
+    <link rel="stylesheet" href="vendor/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700,800" />
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+    <link rel="stylesheet" href="styles/icons.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/modules.css">
+
+    <!-- Use Handlebars to set up the projects body -->
+    <script id="county-curr-econ-template" type="text/x-handlebars-template">
+      <h3>Income</h3>
+      <p id="user_income"></p>
+      <p>Median Income: <b>{{medianIncome}}</b> (household)</p>
+      <p>Federal Median Income: <b>$56516</b> (household)</p>
+      <p>Federal Minimum: <b>$15080</b> (individual)</p>
+      <p>{{county}} Percentage Poverty: <b>{{percentPoverty}}</b></p>
+      <p>We get our median income and poverty data from the U.S. Census Bureau's Small Area Income and Poverty
+          Estimates (SAIPE) program's 2012 census. The program provides estimates of income and poverty levels for
+          all school districts, counties, and states in the US.</p>
+      <p> According to the SAIPE Census in 2012, in {{county}}, the median income was <b>{{medianIncome}}</b>.</p>
+      <p><b>{{percentPoverty}}</b> of people in the county were living at or below the Federal Poverty Line.</p>
+    </script>
+
+    <script id="county-dest-econ-template" type="text/x-handlebars-template">
+      <h3>Income</h3>
+      <p id="income_needed_median"></p>
+      <p>Median Income: <b>{{medianIncome}}</b> (household)</p>
+      <p>Federal Median Income: <b>$56516</b> (household)</p>
+      <p>Federal Minimum: <b>$15080</b> (individual)</p>
+      <p>{{county}} Percentage Poverty: <b>{{percentPoverty}}</b></p>
+      <p>Given your current income's relation to the median (in your current city), we've calculate
+        what you would need to make in order to maintain the same relationship to the new median income.
+        That is, to maintain approximately your lifestyle, this is how much do you need to make in your new city.</p>
+    </script>
+
+    <script id="curr-mortgage-template" type="text/x-handlebars-template">
+      <h3>House Prices</h3>
+      <p>Median House Price: <b>{{aveHousePrice}}</b></p>
+      <p id="curr-income_to_mortgage"></p>
+      <p>We get our house price data from Zillow.com, an online superstore for buying and selling homes.
+          According to Zillow, in {{city}} the <b>median house price</b> is <b>{{aveHousePrice}}</b></p>
+    </script>
+
+    <script id="dest-mortgage-template" type="text/x-handlebars-template">
+      <h3>House Prices</h3>
+      <p>Median House Price: <b>{{aveHousePrice}}</b></p>
+      <p id="housing-diff-percent"></p>
+      <p id="dest-income_to_mortgage"></p>
+      <p>Given your current income, this is how much you would need to make in order to have the same
+        home buying power in your new city.</p>
+    </script>
+
+    <script id="state-curr-rental-template" type="text/x-handlebars-template">
+      <h3>Your Rental Market</h3>
+      <p>State Average: {{Avg}}</p>
+      <p id="curr_state_rent_percent"></p>
+      <p id="curr_city_median_1bdrm"></p>
+      <p id="curr_median_1bdrm_percent"></p>
+      <p id="curr_city_mean_1bdrm"></p>
+      <p id="curr_city_median_2bdrm"></p>
+      <p id="curr_median_2bdrm_percent"></p>
+      <br />
+      <p>Our rental data comes from a variety of sources, all of which track rental markets using real online
+      listings. Our data set for the median price (that is, the dollar amount that falls in the exact middle of
+      all rents) is more comprehensive. Where possible, we include mean (average) rent prices, too.</p>
+    </script>
+
+    <script id="state-dest-rental-template" type="text/x-handlebars-template">
+      <h3>Their Rental Market</h3>
+      <p>State Average: {{Avg}}</p>
+      <p id="dest_state_rent_percent"></p>
+      <p id="dest_city_median_1bdrm"></p>
+      <p id="dest_median_1bdrm_percent"></p>
+      <p id="dest_city_mean_1bdrm"></p>
+      <p id="dest_city_median_2bdrm"></p>
+      <p id="dest_median_2bdrm_percent"></p>
+      <br />
+      <p>Our rental data comes from a variety of sources, all of which track rental markets using real online
+        listings. Our data set for the median price (that is, the dollar amount that falls in the exact middle of
+        all rents) is more comprehensive. Where possible, we include mean (average) rent prices, too.</p>
+    </script>
+
+
+
+
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <ul>
+          <div class="icon-menu"></div>
+          <li class="link"><a href="/" id="home-link"><span class="branding">Transplantr</span></a></li>
+          <li class="link"><a href="about" id="about-link">About</a></li>
+          <li class="link"><a href="city-data" id="data-link">City Data</a></li>
+          <li class="link"><a href="city-comparison" id="graphs-link">City Comparison</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+
+      <section>
+        <div class="hero">
+          <h1 id="transplantr" class="tagline">
+          Transplantr: The Smarter Way to Move
+          </h1>
+        </div>
+        <div id="about-page" class="tab-content">
+          <div>
+            <h1>What is Transplantr?</h1>
+            <p><b>Transplantr</b> was built in 2016 to provide Americans with the information they need to relocate. Users must enter their current city and income as well as their destination county and city. From there, Transplantr will compare the user's economic status in their current city to the cost of living in their destination. We've added additional information such as the national average, percent of people in poverty for both locations and the salary they would need to make in order to maintain the same economic status in their destination city.</p>
+          </div>
+          <div>
+            <h1>Why do I need Transplantr?</h1>
+            <p>Over 40 million people move or relocate in the U.S. every year. While popular sites such as <b>Zillow</b> and <b>BestPlaces</b> provide housing and cost of living information, we've made it our mission to provide transplanters with all of the economic information they need in one place. We've decided to add even more information, detailed above. <a href="city-data">Get started today</a>!</p>
+          </div>
+          <hr>
+          <div>
+            <h1>The Developers</h1>
+            <div class ="bio">
+              <p>
+                <img class="headshot" src="img/Gloria.jpg">
+                <b>Gloria</b> is an enthusiastic developer, recovering academic, and eccentric urban homesteader. She got her MA in History of Science from UCLA, and has a lingering penchant for diving deep into the docs or source to understand how things work. When not learning web development, Gloria writes hash tables and obscure sort algorithms in python for fun. Otherwise, she spends her time building custom mason jar shelving, working in her vegetable garden, or adventuring with her husband.</p>
+            </div>
+            <div class ="bio">
+              <p>
+                <img class="headshot" src="img/Mugsy.jpg">
+                <b>Mugsy</b> is a web developer curently focusing on full-stack Javascript development.  He enjoys spending time with family, backpacking and climbing, ultimate frisbee, and learning new things.  He previously taught high school science and worked in research and development for a drug company.</p>
+            </div>
+            <div class ="bio">
+              <p class="bio-text">
+                <img class="headshot" src="img/Nathan.jpg">
+                <b>Nathan</b> is a web developer from Portland, Oregon. When not working on code, he loves exploring the outdoors with his partner and dog. Working on personal code projects is a passion of his, as he loves having an outlet for combining code and content he is inspired by.</p>
+            </div>
+            <div class ="bio">
+              <p>
+                <img class="headshot" src="img/Risa.jpg">
+                <b>Risa</b> is a web developer, photographer, and creative writer from the beautiful Pacific Northwest. She has founded the Western Washington University chapter of Food Recovery Network, the nation's largest student movement against food waste and hunger. Having worked for the Non-GMO Project, Risa is passionate about food and its environmental impact. While she is away from her computer, you can find her writing poetry, hanging out with cats, and exploring Portland's vegan food scene with her partner.</p>
+            </div>
+          </div>
+        </div>
+        <div id="data-page" class="tab-content">
+          <div class="datacontainer">
+          <div id="current-side">
+            <form id="#current-city-input">
+              <h2>Your Current City</h2>
+              <label for="state-choice">Current State:</label>
+              <select id="state-choice">
+                <option value="">Choose State</option>
+                <option value="01">Alabama</option>
+                <option value="02">Alaska</option>
+                <option value="04">Arizona</option>
+                <option value="05">Arkansas</option>
+                <option value="06">California</option>
+                <option value="08">Colorado</option>
+                <option value="09">Connecticut</option>
+                <option value="10">Delaware</option>
+                <option value="11">District of Columbia</option>
+                <option value="12">Florida</option>
+                <option value="13">Georgia</option>
+                <option value="15">Hawaii</option>
+                <option value="16">Idaho</option>
+                <option value="17">Illinois</option>
+                <option value="18">Indiana</option>
+                <option value="19">Iowa</option>
+                <option value="20">Kansas</option>
+                <option value="21">Kentucky</option>
+                <option value="22">Louisiana</option>
+                <option value="23">Maine</option>
+                <option value="24">Maryland</option>
+                <option value="25">Massachusetts</option>
+                <option value="26">Michigan</option>
+                <option value="27">Minnesota</option>
+                <option value="28">Mississippi</option>
+                <option value="29">Missouri</option>
+                <option value="30">Montana</option>
+                <option value="31">Nebraska</option>
+                <option value="32">Nevada</option>
+                <option value="33">New Hampshire</option>
+                <option value="34">New Jersey</option>
+                <option value="35">New Mexico</option>
+                <option value="36">New York</option>
+                <option value="37">North Carolina</option>
+                <option value="38">North Dakota</option>
+                <option value="39">Ohio</option>
+                <option value="40">Oklahoma</option>
+                <option value="41">Oregon</option>
+                <option value="42">Pennsylvania</option>
+                <option value="44">Rhodes Island</option>
+                <option value="45">South Carolina</option>
+                <option value="46">South Dakota</option>
+                <option value="47">Tennessee</option>
+                <option value="48">Texas</option>
+                <option value="49">Utah</option>
+                <option value="50">Vermont</option>
+                <option value="51">Virgina</option>
+                <option value="53">Washington</option>
+                <option value="54">West Virginia</option>
+                <option value="55">Wisconsin</option>
+                <option value="56">Wyoming</option>
+                <option value="72">Puerto Rico</option>
+              </select>
+              <label for="county-filter">Current County:</label>
+              <select id="county-filter">
+                <option value="">Choose County</option>
+                <!-- dynamically created -->
+              </select>
+              <label for="city-choice">Current City:</label>
+              <select id="city-choice">
+                <option value="">Choose City</option>
+                  <!-- dynamically created -->
+              </select>
+              <label for="current-income">Current Income:</label>
+              <input type="text" name="current-income" id="current-income">
+            </form>
+            <div id="county-econ"></div>
+            <div id="mortgage-data"></div>
+            <div id="rental-data"></div>
+
+          </div>
+
+
+          <div id="destination-side">
+            <form id="#destination-city-input">
+              <h2>Destination City</h2>
+              <label for="destination-state-choice">Choose State:</label>
+              <select id="destination-state-choice">
+                <option value="">Choose State</option>
+                <option value="01">Alabama</option>
+                <option value="02">Alaska</option>
+                <option value="04">Arizona</option>
+                <option value="05">Arkansas</option>
+                <option value="06">California</option>
+                <option value="08">Colorado</option>
+                <option value="09">Connecticut</option>
+                <option value="10">Delaware</option>
+                <option value="11">District of Columbia</option>
+                <option value="12">Florida</option>
+                <option value="13">Georgia</option>
+                <option value="15">Hawaii</option>
+                <option value="16">Idaho</option>
+                <option value="17">Illinois</option>
+                <option value="18">Indiana</option>
+                <option value="19">Iowa</option>
+                <option value="20">Kansas</option>
+                <option value="21">Kentucky</option>
+                <option value="22">Louisiana</option>
+                <option value="23">Maine</option>
+                <option value="24">Maryland</option>
+                <option value="25">Massachusetts</option>
+                <option value="26">Michigan</option>
+                <option value="27">Minnesota</option>
+                <option value="28">Mississippi</option>
+                <option value="29">Missouri</option>
+                <option value="30">Montana</option>
+                <option value="31">Nebraska</option>
+                <option value="32">Nevada</option>
+                <option value="33">New Hampshire</option>
+                <option value="34">New Jersey</option>
+                <option value="35">New Mexico</option>
+                <option value="36">New York</option>
+                <option value="37">North Carolina</option>
+                <option value="38">North Dakota</option>
+                <option value="39">Ohio</option>
+                <option value="40">Oklahoma</option>
+                <option value="41">Oregon</option>
+                <option value="42">Pennsylvania</option>
+                <option value="44">Rhodes Island</option>
+                <option value="45">South Carolina</option>
+                <option value="46">South Dakota</option>
+                <option value="47">Tennessee</option>
+                <option value="48">Texas</option>
+                <option value="49">Utah</option>
+                <option value="50">Vermont</option>
+                <option value="51">Virgina</option>
+                <option value="53">Washington</option>
+                <option value="54">West Virginia</option>
+                <option value="55">Wisconsin</option>
+                <option value="56">Wyoming</option>
+                <option value="72">Puerto Rico</option>
+              </select>
+              <label for="destination-county-filter">Choose County:</label>
+              <select id="destination-county-filter">
+                <option value="">Choose County</option>
+              </select>
+              <label for="destination-city-choice">Choose City:</label>
+              <select id="destination-city-choice">
+                <option value="">Choose City</option>
+              </select>
+              <button type="button" id="current-submit">Go!</button>
+            </form>
+            <div class="emptybox"></div>
+            <div id="destination-econ"></div>
+            <div id="destination-mortgage-data"></div>
+            <div id="destination-rental-data"></div>
+          </div>
+        </div>
+        <div class="showChartContainer">
+        <form action="city-comparison">
+          <input type="submit" class="get-started-btn" id="chart-submit" value="Show Charts" />
+        </form>
+        </div>
+        </div>
+
+
+
+        <div id="graphs-page" class="tab-content">
+          <div id="chart_container" class="chartSize">
+            <h3 class="graph-title">Home Prices</h3>
+            <canvas id="chart_canvas"></canvas>
+            <p class="graph-description" id="housing-graph-description">No housing data entered.</p>
+          </div>
+          <div id="chart2_container" class="chartSize">
+            <h3 class="graph-title">Income Data</h3>
+            <canvas id="chart2_canvas"></canvas>
+            <p class="graph-description" id="income-graph-description">No income data entered.</p>
+          </div>
+          <div class="more-cities">
+            <form action="city-data">
+              <input type="submit" class="more-cities-btn" value="Try Different Cities" />
+            </form>
+          </div>
+        </div>
+
+
+        <div id="threeColumnHome" class="tab-content">
+          <div class="home_column">
+            <h1>Who</h1>
+            <p>Every year, approximately 14% of Americans move. Whether it be to another part of their city or to another state entirely, over 40 million Americans are scouring the internet and other resources to find the information and tools they need to relocate.</p>
+            <p><a href="about">Learn more</a></p>
+          </div>
+          <div class="home_column">
+            <h1>What</h1>
+            <p><b>Transplantr</b> was established in 2016 with a mission to provide Americans with the information they need to plan their move. While a plethora of websites can provide this information, Transplantr serves to be an all-in-one resource.</p>
+            <p><a href="about">Learn more</a></p>
+          </div>
+          <div class="home_column">
+            <h1>Why</h1>
+            <p>Zillow, a popular real estate website, provides users with property listings in a given area but does not offer the average salary and cost of living in that area. Other sites  help users compare the average cost of living in their current city to their provided destination, but <b>Transplantr</b> is different.</p>
+            <p><a href="about">Learn more</a></p>
+          </div>
+          <div class="get-started">
+          <form action="city-data">
+            <input type="submit" class="get-started-btn" value="Get Started" />
+          </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <p><span class="branding">&copy; PDX Transplants, 2016</span></p>
+    </footer>
+
+    <!-- Scripts go here! -->
+    <script src="vendor/scripts/jquery-2.1.4.js"></script>
+    <script src="vendor/scripts/handlebars.js"></script>
+    <script src="vendor/scripts/page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
+    <!-- Model Files -->
+    <script src="scripts/models/census.js"></script>
+    <script src="scripts/models/mortgage.js"></script>
+    <script src="scripts/models/rental.js"></script>
+    <script src="scripts/models/userData.js"></script>
+    <!-- <script src="scripts/models/cityrental.js"></script> -->
+    <!-- View Files -->
+    <script src="scripts/views/chartrView.js"></script>
+    <script src="scripts/views/cityView.js"></script>
+    <script src="scripts/views/mobileNav.js"></script>
+    <!-- Controller Files -->
+    <script src="scripts/controllers/aboutController.js"></script>
+    <script src="scripts/controllers/dataController.js"></script>
+    <script src="scripts/controllers/graphsController.js"></script>
+    <script src="scripts/controllers/homeController.js"></script>
+    <script src="scripts/controllers/incomeController.js"></script>
+    <script src="scripts/controllers/rentalController.js"></script>
+    <script src="scripts/controllers/routes.js"></script>
+  </body>
+</html>
